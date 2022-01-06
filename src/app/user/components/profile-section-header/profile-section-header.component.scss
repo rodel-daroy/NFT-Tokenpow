@@ -1,0 +1,45 @@
+.header-section {
+  background-color: #000000;
+  min-height: 110px;
+}
+
+.profile-header-heading {
+  color: #0c0c0c;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.form-control {
+  color: #ffffff;
+  border: 1px solid #969696;
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+.form-control::placeholder {
+  color: #ffffff;
+}
+
+.polygon-bg {
+  background-color:#e7e7e7;
+  clip-path: polygon(
+  35% 0%, 100% 0, 100% 65%, 65% 100%, 0 100%, 0 35%
+);
+}
+
+.coins-text {
+  font-size: 64px;
+}
+
+.vertical-line {
+  background-color: #333333;
+  border: 1px solid #bcbcbc;
+  height: 400px;
+}
+
+.horizontal-line {
+  background-color: #333333;
+  border: 1px solid #bcbcbc;
+}

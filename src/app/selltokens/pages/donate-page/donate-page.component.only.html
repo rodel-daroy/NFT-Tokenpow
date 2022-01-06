@@ -1,0 +1,263 @@
+<div class="container">
+  <div class="w-100" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
+    <div fxFlex.gt-sm="66">
+      <button pButton label="{{'selltokens.detail.back' | translate }}" class="mb-3 p-button-outlined mr-3" (click)="back()"></button>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center start">
+        <div class="w-100">
+          <p>{{'selltokens.detail.you-are-contributing-to' | translate | uppercase}}:</p>
+          <h3>{{selltoken?.title}}</h3>
+        </div>
+
+          <div class="p-float-label " fxLayout="column" fxLayoutAlign="center start">
+
+            <p-inputNumber
+              [(ngModel)]="totalAmount"
+              (onInput)="onInput($event.value)"
+              mode="currency"
+              inputId="donate"
+              id="donationInput"
+              min="0"
+              currency="USD"
+              autofocus
+            >
+            </p-inputNumber>
+
+            <label for="donationInput">{{'selltokens.donate-dialog.amount-to-donate' | translate}}</label>
+
+          </div>
+      </div>
+
+      <div class="w-100 mb-0" fxLayout="column" fxLayoutAlign="center start">
+        <label for="commentArea">{{'selltokens.detail.add-comment' | translate }}:</label>
+        <textarea maxlength="200" class="w-100" id="commentArea" [rows]="3" [(ngModel)]="comment" style="background:#1c2735"></textarea>
+      </div>
+      <div *ngIf="mobileView" class="mt-3" fxLayout="column" fxLayoutAlign="center center">
+        <div class="p-field-checkbox" style="max-width: 440px">
+          <p-checkbox [(ngModel)]="termsChecked" (ngModelChange)="onTermsInputChange()" binary="true" inputId="terms"></p-checkbox>
+          <label for="terms">{{'selltokens.detail.i-agree-to-the' | translate }}
+            <b routerLink="/terms" class="clickable"><u>{{'selltokens.detail.terms-of-use' | translate }}</u></b>
+            {{'selltokens.detail.and-have-read-and-understand-the' | translate }}
+            <b routerLink="/privacy-policy" class="clickable"><u>{{'selltokens.detail.privacy-policy' | translate }}.</u></b></label>
+        </div>
+        <<!
+          *ngIf="!isPayedWithCard"
+          (resolved)="resolved($event)"
+          (error)="onCaptchaError($event)"
+          [siteKey]=env.recaptcha.siteKey
+        ></!>
+      </div>
+      <div class="mt-3" fxLayout="column" fxLayoutAlign="center center">
+        <!--
+        <div class="w-100 border-option"
+             [ngClass]="{'border-option-active': isFlippedStripe, 'clickable': !isFlippedStripe}"
+             (click)="!isFlippedStripe ? flipCard() : ''"
+             fxLayout="row" fxLayoutAlign="space-between center">
+
+          <div class="ml-3 mt-2 mb-2"  fxLayout="column" fxLayoutAlign="center start">
+            <h5 style="color: black" class="d-flex align-items-center mb-0 pb-0">{{'selltokens.detail.credit-card' | translate }} <ng-lottie width="60px" height="60px" [options]="creditCard"></ng-lottie></h5>
+            <div>{{'selltokens.detail.contribute-to-selltoken-with-your-credit-card' | translate }}</div>
+          </div>
+          <p-radioButton class="mr-3" name="isFlippedStripe" [ngModel]="isFlippedStripe" [value]="true" ></p-radioButton>
+        </div>
+      -->
+        <div class="w-100 border-option mt-4"
+             [ngClass]="{'border-option-active': !isFlippedStripe,'clickable': isFlippedStripe}"
+             (click)="isFlippedStripe ? flipCard() : ''"
+             fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="ml-3 mt-2 mb-2" fxLayout="column" fxLayoutAlign="center start">
+            <h5 style="color: black" class="d-flex align-items-center mb-0 pb-0">Money Button <ng-lottie width="60px" height="60px" [options]="hand"></ng-lottie></h5>
+            <div>{{'selltokens.detail.swipe-to-pay-using-your-favourite-web-wallet' | translate }}</div>
+          </div>
+          <p-radioButton class="mr-3" name="isFlippedStripe" [ngModel]="isFlippedStripe" [value]="false"></p-radioButton>
+        </div>
+      <!--
+        <div class="w-100 border-option mt-4 clickable"
+             (click)="showPayPresto()"
+             fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="ml-3 mt-2 mb-2" fxLayout="column" fxLayoutAlign="center start">
+            <h5 style="color: black" class="d-flex align-items-center mb-0 pb-0">Handcash/Relay/Volt/VBox</h5>
+            <div>{{'selltokens.detail.pay-with-paypresto' | translate }}</div>
+          </div>
+        </div>
+      -->
+      </div>
+      <!--
+      <div class="scene scene--card">
+        <div #paymentCard class="payment-card">
+          <div [hidden]="!isFlippedStripe" class="card__face card__face--front p-4">
+            <div *ngIf="!payPrestoEvent">
+              <h4>{{'selltokens.detail.pay-with-credit-card' | translate }}:</h4>
+
+              <h5 class="mt-2">{{'selltokens.detail.secure-payment' | translate }} <fa-icon [icon]="faLock"></fa-icon> </h5>
+              <div class="w-100 h-100" >
+                <div fxLayout="row" fxLayoutAlign="center center" class="mb-2 mt-2">
+
+                </div>
+                <div *ngIf="isPayedWithCard" fxLayout="column" fxLayoutAlign="center center" >
+                  <ng-lottie width="150px" height="150px" [options]="completedAnim"></ng-lottie>
+                  <h5 class="text-center"> {{'selltokens.detail.thank-you-for-your-contribution' | translate }}</h5>
+                  <p class="text-center mb-0">
+                    {{'selltokens.donate-page.your-payment-is-processing,-it-will-be-credited-to-the-selltoken-in-1--2-days' | translate}}
+                    </p>
+                  <p class="text-center">
+                    {{'selltokens.donate-page.you-can-see-the-pending-payments-if-you-go-to-the-selltoken-view-and-click-on-the-eye-below-the-selltoken-picture' | translate}}
+                    </p>
+                  <h4 *ngIf="selltoken?.perkCode && selltoken?.perkMinimumAmount && selltoken?.perkDescription && this.totalAmount >= this.selltoken?.perkMinimumAmount" class="text-center">{{'selltokens.donate-page.you-enabled-perks-with-your-donation' | translate}}</h4>
+                  <h5 *ngIf="selltoken?.perkCode && selltoken?.perkMinimumAmount && selltoken?.perkDescription && this.totalAmount >= this.selltoken?.perkMinimumAmount" class="text-center">{{'selltokens.donate-page.use-this-code' | translate}} </h5>
+                  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="selltoken?.perkCode">
+                    <fa-icon class="blinker mr-2" style="font-size: 24px; color: #d00a5c" [icon]="faArrowRight"></fa-icon>
+                    <div (click)="openPerkDialog()"
+                         class="clickable perk-code pl-4 pr-4 pt-2 pb-2"><b>
+                      {{selltoken?.perkCode}}
+                    </b></div>
+                    <fa-icon class="blinker ml-2" style="font-size: 24px; color: #d00a5c" [icon]="faArrowLeft"></fa-icon>
+                  </div>
+                </div>
+
+                <input *ngIf="!isPayedWithCard" [(ngModel)]="payerName" id="card_name" class="field w-100 mb-3" placeholder="Your name" />
+                <div *ngIf="!isPayedWithCard" #cardElement></div>
+                <p style="color: red" class="text-center mt-2" *ngIf="!captchaResponse || !termsChecked">{{'donate-page.must-agree-with-tc-and-resolve-recaptcha' | translate }} </p>
+                <p style="color: red" class="text-center mt-2" *ngIf="this.totalAmount < 1 && !isPayedWithCard">{{'selltokens.detail.minimum-amount-to-contribute-with-card-is' | translate }} 1€</p>
+                <p style="color: red" class="text-center mt-2" *ngIf="this.totalAmount > 100">{{'selltokens.detail.maximum-amount-to-contribute-with-card-is' | translate }} 100€</p>
+                <p>{{ cardErrors }}</p>
+
+                <button [disabled]="this.cardErrors || !payerName || totalAmount < 1 || totalAmount > 100 || !termsChecked || !captchaResponse" *ngIf="!isPayedWithCard" (click)="handlePaymentForm($event)" pButton label="{{'selltokens.detail.contribute' | translate }}"></button>
+              </div>
+            </div>
+            <div *ngIf="payPrestoEvent" fxLayout="column" fxLayoutAlign="center center" >
+              <ng-lottie width="150px" height="150px" [options]="completedAnim"></ng-lottie>
+              <h5 class="text-center"> {{'selltokens.detail.thank-you-for-contributing' | translate }} !</h5>
+              <h4 *ngIf="selltoken?.perkCode && selltoken?.perkMinimumAmount && selltoken?.perkDescription && this.totalAmount >= this.selltoken?.perkMinimumAmount" class="text-center">{{'selltokens.donate-page.you-enabled-perks-with-your-donation' | translate}}</h4>
+              <h5 *ngIf="selltoken?.perkCode && selltoken?.perkMinimumAmount && selltoken?.perkDescription && this.totalAmount >= this.selltoken?.perkMinimumAmount" class="text-center">{{'selltokens.donate-page.use-this-code' | translate}} </h5>
+              <div fxLayout="row" fxLayoutAlign="center center" *ngIf="selltoken?.perkCode">
+                <fa-icon class="blinker mr-2" style="font-size: 24px; color: #d00a5c" [icon]="faArrowRight"></fa-icon>
+                <div (click)="openPerkDialog()"
+                     class="clickable perk-code pl-4 pr-4 pt-2 pb-2"><b>
+                  {{selltoken?.perkCode}}
+                </b></div>
+                <fa-icon class="blinker ml-2" style="font-size: 24px; color: #d00a5c" [icon]="faArrowLeft"></fa-icon>
+              </div>
+            </div>
+          </div>
+          <div [hidden]="isFlippedStripe" class="card__face card__face--back p-4" >
+            <div *ngIf="!payPrestoEvent" fxLayout="row" fxLayoutAlign="space-between" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center center">
+              <h4 class="text-center">{{'selltokens.detail.pay-with' | translate }} MoneyButton:</h4>
+              <img src="assets/mb_logo.png" class="moneybutton-logo" alt="moneybutton_logo">
+            </div>
+
+            <div *ngIf="!payPrestoEvent" fxLayout="column" fxLayoutAlign="center center" class="mt-4">
+              <p style="color: red" class="text-center mt-2" *ngIf="!captchaResponse || !termsChecked">{{'donate-page.must-agree-with-tc-and-resolve-recaptcha' | translate }} </p>
+              <app-money-button
+                [hidden]="isPayedWithMB"
+                #moneyButton
+                [disabled]="(!totalAmount) || !termsChecked || !captchaResponse"
+                [outputs]="outputs"
+                clientIdentifier="797da85b13e1972ef81871b263233d5c"
+                (onPayment)="onPaymentFromMoneyButton($event)"
+                (onError)="onErrorFromMoneyButton($event)"
+              ></app-money-button>
+              <h5 [hidden]="isPayedWithMB" class="mt-3 text-center">
+                {{'selltokens.detail.if-you-dont-have-moneybutton-account-register-for-one' | translate }}
+                <a href="https://moneybutton.com/" target="_blank" style="text-decoration: none" class="magenta-text">{{'selltokens.detail.here' | translate }}.</a>
+              </h5>
+              <div *ngIf="isPayedWithMB" fxLayout="column" fxLayoutAlign="center center" >
+                <ng-lottie width="150px" height="150px" [options]="completedAnim"></ng-lottie>
+                <h5 class="text-center"> {{'selltokens.detail.thank-you-for-contributing' | translate }} !</h5>
+                <h4 *ngIf="selltoken?.perkCode && selltoken?.perkMinimumAmount && selltoken?.perkDescription && this.totalAmount >= this.selltoken?.perkMinimumAmount" class="text-center">{{'selltokens.donate-page.you-enabled-perks-with-your-donation' | translate}}</h4>
+                <h5 *ngIf="selltoken?.perkCode && selltoken?.perkMinimumAmount && selltoken?.perkDescription && this.totalAmount >= this.selltoken?.perkMinimumAmount" class="text-center">{{'selltokens.donate-page.use-this-code' | translate}} </h5>
+                <div fxLayout="row" fxLayoutAlign="center center" *ngIf="selltoken?.perkCode">
+                  <fa-icon class="blinker mr-2" style="font-size: 24px; color: #d00a5c" [icon]="faArrowRight"></fa-icon>
+                  <div (click)="openPerkDialog()"
+                       class="clickable perk-code pl-4 pr-4 pt-2 pb-2"><b>
+                    {{selltoken?.perkCode}}
+                  </b></div>
+                  <fa-icon class="blinker ml-2" style="font-size: 24px; color: #d00a5c" [icon]="faArrowLeft"></fa-icon>
+                </div>
+              </div>
+            </div>
+          <div *ngIf="payPrestoEvent" fxLayout="column" fxLayoutAlign="center center" >
+            <ng-lottie width="150px" height="150px" [options]="completedAnim"></ng-lottie>
+            <h5 class="text-center"> {{'selltokens.detail.thank-you-for-contributing' | translate }} !</h5>
+            <h4 *ngIf="selltoken?.perkCode && selltoken?.perkMinimumAmount && selltoken?.perkDescription && this.totalAmount >= this.selltoken?.perkMinimumAmount" class="text-center">{{'selltokens.donate-page.you-enabled-perks-with-your-donation' | translate}}</h4>
+            <h5 *ngIf="selltoken?.perkCode && selltoken?.perkMinimumAmount && selltoken?.perkDescription && this.totalAmount >= this.selltoken?.perkMinimumAmount" class="text-center">{{'selltokens.donate-page.use-this-code' | translate}} </h5>
+            <div fxLayout="row" fxLayoutAlign="center center" *ngIf="selltoken?.perkCode">
+              <fa-icon class="blinker mr-2" style="font-size: 24px; color: #d00a5c" [icon]="faArrowRight"></fa-icon>
+              <div (click)="openPerkDialog()"
+                   class="clickable perk-code pl-4 pr-4 pt-2 pb-2"><b>
+                {{selltoken?.perkCode}}
+              </b></div>
+              <fa-icon class="blinker ml-2" style="font-size: 24px; color: #d00a5c" [icon]="faArrowLeft"></fa-icon>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    -->
+    </div>
+
+
+    <!--      <h3>You are contributing to:</h3>-->
+    <div fxFlex.gt-sm="32" class="donate-column p-4" fxLayout="column" fxLayoutAlign="center center">
+
+        <div fxLayout="column" fxLayoutAlign="center center" class="text-center w-100 funding-border mb-3 p-2">
+          <h5 style="color: #000001" class="w-100" fxLayout="row" fxLayoutAlign="center center">
+            <ng-lottie width="35px" height="35px" [options]="hand"></ng-lottie>
+            <span>
+              {{'selltokens.detail.crowdfunding-is-not-shopping' | translate }}
+            </span>
+          </h5>
+          <span>{{'selltokens.detail.your-contribution-is-a-way-to-support-a-project-but-does-not-guarantee-that-you-will-receive-a-perk' | translate }}.</span>
+        </div>
+        <app-selltoken-card [selltoken]="selltoken"></app-selltoken-card>
+      <div *ngIf="!mobileView" fxLayout="column" fxLayoutAlign="center center">
+        <div class="p-field-checkbox">
+          <p-checkbox [(ngModel)]="termsChecked" (ngModelChange)="onTermsInputChange()" binary="true" inputId="terms"></p-checkbox>
+          <label for="terms">{{'selltokens.detail.i-agree-to-the' | translate }}
+            <b routerLink="/terms" class="clickable"><u>{{'selltokens.detail.terms-of-use' | translate }}</u></b>
+            {{'selltokens.detail.and-have-read-and-understand-the' | translate }}
+            <b routerLink="/privacy-policy" class="clickable"><u>{{'selltokens.detail.privacy-policy' | translate }}.</u></b></label>
+        </div>
+        <re-captcha
+          *ngIf="!isPayedWithCard"
+          (resolved)="resolved($event)"
+          (error)="onCaptchaError($event)"
+          [siteKey]=env.recaptcha.siteKey
+        ></re-captcha>
+      </div>
+
+<!--      <div>-->
+<!--        <div class="p-float-label w-100 text-center">-->
+
+<!--          <p-inputNumber-->
+<!--            class="w-100"-->
+<!--            [(ngModel)]="totalAmount"-->
+<!--            (onInput)="onInput($event.value)"-->
+<!--            mode="currency"-->
+<!--            inputId="donate"-->
+<!--            id="donate"-->
+<!--            currency="USD"-->
+<!--          >-->
+<!--          </p-inputNumber>-->
+<!--          <label for="donate" style="margin-left: 17px">-->
+<!--            {{'selltokens.donate-dialog.amount-to-donate' | translate}}-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+    </div>
+  </div>
+</div>
+<p-sidebar  [fullScreen]="mobileView" [(visible)]="display" blockScroll="true" showCloseIcon="true">
+  <p-scrollPanel class="mt-2" [style]="{width: '100%', height: '90vh'}"  >
+  <app-paypresto
+    class="mt-2"
+    #presto
+    [sharedAddress]="this.donateService.getValue()?.address"
+    [amount]="((((totalAmount * this.currentPriceOfUsdInEur)) * this.currentPriceOfUsdInBsv) * 100000000) | fixedNumber"
+    [selltokenAddress]="selltoken?.bsvAddress?.address"
+    (onPayment)="onPaymentFromPaypresto($event)"
+    (onTxPushed)="onTxPushedFromPayPresto($event)"
+  ></app-paypresto>
+  </p-scrollPanel>
+</p-sidebar>

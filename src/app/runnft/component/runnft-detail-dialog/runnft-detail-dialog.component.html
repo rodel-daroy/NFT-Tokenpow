@@ -1,0 +1,27 @@
+<div class="container " fxLayout="column" fxLayoutAlign="center center">
+  <div class="col-12   border-bottom"   fxLayout="column" fxLayoutAlign="center center">
+    <p> <img class="user-image " align="left" [src]="runArt?.image ? sanitize(runArt?.image) : 'assets/account.png'">            </p>
+    <p> Author:  {{ runArt?.author }}</p>
+    <p> Title:  {{ runArt?.title }}</p>
+    <!--p> Reference information:  {{ runArt?.source }}</p-->
+    <p><a href="{{ runArt?.source}}"   style="text-decoration: none" class="gray-text"  target="_blank"> Reference information  </a></p>
+    <p> License:  {{ runArt?.license }}</p>
+  </div>
+
+  <div class="col-12  ">
+    <p> Asset Overview </p>
+    <p> Name:   <a href="https://run.network/explorer/?query={{runArt?.location}}&network=main"   style="text-decoration: none" class="gray-text"  target="_blank"> {{ runArt?.name }} </a>  </p>
+    <p> Emoji:  {{ runArt?.emoji }}</p>
+    <p> Description:</p>
+    <p> {{ runArt?.description }}</p>
+    <p class="mb-1"> Assets:</p>
+    <div fxLayout="row" *ngFor="let assetTxid of runArt?.assetIds; let i = index;">
+      <a href="https://bico.media/{{assetTxid.txtid}}"   style="text-decoration: none" class="gray-text"  target="_blank"> Asset-{{i}}  </a>
+      <span class="ml-3"> {{assetTxid?.description}} </span>
+    </div>
+    <p> Edition No:  {{ runArt?.editionNo }}</p>
+    <p> Royality percentage fee:  {{ runArt?.percentage }}</p>
+    <p> Royalty BSV address:  {{ runArt?.feeowneraddress }}</p>
+
+  </div>
+</div>

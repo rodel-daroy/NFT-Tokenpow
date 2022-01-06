@@ -1,0 +1,37 @@
+<p-table
+  [value]="refunds"
+  dataKey="uid"
+  styleClass="p-datatable-responsive-demo"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3%"></th>
+      <th style="width: 30%">
+        Paymail
+      </th>
+      <th style="width: 30%">
+        Price
+      </th>
+      <th style="width: 30%">
+        Satoshi
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-refund let-expanded="expanded">
+    <tr>
+      <td></td>
+      <td>{{ refund?.paymail }}</td>
+      <td>{{ refund?.price }}</td>
+      <td>{{ refund?.amountToWithdraw }}</td>
+      <td>
+        <button
+          pButton
+          type="button"
+          label="Refund"
+          class="p-button-rounded p-button-info"
+          (click)="refundBtn(refund)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

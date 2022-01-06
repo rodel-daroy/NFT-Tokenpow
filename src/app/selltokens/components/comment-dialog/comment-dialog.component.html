@@ -1,0 +1,17 @@
+<main class="w-30" fxLayout="column" fxLayoutAlign="center center">
+    <b class="mt-2">Leave your comment here</b>
+    <div class="mt-2"  fxLayout="column" fxLayoutAlign="center center"  >
+      <textarea maxlength="100" [rows]="3" [cols]="40" pInputTextarea autoResize="autoResize" [(ngModel)]="comment"></textarea>
+    </div>
+    <!-- <p-button label="Confirm" (click)="confirm()"></p-button> -->
+    <div class="mt-3">
+      <app-money-button
+        [outputs]="outputs"
+        clientIdentifier="{{ clientId }}"
+        (onPayment)="onPaymentSuccess($event)"
+        (onError)="onPaymentError($event)"
+      >
+      </app-money-button>
+    </div>
+</main>
+

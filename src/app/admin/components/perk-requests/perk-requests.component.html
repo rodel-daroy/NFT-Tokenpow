@@ -1,0 +1,29 @@
+<p-table [value]="requests" [paginator]="true" [rows]="10" sortField="createdAt" sortOrder="-1"
+         styleClass="p-datatable-responsive-demo">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="uid">UID
+        <p-sortIcon field="uid"></p-sortIcon>
+      </th>
+      <th pSortableColumn="createdAt">{{'admin.selltoken-approvals.created-at' | translate}}
+        <p-sortIcon field="createdAt"></p-sortIcon>
+      </th>
+      <th>selltoken URL</th>
+      <th>Request</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-request>
+    <tr>
+      <td><span class="p-column-title">UID</span>{{request.id}} </td>
+      <td><span
+        class="p-column-title">{{'admin.selltoken-approvals.created-at' | translate}}</span>{{request.createdAt | dateFormatter}}
+      </td>
+      <td><span
+        class="p-column-title">selltoken URL</span><a href="{{request.selltokenUrl}}" target="_blank">Link</a></td>
+      <td><span
+        class="p-column-title">Request</span>
+        <p-button (click)="openRequest(request)">Open Request</p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

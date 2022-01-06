@@ -1,0 +1,38 @@
+table{
+    width: 100%;
+}
+
+table thead{
+    background-color:aliceblue;
+}
+
+.user-image {
+    max-height: 100px;
+    min-height: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50% !important;
+    display: block;
+    object-fit: cover;
+
+  }
+  
+.word-break {
+   word-break: break-all;
+}
+
+.p-highlight .gray-text{
+    color: #000000  !important;
+  }
+
+  .p-highlight::ng-deep .p-button{
+    background: #1dadff;
+    color: #151515;
+    border-color: #1dadff;
+  }
+
+  .gray-text {
+    color: #a9c6fc;
+  }

@@ -1,0 +1,66 @@
+<main class="container" fxLayout="column" fxLayoutAlign="center center">
+  <div class="text-center mt-5">
+    <h2>
+      <b class="dark-text">Create your tokens</b>
+    </h2>
+    <p style="font-size: 18px">Fill out the required fields</p>
+  </div>
+
+
+  <div class="w-100 mt-5" fxLayout="column" fxLayoutAlign="center start">
+    <div fxLayout="row" fxLayoutGap="30px" fxLayout.lt-md="column">
+      <div fxLayout="column">
+        <label for="title">{{'Token Name' | translate}}</label>
+        <input class="assets-input" id="name" name="name" [(ngModel)]="assets.name" maxlength="45">
+        <p style="font-size: 11px">{{'3-32 characters' | translate}}</p>
+      </div>
+    </div>
+
+    <label for="symbol">{{'Token Symbol' | translate}}</label>
+    <input id="symbol" type="text" class="assets-input" name="target" [(ngModel)]="assets.symbol">
+    <p style="font-size: 11px">{{'3-10 characters' | translate}}</p>
+
+    <label for="initialSupply">{{'Initial supply' | translate}}</label>
+    <input id="initialSupply" type="number" class="assets-input" name="target" [(ngModel)]="assets.initialSupply">
+
+    <label for="decimals">{{'Token decimals (optional)' | translate}}</label>
+    <input id="decimals" type="number" class="assets-input" name="target" [(ngModel)]="assets.decimals">
+
+
+    <label for="shortDescription">{{'Token description (optional)' | translate}}</label>
+    <textarea class="assets-textarea" id="shortDescription" maxlength="255" [(ngModel)]="assets.description"></textarea>
+    <p style="font-size: 11px">{{'0–255 characters' | translate}}</p>
+
+    <label for="emoji">{{'Token emoji (optional)' | translate}}</label>
+    <input id="emoji" type="text" class="assets-input" name="target" [(ngModel)]="assets.emoji">
+
+    <!---<label for="avatar"> {{'create-assets.assets-avatar' | translate}}</label> -->
+    <label for="symbol"><a class="bitcoinlink" href="https://bico.media/" target="_blank"> {{'Token icon transactionId &nbsp;&nbsp;' | translate}}<svg viewBox="64 64 896 896" focusable="false" data-icon="question-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0130.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1080 0 40 40 0 10-80 0z"></path></svg> </a></label>
+    <input class="assets-input" id="name" name="name" [(ngModel)]="assets.avatar" maxlength="255">
+
+    <label for="protocol"> <b><p> {{'create-assets.assets-protocol' | translate}} </p></b></label>
+    <div>
+      <input type="radio" id="protocol" name="protocol" value="male" checked>
+      <b><label class="ml-1" for="male">Run@0.1</label></b><br>
+    </div>
+    <!--<div class="image-hover-zoom clickable">
+      <img class="user-image " [src]="assets.avatar ? assets.avatar : 'assets/account.png'" (click)="fileInput.click()">
+      <input style="display:none" type="file" (change)="onFileChanged($event)" accept="image/*" #fileInput>
+      <div class="overlay" (click)="fileInput.click()">
+        <div class="overlay-text">
+          {{'user.user-profile.upload-image' | translate}}
+        </div>
+      </div>
+    </div>
+    -->
+  </div>
+<div class="mt-5 w-100" fxLayout="row" fxLayoutAlign="center center">
+      <p-button
+        [disabled]="
+          !(this.assets?.name !== '' && this.assets?.symbol !== '' &&  (this.assets?.initialSupply != undefined))
+
+          "
+        label="{{'create-assets.create-assets-page.show-preview' | translate}}"
+        (onClick)="nextStep()"></p-button>
+</div>
+</main>

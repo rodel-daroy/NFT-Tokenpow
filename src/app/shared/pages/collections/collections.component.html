@@ -1,0 +1,18 @@
+<section class="feature-content" fxLayout="column" fxLayoutAlign="center center" style="background-color: rgb(242, 242, 242)"
+  >
+  <div class="css-ki8v3k css-wapumg"  fxLayout="column" fxLayoutAlign="center center"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="150"
+  (scrolled)="onScroll()">
+    <div fxLayout="column" fxLayoutAlign="center center" class="container-fluid">
+      <img src="assets/featured_collections.png" class="other-collection-image">
+      <div class="css-1fjs75c">
+        <app-feature-card
+          *ngFor="let collection of featuredSellTokens"
+          [collection]="collection"
+        ></app-feature-card>
+      </div>
+    </div>
+  </div>
+</section>

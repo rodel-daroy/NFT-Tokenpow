@@ -1,0 +1,22 @@
+<div *ngIf="percentage | async as pct">
+  <progress [value]="pct" max="100"></progress>
+  {{ pct | number }}%
+</div>
+
+
+
+<div *ngIf="snapshot | async as snap">
+
+  {{ snap.bytesTransferred }} {{'shared.upload-task.of' | translate}} {{ snap.totalBytes }}
+
+  <div *ngIf="downloaded">
+      <h3 id="success-upload-text">{{'shared.upload-task.successfully-uploaded' | translate}}</h3>
+    <img style="width: 10%" src="{{downloadURL}}"><br>
+  </div>
+
+<!--  <div fxLayout="row" fxLayoutGap="10px">-->
+<!--    <button (click)="task.pause()" [disabled]="!isActive(snap)">Pozastaviť</button>-->
+<!--    <button (click)="task.cancel()" [disabled]="!isActive(snap)">Zrušiť</button>-->
+<!--    <button (click)="task.resume()" [disabled]="!(snap?.state === 'paused')">Obnoviť</button>-->
+<!--  </div>-->
+</div>

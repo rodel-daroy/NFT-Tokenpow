@@ -1,0 +1,169 @@
+.donate-column {
+  background-color: #fbf8f6;
+}
+
+.moneybutton-logo {
+  max-width: 160px;
+}
+
+#donate > span::ng-deep {
+  width: 100%!important;
+}
+
+
+.field {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 2px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 250ms ease;
+  transition: box-shadow 250ms ease;
+}
+
+.field:focus {
+  box-shadow: 0 5px 5px 0 #cfd7df;
+}
+
+.field::-webkit-input-placeholder { color: #CFD7E0; }
+.field::-moz-placeholder { color: #CFD7E0; }
+
+.StripeElement {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 2px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 250ms ease;
+  transition: box-shadow 250ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 5px 5px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.scene {
+  width: 100%;
+  //height: 260px;
+  margin: 40px 0;
+  //perspective: 00px;
+}
+
+.payment-card {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.payment-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card__face {
+
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card__face--back {
+  background-color: #fbf8f6;
+  transform: rotateY(180deg);
+}
+
+.change-visibility {
+  visibility: hidden;
+}
+
+.card__face--front {
+  background-color: #fbf8f6;
+}
+
+.border-option {
+  box-shadow: 0 0 0 2px #f1f1f1;
+  border-radius: 10px;
+}
+
+.border-option-active {
+  box-shadow: 0 0 0 3px rgba(238, 42, 123, 0.9);
+}
+
+.funding-border {
+  border: 2px solid #e1e1e1;
+  border-radius: 5px;
+}
+
+.donation-input-color {
+  color: #5DCC1A;
+}
+
+
+:host ::ng-deep .p-inputnumber-input {
+  font-size:32px !important;
+  padding:10px 0 10px 10px;
+  background-color: #f3fae4 !important;
+  color: #5e7f07 !important;
+  width: 100% !important;
+  border: 2px solid #cccccc !important;
+  border-radius: 3px;
+}
+
+:host ::ng-deep .p-float-label .p-inputwrapper-focus ~ label{
+  color: #5e7f07;
+}
+
+.perk-code {
+  border: 3px solid #EE2A7B;
+  box-shadow: 0 0 5px 3px lightgray inset;
+  border-radius: 8px;
+  font-size: 22px;
+  background-color: #fafafa;
+}
+
+.blinker {
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+
+  50% {
+    opacity: 0;
+  }
+
+}
+
+:host ::ng-deep .p-scrollpanel .p-scrollpanel-bar {
+  background-color: #333333 !important;
+  opacity: 0.3!important;
+}
+
+:host ::ng-deep .p-sidebar-close {
+  z-index: 10001;
+}
+
+//#5DCC1A;
+//#f3fae4
+//#5e7f07

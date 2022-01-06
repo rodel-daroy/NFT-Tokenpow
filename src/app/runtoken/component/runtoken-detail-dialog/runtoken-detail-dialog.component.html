@@ -1,0 +1,16 @@
+<div class="container " fxLayout="column" fxLayoutAlign="center center">
+  <div class="col-12   border-bottom" fxLayoutAlign="center center">
+  <p> <img class="user-image " align="left" [src]="runtoken?.image ? sanitize(runtoken?.image) : 'assets/account.png'">            </p>
+  </div>
+
+  <div class="col-12  ">
+    <p> Name:   <a href="https://run.network/explorer/?query={{runtoken?.location}}&network=main"   style="text-decoration: none" class="gray-text"  target="_blank"> {{ runtoken?.name }} </a>  </p>
+    <p> Description:</p>
+    <p> {{ runtoken?.description }}</p>
+    <p> Emoji:  {{ runtoken?.emoji }}</p>
+    <p> Symbol:  {{ runtoken?.symbol }}</p>
+    <p> Decimal:  {{ runtoken?.decimals }}</p>
+    <p> InitialSupply: {{ runtoken.initialSupply!=0?getRealSupply(runtoken.initialSupply,runtoken.decimals):'Unknown'}}  </p>
+    <p> Owned:  {{getRealSupply(runtoken.supply,runtoken.decimals)}}</p>   
+  </div>
+</div>

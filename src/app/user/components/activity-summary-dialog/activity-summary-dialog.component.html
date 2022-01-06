@@ -1,0 +1,63 @@
+<p-table [value]="data" [paginator]="true" [rows]="10" dataKey="txid">
+  <ng-template pTemplate="caption">
+    <div class="p-d-flex">
+      <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success p-mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3rem"></th>
+      <th *ngFor="let col of cols">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-request let-expanded="expanded">
+    <tr>
+      <td>
+        <button
+          type="button"
+          pButton
+          [pRowToggler]="request"
+          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+        ></button>
+      </td>
+      <td>{{request.createdAt | dateFormatter:true}}</td>
+      <td>{{request.withdrawAmount | formatCoins}}</td>
+      <!--
+      <td *ngIf="request.selltokenLink.includes('https://tokenpow.com')"><a href="{{request.selltokenLink}}" target="_blank">{{'user.activity-summary-dialog.selltoken' | translate}}</a></td>
+      <td *ngIf="request.selltokenLink && !request.selltokenLink.includes('https://tokenpow.com')"><a href="https://tokenpow.com/auction/{{request.selltokenLink}}" target="_blank">{{'user.activity-summary-dialog.selltoken' | translate}}</a></td>
+      -->
+      <td><a href="{{request.selltokenLink}}" target="_blank">{{'user.activity-summary-dialog.selltoken' | translate}}</a></td>
+
+      <td *ngIf="!request.selltokenLink"><a href="https://whatsonchain.com/address/{{request.fromWallet}}" target="_blank">{{'user.activity-summary-dialog.wallet' | translate}}</a></td>
+      <td><a href="https://whatsonchain.com/address/{{request.toWallet}}" target="_blank">{{'user.activity-summary-dialog.wallet' | translate}}</a></td>
+      <td id="rewardFalse" *ngIf="(request.isReward == 'false') || !(request.isReward)">{{request.isWithdrawal == 'true' ? withdrawalText : selltokenClosingText}}</td>
+      <td id="rewardTrue" *ngIf="request.isReward == 'true'">{{'user.activity-summary-dialog.sharing-reward' | translate}}</td>
+      <td><a href="https://whatsonchain.com/tx/{{request.txid}}" target="_blank">{{'user.activity-summary-dialog.transaction' | translate}}</a></td>
+    </tr>
+  </ng-template>
+
+  <ng-template class="w-100" pTemplate="rowexpansion" let-request>
+    <div style="min-width:900px!important; max-width: 1000px!important;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">{{'user.activity-summary-dialog.coins' | translate}}</th>
+            <th scope="col">{{'activity-summary-dialog.fee' | translate}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td id="withdrawAmount" [style]="{
+        'color': request.isWithdrawal == 'true' ? 'red' : 'black'
+      }">{{request.isWithdrawal == 'true' ? '-' : ''}}{{(request.withdrawAmount - request.fee) | formatCoins}}</td>
+            <td>{{request.fee | formatCoins}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+</p-table>

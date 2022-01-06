@@ -1,0 +1,113 @@
+@import "src/styles";
+
+.locations {
+  background-color: #F9F9F9;
+}
+
+.multiselect {
+  padding-top: 1.2em;
+}
+
+.selected-list.c-list.c-token {
+  background: $pink-magenta !important;
+}
+
+p-calendar ::ng-deep {
+  width: 100%!important;
+}
+
+.text-area ::ng-deep {
+  margin-top: 20px!important;
+}
+
+.gray-text {
+  color: #474747;
+}
+
+.wizard-image {
+  max-width: 400px;
+  width: auto;
+}
+.dark-text {
+  color: #000000;
+}
+.selltoken-input {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.87);
+  background: #ffffff;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #808080;
+  transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+  border-radius: 4px;
+  width: 260px;
+  height: 40px;
+}
+.selltoken-textarea {
+  background: #ffffff;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  border: 1px solid #919191;
+  height: 170px;
+  max-width: 400px;
+  color: rgba(255, 255, 255, 0.87);
+  width: 100%;
+  padding: 5px;
+}
+.ng-select.selltoken-select ::ng-deep input {
+  color: rgb(0, 0, 0);
+}
+.ng-select.selltoken-select ::ng-deep .ng-select-container {
+  background: #ffffff;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  border: 1px solid #b6b6b6;
+  height: 40px;
+  color: rgba(255, 255, 255, 0.87);
+  width: 260px;
+  padding: 5px;
+}
+.ng-select.selltoken-select ::ng-deep .ng-value 
+{
+  background: #2d4d77 !important;
+}
+
+:host ::ng-deep .p-calendar {
+  background: #F4F4F4 !important;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  border: 1px solid #F4F4F4;
+  height: 40px;
+  padding: 5px;
+}
+
+:host ::ng-deep .dropzone {
+  margin-top: 0!important;
+  background-color: #232121 !important;
+}
+.user-image {
+  max-height: 30px;
+  min-height: 30px;
+  min-width: 30px;
+  max-width: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50% !important;
+  display: block;
+}
+
+.k-editor {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+.k-editor ::ng-deep  iframe{
+  color: rgb(0, 0, 0);
+}
+
+.k-editor ::ng-deep  html{
+  color: rgb(0, 0, 0);
+}
+.k-editor .k-editor-content p {
+  color: blue; /* set the color */
+}

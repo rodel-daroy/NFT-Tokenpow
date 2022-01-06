@@ -1,0 +1,41 @@
+.categories-filter {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 45px 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgb(10, 10, 10);
+  cursor: default;
+
+  .category-link {
+    transition: all 0.27s cubic-bezier(0.000, 0.000, 0.580, 1.000);
+    display: inline-block;
+    margin: 0 21px 5px;
+    color: rgb(70, 69, 69);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+
+    &:hover { 
+      color: #383838;
+    }
+  }
+  //
+  //a.active {
+  //  color: #101010;
+  //  border-color: #101010;  
+  //  cursor: default;
+  //}
+}
+@media only screen and (max-width: 767px) {
+  .categories-filter > a {
+    width: 40%;
+  }
+}
+
+.currentFilter {
+  color: #000000!important;
+  font-weight: bold!important;
+}
+

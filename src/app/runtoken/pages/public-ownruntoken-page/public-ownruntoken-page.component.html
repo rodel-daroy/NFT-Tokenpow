@@ -1,0 +1,55 @@
+<main class="container" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+    <div class="w-100" fxLayout.xs="column" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="space-between center">
+
+
+    </div>
+    <p-table #dt2 [value]="assets" dataKey="location"
+        [rows]="5" [showCurrentPageReport]="true"  [totalRecords]="totalRecords"   selectionMode="single1"  [(selection)]="selectedToken" (onRowSelect)="onRowSelect($event)"  [loading]="loading"  [rowsPerPageOptions]="[5,10,15]"  styleClass="p-datatable-customers"
+        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['name','description']">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="no">No</th>
+                <th >Avatar</th>
+                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th>Description</th>
+                <!--<th pSortableColumn="asset.initialSupply">Initial supply <p-sortIcon field="asset.initialSupply"></p-sortIcon></th> -->
+                <th pSortableColumn="supply">Quantity <p-sortIcon field="supply"></p-sortIcon></th>
+                <th pSortableColumn="initialSupply">Initial Supply <p-sortIcon field="initialSupply"></p-sortIcon></th>
+
+                <th colspan="2"></th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body"  let-asset  let-i="rowIndex">
+            <tr [pSelectableRow1]="asset">
+                <td>{{i+1}}</td>
+                <td>
+                    <img *ngIf="asset.image==''"  class="user-image " align="left" [src]="asset?.avatar ? asset.avatar : 'assets/account.png'">
+                    <img *ngIf="asset.image != '' "  class="user-image " align="left" [src]="asset?.image ? sanitize(asset.image) : 'assets/account.png'">
+                </td>
+                <td> <a href="https://run.network/explorer/?query={{asset?.location}}&network=main"   style="text-decoration: none" class="gray-text"  target="_blank"> {{asset.name}} </a></td>
+                <!--<td><p class="word-break">{{asset.description | replace : '/newLineSeparator/' : '\n'}}</p></td>-->
+                <td><p class="word-break">{{asset.description}}</p></td>
+                <!--<td>{{asset.asset.initialSupply}} </td> -->
+                <td>{{getRealSupply(asset.supply,asset.decimals)}} </td>
+                <td>{{ asset.initialSupply!=0?getRealSupply(asset.initialSupply,asset.decimals):'Unknown'}} </td>
+                <td>
+                    <p-button  class="p-button-lg mt-4"  (onClick)="detail(i)" [disabled]="false"   label="{{'Detail' | translate}}"></p-button>
+                </td>
+                <td>
+                    <p-button  class="p-button-lg mt-4"  (onClick)="transfer(i)" [disabled]="false"   label="{{'Transfer' | translate}}"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</main>
+

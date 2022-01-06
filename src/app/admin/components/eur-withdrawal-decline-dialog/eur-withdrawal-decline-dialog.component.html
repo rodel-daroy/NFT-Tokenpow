@@ -1,0 +1,12 @@
+<textarea
+  [(ngModel)]="reasonOfDecline"
+  class="w-100 h-100"
+  id="float-input"
+  rows="5"
+  cols="30"
+  pInputTextarea
+></textarea>
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px">
+  <p-button icon="pi pi-check" (onClick)="rejectRequest()" label="{{'admin.decline-dialog.send' | translate}}" class="p-button-text"></p-button>
+  <p-button icon="pi pi-times" (onClick)="ref.close()" label="{{'admin.decline-dialog.cancel' | translate}}"></p-button>
+</div>

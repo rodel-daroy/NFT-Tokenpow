@@ -1,0 +1,19 @@
+<main class="w-30" fxLayout="column" fxLayoutAlign="center center">
+ <b class="mt-2">Buy Now: {{this.buyNowPrice | currency : 'USD'}}</b>
+
+  <div class="mt-2"  fxLayout="column" fxLayoutAlign="center center"  *ngIf="!checked">
+    <input [readonly]="true" class="w-100" id="userName" type="number" pInputText [(ngModel)]="buyNowPrice">
+    <p></p>
+    <app-money-button
+      class="mt-2"
+      [hidden]="false"
+      #moneyButton
+      [disabled]="false"
+      [outputs]="outputs"
+      clientIdentifier="797da85b13e1972ef81871b263233d5c"
+      (onPayment)="onPaymentFromMoneyButton($event)"
+      (onError)="onErrorFromMoneyButton($event)"
+    ></app-money-button>
+  </div>
+</main>
+

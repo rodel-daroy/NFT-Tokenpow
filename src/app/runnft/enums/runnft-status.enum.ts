@@ -1,0 +1,7 @@
+export enum RunNftStatus {
+  CREATION,
+  PENDING_APPROVAL,
+  NOT_APPROVED,
+  APPROVED,
+  ENDED
+}

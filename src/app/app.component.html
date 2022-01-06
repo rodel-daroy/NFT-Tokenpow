@@ -1,0 +1,17 @@
+<app-shell class="p-input-filled">
+  <ngx-spinner
+    bdColor = "rgba(0, 0, 0, 0.8)"
+    size = "medium"
+    color = "#fff"
+    zIndex="99999999999999999999"
+    type = "ball-spin"
+    [fullScreen] = "true"
+  > 
+    <p style="color: white"> Loading... </p>
+  </ngx-spinner>
+  <div style="margin-top: 90px;">
+    <h1 *ngIf="environment.maintenance" class="text-center mt-5">Website is under maintenance mode. Please come back later.</h1>
+    <router-outlet *ngIf="!environment.maintenance"></router-outlet>
+  </div>
+</app-shell>
+<p-confirmDialog header="Version changed" icon="pi pi-exclamation-triangle"></p-confirmDialog>

@@ -1,0 +1,14 @@
+.grid-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card-height {
+  min-height: 400px!important;
+}
+
+.selltoken-grid-container {
+  margin-top: 15px;
+  margin-left: 0 !important;
+  margin-right: 0!important;
+}

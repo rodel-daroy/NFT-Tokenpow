@@ -1,0 +1,66 @@
+<div class="container ">
+  <div style="height:50px">
+  <p-messages [(value)]="msgs" [enableService]="false"></p-messages> 
+  <p-messages></p-messages>
+  </div>
+  <div
+    class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+    <p-tabView (activeIndexChange)="onTabPanelClick($event)" class="w-100">
+      <p-tabPanel header="ACTIVE">
+        <div
+          class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+          <app-selltoken-card
+            class="col-sm col-xl-3"
+            *ngFor="let selltoken of data"
+            [routerLink]="['/auction/', selltoken.uid]"
+            [selltoken]="selltoken"
+            style="padding: 15px;"
+          ></app-selltoken-card>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Processing">
+        <div
+          class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+          <app-selltoken-card
+            class="col-sm col-xl-3"
+            *ngFor="let selltoken of data"
+            [routerLink]="['/auction/', selltoken.uid]"
+            [selltoken]="selltoken"
+            style="padding: 15px;"
+          ></app-selltoken-card>
+        </div>
+      </p-tabPanel>
+    
+      <p-tabPanel header="COMPLETE">
+        <div
+          class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+          <app-selltoken-card
+            class="col-sm col-xl-3"
+            *ngFor="let selltoken of data"
+            [routerLink]="['/auction/', selltoken.uid]"
+            [selltoken]="selltoken"
+            style="padding: 15px;"
+          ></app-selltoken-card>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="CLOSED">
+        <div
+          class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+          <app-selltoken-card
+            class="col-sm col-xl-3"
+            *ngFor="let selltoken of data"
+            [routerLink]="['/auction/', selltoken.uid]"
+            [selltoken]="selltoken"
+            style="padding: 15px;"
+          ></app-selltoken-card>
+        </div>
+      </p-tabPanel>
+
+      
+    </p-tabView>
+
+  </div>
+
+</div>
+

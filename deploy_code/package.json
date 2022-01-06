@@ -1,0 +1,16 @@
+{
+  "name": "deploy_code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "TokenPowNft.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.8.0",
+    "pixel-sprite-generator-nodejs": "^1.0.3",
+    "run-sdk": "^0.6.32"
+  }
+}

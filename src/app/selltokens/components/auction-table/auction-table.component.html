@@ -1,0 +1,185 @@
+<div style="width: 100%;">
+    <div class="css-1glq2si"><h2 class="css-17znm6m">Activity</h2>
+
+        <div *ngIf="status == 'Processing'" style="margin-bottom: 30px;">
+            <div class="css-zrdji6">
+                <div class="css-942keq">
+                    <div class="css-18h6j3g">
+                        <div class="css-1vo2tlx">
+                            <div class="css-68da1"> <b> Winner </b> <div class="css-12hibeq">
+                                <div class="css-1jm49l2" aria-expanded="false">
+                                        <div class="css-1sdwxkz" style="color: black;">{{data[0]?.sender}}</div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="css-fm72rd">{{selltoken.auctionEndTime | dateFormatter : true}}</div>
+                        </div>
+                    </div>
+                    <div class="css-5avtf0">
+                        <div class="css-1lrq472">
+                            <div class="css-i44hey">{{data[0]?.price | currency : 'USD' }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="(status == 'COMPLETE' || status == 'CLOSED') && selltoken?.auctionPaymail" style="margin-bottom: 30px;">
+            <div class="css-zrdji6">
+                <div class="css-942keq">
+                    <div class="css-18h6j3g">
+                        <div class="css-1vo2tlx">
+                            <div class="css-68da1"> <b> Sold To </b> <div class="css-12hibeq">
+                                <div class="css-1jm49l2" aria-expanded="false">
+                                        <div class="css-1sdwxkz" style="color: black;">{{data[0]?.sender}}</div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="css-fm72rd">{{data[0]?.bidTime | dateFormatter : true}}</div>
+                        </div>
+                    </div>
+                    <div class="css-5avtf0">
+                        <div class="css-1lrq472">
+                            <div class="css-i44hey">{{data[0]?.price | currency : 'USD' }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-container *ngIf="!selltoken?.offerId">
+            <div *ngFor="let item of offerData" class="css-zrdji6">
+                <div class="css-942keq">
+                    <div class="css-18h6j3g">
+                        <div class="css-1vo2tlx">
+                            <div class="css-68da1">Offer placed by <div class="css-12hibeq">
+                                <div class="css-1jm49l2" aria-expanded="false">
+                                    <div class="css-1sdwxkz">{{item.sender}} </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="css-fm72rd">{{item.offerTime | dateFormatter : true}}</div>
+                        </div>
+                    </div>
+                    <div class="css-5avtf0">
+                        <div class="css-1lrq472">
+                            <div class="css-i44hey">{{item.price | currency : 'USD' }}</div>
+                            <span style="color: blue; cursor: pointer; text-decoration: underline;z-index: 1" *ngIf="user?.uid == this.selltoken?.userId" (click)="approveOffer(item.price, item.senderUid, item.id)">Approve</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selltoken?.offerId">
+            <ng-container *ngFor="let item of offerData">
+                <div *ngIf="selltoken.offerId == item.id" class="css-zrdji6">
+                    <div class="css-942keq">
+                        <div class="css-18h6j3g">
+                            <div class="css-1vo2tlx">
+                                <div class="css-68da1">Offer placed by <div class="css-12hibeq">
+                                    <div class="css-1jm49l2" aria-expanded="false">
+                                        <div class="css-1sdwxkz">{{item.sender}} </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="css-fm72rd">{{item.offerTime | dateFormatter : true}}</div>
+                            </div>
+                        </div>
+                        <div class="css-5avtf0">
+                            <div class="css-1lrq472">
+                                <div class="css-i44hey">{{item.price | currency : 'USD' }}</div>
+                                <span style="color: green; cursor: pointer; text-decoration: underline;">Approved</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+
+        <div *ngFor="let item of data" class="css-zrdji6">
+            <div class="css-1uoge8i">
+                <div class="css-1jm49l2" aria-expanded="false">
+                    <a href="/Aito" class="css-15ooa9">
+                        <div class="css-9wy7g4" style="background-image: url(&quot;https://f8n-production.imgix.net/creators/profile/6rfsu1wgr-te-le-chargement-jpeg-ou9rte.jpeg?fit=fill&amp;q=80&amp;w=72&quot;);"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="css-942keq">
+                <div class="css-18h6j3g">
+                    <div class="css-1vo2tlx">
+                        <div class="css-68da1">Bid placed by
+                            <div class="css-12hibeq">
+                                <div class="css-1jm49l2" aria-expanded="false">
+                                    <div class="css-1sdwxkz" fxLayout="row">
+                                            {{item.sender}}
+                                            <a *ngIf="item.escrowAddress?.address" fxLayout="row" fxLayoutAlign="center start"
+                                                href="https://whatsonchain.com/address/{{item.escrowAddress?.address.toString()}}"
+                                                style="text-decoration: none; z-index: 1; margin-left: 30px;" class="gray-text" target="_blank">
+                                                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="css-13o7eu2">
+                                                <path d="M15 0H8v2h4.6L6.3 8.3l1.4 1.4L14 3.4V8h2V1c0-.6-.4-1-1-1z" fill="currentColor"></path>
+                                                <path d="M14 16H1c-.6 0-1-.4-1-1V2c0-.6.4-1 1-1h4v2H2v11h11v-3h2v4c0 .6-.4 1-1 1z" fill="currentColor"></path>
+                                                </svg>
+                                            </a>
+                                    </div>
+
+                                    <!--</a> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="css-fm72rd">{{item.bidTime | dateFormatter : true}}</div>
+                    </div>
+                </div>
+                <div class="css-5avtf0">
+                    <div class="css-1lrq472">
+                        <div class="css-i44hey">{{item.price | currency : 'USD' }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="css-zrdji6">
+            <div class="css-942keq">
+                <div class="css-18h6j3g">
+                    <div class="css-1vo2tlx">
+                        <div class="css-68da1">Created by <div class="css-12hibeq">
+                            <div class="css-1jm49l2" aria-expanded="false">
+                                    <div class="css-1sdwxkz">@{{selltoken?.userName}}</div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="css-fm72rd">{{selltoken.createdAt | dateFormatter : true}}</div>
+                    </div>
+                </div>
+                <div class="css-5avtf0">
+                    <div class="css-1lrq472">
+                        <div class="css-i44hey">{{selltoken?.orderAmount * selltoken?.targetInEur | currency : 'USD'}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="css-1glq2si">
+        <h2 class="css-17znm6m">Comments</h2>
+        <div *ngFor="let item of comments" class="css-zrdji6">
+            <div class="css-942keq">
+                <div class="css-18h6j3g">
+                    <div class="css-1vo2tlx">
+                        <div class="css-68da1">Commented by <div class="css-12hibeq">
+                            <div class="css-1jm49l2" aria-expanded="false">
+                                <div class="css-1sdwxkz">{{item.firstName}} </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="css-fm72rd">{{item.commentTime | dateFormatter : true}}</div>
+                    </div>
+                </div>
+                <div class="css-5avtf0">
+                    <div class="css-1lrq472">
+                        <div class="css-i44hey" style="white-space: initial; max-width: 300px; text-align: left;">{{item.comment}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

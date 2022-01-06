@@ -1,0 +1,17 @@
+<main class="container" fxLayout="column" fxLayoutAlign="center center">
+    <div>
+      <p>Slide button to mint</p>
+    </div>
+    <div #moneybuttonrender id="mybuttonrender" fxHide.lt-md>
+    </div>
+    <div class="mt-5" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <div>
+      <button
+        pButton
+        class="p-button-outlined"
+        label="{{'selltokens.create-selltoken.create-preview-selltoken.back' | translate}}"
+        (click)="backStep()"></button>
+      </div>
+    </div>
+    <br>
+  </main>

@@ -1,0 +1,135 @@
+<p-tabView>
+  <p-tabPanel header="{{'admin.iban-withdrawal-requests.pending' | translate}}">
+    <p-table [value]="pendingRequests" [paginator]="true" [rows]="10" sortField="createdAt" sortOrder="-1" styleClass="p-datatable-responsive-demo">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 20%" pSortableColumn="createdAt">{{'admin.withdrawal-requests.created-at' | translate}}<p-sortIcon field="createdAt"></p-sortIcon></th>
+          <th style="width: 15%" pSortableColumn="requesterName">{{'admin.withdrawal-requests.requester-name' | translate}}<p-sortIcon field="requesterName"></p-sortIcon></th>
+          <th style="width: 30%">{{'admin.withdrawal-requests.iban' | translate}}</th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.total-amount' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.service-fee' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.amount' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+          <th style="width: 10%">{{'admin.withdrawal-requests.approve' | translate}}</th>
+          <th style="width: 10%">{{'admin.withdrawal-requests.decline' | translate}}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-request>
+        <tr>
+          <td><span class="p-column-title">{{request.createdAt | dateFormatter:true}}</span></td>
+          <td><span class="p-column-title"></span>{{request.userFirstName}} {{request.userLastName}}</td>
+          <td><span class="p-column-title"></span>{{request.iban}}</td>
+          <td><span class="p-column-title"></span>{{request.amountInSatoshis | formatCoins}}</td>
+          <td><span class="p-column-title"></span>{{request.fee | formatCoins}} </td>
+          <td><span class="p-column-title"></span>{{request.amountAfterFee | formatCoins}} </td>
+          <td>
+            <button
+              pButton
+              type="button"
+              label="{{'admin.withdrawal-requests.approve' | translate}}"
+              class="p-button-rounded p-button-success"
+              (click)="approveRequest(request)"
+            >
+            </button>
+          </td>
+          <td>
+            <button
+              pButton
+              type="button"
+              label="{{'admin.withdrawal-requests.decline' | translate}}"
+              class="p-button-rounded p-button-danger"
+              (click)="declineRequest(request)"
+            >
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+
+  <p-tabPanel header="{{'admin.iban-withdrawal-requests.approved' | translate}}">
+    <p-table [value]="approvedRequests" [paginator]="true" [rows]="10" sortField="createdAt" sortOrder="-1" styleClass="p-datatable-responsive-demo">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 20%" pSortableColumn="createdAt">{{'admin.withdrawal-requests.created-at' | translate}}<p-sortIcon field="createdAt"></p-sortIcon></th>
+          <th style="width: 15%" pSortableColumn="requesterName">{{'admin.withdrawal-requests.requester-name' | translate}}<p-sortIcon field="requesterName"></p-sortIcon></th>
+          <th style="width: 30%">{{'admin.withdrawal-requests.iban' | translate}}</th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.total-amount' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.service-fee' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.amount' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+          <th style="width: 10%">{{'admin.withdrawal-requests.complete' | translate}}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-request>
+        <tr>
+          <td><span class="p-column-title">{{request.createdAt | dateFormatter:true}}</span></td>
+          <td><span class="p-column-title"></span>{{request.userFirstName}} {{request.userLastName}}</td>
+          <td><span class="p-column-title"></span>{{request.iban}}</td>
+          <td><span class="p-column-title"></span>{{request.amountInSatoshis | formatCoins}}</td>
+          <td><span class="p-column-title"></span>{{request.fee | formatCoins}} </td>
+          <td><span class="p-column-title"></span>{{request.amountAfterFee | formatCoins}} </td>
+          <td>
+            <button
+              pButton
+              type="button"
+              label="{{'admin.withdrawal-requests.complete' | translate}}"
+              class="p-button-rounded p-button-success"
+              (click)="completeRequest(request)"
+            >
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+
+  <p-tabPanel header="{{'admin.iban-withdrawal-requests.completed' | translate}}">
+    <p-table [value]="completedRequests" [paginator]="true" [rows]="10" sortField="createdAt" sortOrder="-1" styleClass="p-datatable-responsive-demo">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 20%" pSortableColumn="createdAt">{{'admin.withdrawal-requests.created-at' | translate}}<p-sortIcon field="createdAt"></p-sortIcon></th>
+          <th style="width: 20%" pSortableColumn="requesterName">{{'admin.withdrawal-requests.requester-name' | translate}}<p-sortIcon field="requesterName"></p-sortIcon></th>
+          <th style="width: 30%">{{'admin.withdrawal-requests.iban' | translate}}</th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.total-amount' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.service-fee' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.amount' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-request>
+        <tr>
+          <td><span class="p-column-title">{{request.createdAt | dateFormatter:true}}</span></td>
+          <td><span class="p-column-title"></span>{{request.userFirstName}} {{request.userLastName}}</td>
+          <td><span class="p-column-title"></span>{{request.iban}}</td>
+          <td><span class="p-column-title"></span>{{request.amountInSatoshis | formatCoins}}</td>
+          <td><span class="p-column-title"></span>{{request.fee | formatCoins}} </td>
+          <td><span class="p-column-title"></span>{{request.amountAfterFee | formatCoins}} </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+
+  <p-tabPanel header="{{'admin.iban-withdrawal-requests.rejected' | translate}}">
+    <p-table [value]="rejectedRequests" [paginator]="true" [rows]="10" sortField="createdAt" sortOrder="-1" styleClass="p-datatable-responsive-demo">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 20%" pSortableColumn="createdAt">{{'admin.withdrawal-requests.created-at' | translate}}<p-sortIcon field="createdAt"></p-sortIcon></th>
+          <th style="width: 20%" pSortableColumn="requesterName">{{'admin.withdrawal-requests.requester-name' | translate}}<p-sortIcon field="requesterName"></p-sortIcon></th>
+          <th style="width: 30%">{{'admin.withdrawal-requests.iban' | translate}}</th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.total-amount' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.service-fee' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+          <th style="width: 15%" pSortableColumn="amount">{{'admin.withdrawal-requests.amount' | translate}}<p-sortIcon field="amount"></p-sortIcon></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-request>
+        <tr>
+          <td><span class="p-column-title">{{request.createdAt | dateFormatter:true}}</span></td>
+          <td><span class="p-column-title"></span>{{request.userFirstName}} {{request.userLastName}}</td>
+          <td><span class="p-column-title"></span>{{request.iban}}</td>
+          <td><span class="p-column-title"></span>{{request.amountInSatoshis | formatCoins}}</td>
+          <td><span class="p-column-title"></span>{{request.fee | formatCoins}} </td>
+          <td><span class="p-column-title"></span>{{request.amountAfterFee | formatCoins}} </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+</p-tabView>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>

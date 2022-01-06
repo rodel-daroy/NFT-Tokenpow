@@ -1,0 +1,85 @@
+<p-table [value]="selltokens" dataKey="uid" styleClass="p-datatable-responsive-demo">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3%"></th>
+      <th style="width: 14%">{{'admin.selltoken-approvals.user-email' | translate}}</th>
+      <th style="width: 14%">{{'admin.selltoken-approvals.created-at' | translate}}</th>
+      <th style="width: 10%">{{'admin.selltoken-approvals.title' | translate}}</th>
+      <th style="width: 14%">{{'admin.selltoken-approvals.view' | translate}}</th>
+      <th style="width: 15%">{{'admin.selltoken-approvals.approve' | translate}}</th>
+      <th style="width: 15%">{{'admin.selltoken-approvals.decline' | translate}}</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-selltoken let-expanded="expanded">
+    <tr>
+      <td class="p-column-responsive-hide">
+        <span class="p-column-title"></span>
+        <button
+          type="button"
+          pButton
+          [pRowToggler]="selltoken"
+          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+        ></button>
+      </td>
+      <td><span class="p-column-title">{{'admin.selltoken-approvals.user-email' | translate}}</span>{{selltoken.userEmail}}</td>
+      <td><span class="p-column-title">{{'admin.selltoken-approvals.created-at' | translate}}</span>{{selltoken.createdAt | dateFormatter}}</td>
+      <td><span class="p-column-title">{{'admin.selltoken-approvals.title' | translate}}</span>{{selltoken.title}}</td>
+      <td>
+        <span class="p-column-title">{{'admin.selltoken-approvals.view' | translate}}</span>
+        <button
+          pButton
+          type="button"
+          label="{{'admin.selltoken-approvals.view' | translate}}"
+          class="p-button-rounded p-button-info"
+          [routerLink]="['/auction/', selltoken.uid]"
+          >
+        </button>
+      </td>
+
+      <td>
+        <span class="p-column-title">{{'admin.selltoken-approvals.decline' | translate}}</span>
+        <button
+          pButton
+          type="button"
+          label="{{'admin.selltoken-approvals.decline' | translate}}"
+          style="z-index: 99"
+          class="p-button-rounded p-button-danger"
+          (click)="showDialog(selltoken.userEmail, selltoken)">
+        </button>
+      </td>
+      <td>
+        <span class="p-column-title">{{'admin.selltoken-approvals.approve' | translate}}</span>
+        <button
+          pButton
+          type="button"
+          label="{{'admin.selltoken-approvals.approve' | translate}}"
+          class="p-button-rounded p-button-success"
+          (click)="approveselltoken(selltoken)">
+        </button>
+      </td>
+      <td class="p-column-responsive-show">
+        <span class="p-column-title">{{'admin.selltoken-approvals.show-card' | translate}}</span>
+        <button
+          type="button"
+          pButton
+          [pRowToggler]="selltoken"
+          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template class="w-100" pTemplate="rowexpansion" let-selltoken>
+    <tr>
+      <td colspan="7">
+          <div class="w-100" fxLayout="row" fxLayoutAlign="center center">
+            <app-selltoken-card
+              [selltoken]="selltoken"
+              [isPreview]="true"
+            ></app-selltoken-card>
+          </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>

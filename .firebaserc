@@ -1,0 +1,21 @@
+{
+  "projects": {
+    "toek-pow": "token-pow"
+  },
+  "targets": {
+    "money-me-4897f": {
+      "hosting": {
+        "money-me-4897f": [
+          "money-me-4897f"
+        ]
+      }
+    },
+    "gobitfundmedev": {
+      "hosting": {
+        "gobitfundmedev": [
+          "gobitfundmedev"
+        ]
+      }
+    }
+  }
+}

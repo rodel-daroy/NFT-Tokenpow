@@ -1,0 +1,59 @@
+<div fxLayout="column" fxLayoutAlign="center center" style="background-color: rgb(242, 242, 242);">
+  <div #fullscreen style="height: 500px; width: 100%; background-color: rgb(242, 242, 242);" fxLayout="column" fxLayoutAlign="center center">
+    <div class="image-container" style="height: 100%; width: 100%; overflow: hidden;   object-fit: cover;"  fxLayout="row"  fxLayoutAlign="">
+      <img class="card-img-top selltoken-card-image clickable" [src]="runtoken?.image ? sanitize(runtoken?.image) : 'assets/account.png'">
+
+    </div>
+    <div fxLayout="row" style="width:100%" fxLayoutAlign="end center">
+      <button class="btn-enlarge" (click)="showFullScreen()" >
+        <div class="container" >
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"><path d="M9 2h3.6l-4 4L10 7.4l4-4V7h2V0H9v2zM6 8.6l-4 4V9H0v7h7v-2H3.4l4-4L6 8.6z" fill="#fff"></path>
+        </svg></div>
+      </button>
+    </div>
+  </div>
+</div>
+<div >
+
+<div fxLayout="column" fxLayoutAlign="center center" style="margin-top: 30px;" >
+<div class="detailed-pane" fxLayout="column" fxLayoutAlign="center center">
+  <div class="col-12  ">
+    <p class="description-title">  Asset Overview </p>
+    <div *ngIf="runtoken?.name" style = "width:100%" fxLayout="row" fxLayoutAlign="space-between center">
+      <p class="description-title" > Name:  </p><p class="description-text">   <a href="https://run.network/explorer/?query={{runtoken?.location}}&network=main"   style="text-decoration: none" class="gray-text"  target="_blank"> {{ runtoken?.name }} </a>  </p>
+    </div>
+
+    <p class="description-title" *ngIf="runtoken?.description"> Description:</p>
+    <p class="description-text" *ngIf="runtoken?.description"  style="padding-bottom: 8px;" > {{ runtoken?.description }}</p>
+
+    <div *ngIf="runtoken?.emoji" style = "width:100%" fxLayout="row" fxLayoutAlign="space-between center">
+      <p class="description-title" > Emoji:  </p><p class="description-text">  {{ runtoken?.emoji }}</p>
+    </div>
+    <div *ngIf="runtoken?.symbol" style = "width:100%" fxLayout="row" fxLayoutAlign="space-between center">
+      <p class="description-title" > Symbol:   </p><p class="description-text"> {{ runtoken?.symbol }}</p>
+    </div>
+    <div *ngIf="runtoken?.decimals" style = "width:100%" fxLayout="row" fxLayoutAlign="space-between center">
+      <p class="description-title" > Decimal:   </p><p class="description-text"> {{ runtoken?.decimals }}</p>
+    </div>
+    <div *ngIf="runtoken?.initialSupply" style = "width:100%" fxLayout="row" fxLayoutAlign="space-between center">
+      <p class="description-title" > InitialSupply: </p><p class="description-text">  {{ runtoken?.initialSupply!=0?getRealSupply(runtoken?.initialSupply,runtoken?.decimals):'Unknown'}}  </p>
+    </div>
+    <div *ngIf="runtoken?.supply" style = "width:100%" fxLayout="row" fxLayoutAlign="space-between center">
+      <p class="description-title" > Owned:  </p><p class="description-text">  {{getRealSupply(runtoken?.supply,runtoken?.decimals)}}</p>
+    </div>
+  </div>
+
+
+</div>
+</div>
+
+
+<div class="mt-5" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <div>
+    <button
+      pButton
+      class="p-button-outlined"
+      label="{{'selltokens.create-selltoken.create-preview-selltoken.back' | translate}}"
+      (click)="prevStep()"></button>
+  </div>
+</div>

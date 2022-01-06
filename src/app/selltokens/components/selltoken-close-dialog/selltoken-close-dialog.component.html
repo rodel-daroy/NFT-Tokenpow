@@ -1,0 +1,21 @@
+<div *ngIf = "this.config.data.billinguser && this.status != 2" >
+<p> Firstly You need to send this Asset to buyer. </p>
+<p>send asset to {{this.config.data.billinguser}} for amount {{ this.config.data.amount}} </p>
+<app-money-button
+              [outputs]="outputs"
+              clientIdentifier="{{clientId}}"
+              (onPayment)="onPaymentSuccess($event)"
+              (onError)="onPaymentError($event)"
+            >
+</app-money-button>
+</div>
+<div *ngIf="paymentSuccessed" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <i class="pi pi-exclamation-triangle" style="font-size: 2rem"></i>
+  <p style="font-size: 16px">
+    {{'selltokens.selltoken-close-dialog.after-closing-the-selltoken-the-coins-will-be-moved-to-your-user-wallet' | translate}}.
+  </p>
+</div>
+<div *ngIf="paymentSuccessed"  class="w-100" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+  <button pButton label="{{'selltokens.selltoken-close-dialog.yes' | translate}}" (click)="onSubmit(true)"></button>
+  <button pButton label="{{'selltokens.selltoken-close-dialog.no' | translate}}" (click)="onSubmit(false)"></button>
+</div>

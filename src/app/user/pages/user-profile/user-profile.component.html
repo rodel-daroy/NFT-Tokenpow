@@ -1,0 +1,68 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+  <div class="image-hover-zoom clickable">
+    <img class="user-image " [src]="user.photoUrl ? user.photoUrl : 'assets/account.png'" (click)="fileInput.click()">
+    <input style="display:none" type="file" (change)="onFileChanged($event)" accept="image/*" #fileInput>
+    <div class="overlay" (click)="fileInput.click()">
+      <div class="overlay-text">
+        {{'user.user-profile.upload-image' | translate}}
+      </div>
+    </div>
+  </div>
+  <h5 class="dark-text mt-5"><b> Your NFT art credentials </b></h5>
+
+  <p-editor
+    [(ngModel)]="user.description"
+    [style]="{'height': '250px'}">
+  </p-editor>
+  <span class="p-float-label col-12 col-sm-10  col-lg-6">
+    <input id="firstName" type="text" pInputText required [(ngModel)]="user.firstName" class="w-100">
+    <label for="firstName">{{'user.user-profile.first-name' | translate}}:</label>
+  </span>
+  <span class="p-float-label col-12 col-sm-10  col-lg-6">
+    <input id="lastName" type="text" pInputText required [(ngModel)]="user.lastName" class="w-100">
+    <label for="lastName">{{'user.user-profile.last-name' | translate}}:</label>
+  </span>
+
+  <span class="p-float-label col-12 col-sm-10  col-lg-6">
+    <input id="email"  type="text" pInputText required [(ngModel)]="user.email" class="w-100">
+    <label for="email">{{'email' | translate}}:</label>
+  </span>
+
+  <span class="p-float-label col-12 col-sm-10  col-lg-6">
+    <input pattern="^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$" id="withdrawalBsvAddress" type="text" pInputText [(ngModel)]="user.withdrawalBsvAddress" class="w-100">
+    <label for="withdrawalBsvAddress">{{'user.user-profile.preferred-withdrawal-bsv-adress' | translate}}:</label>
+  </span>
+
+ <span class="p-float-label col-12 col-sm-10  col-lg-6 mt-1">
+   <input id="paymail" disabled type="text" pInputText [(ngModel)]="user.paymail" class="w-100">
+   <label for="paymail">{{'user.user-profile.paymail' | translate}}:</label>
+ </span>
+
+ <span class="p-float-label col-12 col-sm-10  col-lg-6 mt-1">
+  <!-- <input id="address" disabled type="text" pInputText [(ngModel)]="user.assetAddress.address" class="w-100"> -->
+  <div class="p-inputgroup">
+    <input id="address" disabled type="text" pInputText [(ngModel)]="user.assetAddress.address">
+    <button
+      style="background: white; color: black; border-bottom: 1px solid #dbdbdb;"
+      type="button" pButton pRipple icon="pi pi-copy" styleClass="p-button-warn" ngxClipboard [cbContent]="user.assetAddress.address" (click)="clipboard()"></button>
+  </div>
+  <label for="address" style="top: 20% !important;">{{'Run Owner address' | translate}}:</label>
+  </span>
+
+  <span class="p-float-label col-12 col-sm-10  col-lg-6">
+    <input id="facebook" type="text" pInputText [(ngModel)]="user.facebookUrl" class="w-100">
+    <label for="facebook">{{'user.user-profile.facebook-url' | translate}}:</label>
+  </span>
+
+  <span class="p-float-label col-12 col-sm-10  col-lg-6">
+    <input id="twitter" type="text" pInputText [(ngModel)]="user.twitterUrl" class="w-100">
+    <label for="twitter">{{'user.user-profile.twitter-url' | translate}}:</label>
+  </span>
+
+  <!-- <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="selltoken.description" [config]="editorConfig"></angular-editor> -->
+  <!--<kendo-editor name="selltoken_description" [iframe]="false" [(ngModel)]="user.description" style="width: 100%; height: 300px;" ngDefaultControl
+
+  ></kendo-editor> -->
+
+  <button pButton label="{{'user.user-profile.update-profile' | translate}}" class="p-button-outlined"  (click)="updateProfile()"></button>
+</div>

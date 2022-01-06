@@ -1,0 +1,215 @@
+.image {
+  img {
+    width     : 100%;
+    height    : 100%;
+    max-width : 640px;
+    max-height: 360px;
+    object-fit   : cover;
+    border-radius: 5px;
+  }
+}
+
+.date-text {
+  font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+  font-weight: 600;
+  size       : 16px;
+  line-height: 21px;
+  color      : #ADADAD;
+}
+
+.title-text {
+  color        : #333333;
+  margin-bottom: 13px;
+  font-weight  : 700;
+  font-family  : Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+}
+
+.donation-progressbar {
+  background   : #E2E2E2;
+  border-radius: 6px;
+  height       : 10px;
+  position     : relative;
+}
+
+.donation-progressbar-active {
+  background   : #5DCC1A;
+  border-radius: 6px;
+  height       : 10px;
+  position     : absolute;
+  // width: 50%;
+}
+
+.donation-button {
+  border-radius: 5px !important;
+  font-weight  : bold !important;
+}
+
+.dark-text {
+  color: #333333;
+}
+
+.gray-text {
+  color: #ADADAD;
+}
+
+.selltoken-info {
+  font-weight: 400;
+  font-size  : 18px;
+}
+
+.donation-container {
+  height       : 100%;
+  // background: linear-gradient(90deg, white 50%, #FAFAFA 50%);
+}
+
+@media (max-width: 956px) {
+  .donation-container {
+    height    : 100%;
+    background: white;
+  }
+}
+
+
+:host ::ng-deep .p-scrollpanel-bar {
+  opacity: 1;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.avatar {
+  min-height   : 60px;
+  max-height   : 60px;
+  max-width    : 60px;
+  min-width    : 60px;
+  border-radius: 50%;
+  margin       : 0 10px;
+}
+
+.selltoken-owner {
+
+  border-top   : 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+}
+
+.icon {
+  color     : #2e89ff !important;
+  transition: all 0.3s ease 0s;
+}
+
+.icon:hover {
+  color: #005ccf !important;
+}
+
+.section-width {
+  max-width: 640px;
+}
+
+.angular-editor-textarea img, .additional-info img {
+  width: 100%;
+}
+
+@media (min-width: 1921px) {
+  .section-width {
+    max-width: 850px;
+  }
+
+  .image {
+    img {
+      max-width : 854px;
+      max-height: 480px;
+    }
+  }
+
+}
+
+
+.tltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #222222;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 1px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.tltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.perk-code {
+  border: 3px solid #EE2A7B;
+  box-shadow: 0 0 5px 3px lightgray inset;
+  border-radius: 8px;
+  font-size: 22px;
+  background-color: #fafafa;
+}
+
+.blinker {
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+
+  50% {
+    opacity: 0;
+  }
+
+}
+
+.desc-icon {
+  width: 21px;
+  height: auto;
+  margin-right: 2px;
+}
+
+.assetinfo-card {
+  color: black;
+  margin-bottom: 30px;
+  width: 18rem;
+  transition: all 0.5s;
+  border-radius: 16px;
+  border: 1px solid #dddddd;
+}
+
+
+.user-image {
+  max-height: 100px;
+  min-height: 100px;
+  min-width: auto;
+  max-width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50% !important;
+  display: block;
+}
+
+
+.count-down {
+  font-size: 2rem;
+}
+
+.count-down span{
+  font-size: 2rem;
+}
+
+table tr:last-child { 
+  border-top: 1px solid black; 
+}

@@ -1,0 +1,59 @@
+@import 'src/styles';
+
+.containers {
+  overflow-y: scroll!important;
+}
+
+.icon-color {
+  color: $pink-magenta;
+  font-size: 30px;
+  margin-right: 30px;
+}
+
+@media (max-width: 576px) {
+  .icon-color {
+    margin-right: 0!important;
+  }
+}
+
+.card-header {
+  background-color: white !important;
+  box-shadow: 0 0 0 0 !important;
+  border-bottom: 0 !important;
+}
+
+.start-button {
+  padding: 10px 37px 10px 37px;
+  width: 200px;
+  background: rgb(170 224 255);
+  border: 1px solid rgba(255, 255, 255, 0.46);
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+.card {
+  border: 0 !important;
+}
+
+.pi-heart {
+  font-size: 30px;
+  color: black;
+}
+
+.pi-heart:hover {
+  color:red;
+}
+
+.pi-heart-check {
+  color:red;
+}
+
+.pi-heart-uncheck {
+  color:black;
+}
+
+:host ::ng-deep .p-scrollpanel .p-scrollpanel-bar {
+  background-color: #333333 !important;
+  opacity: 0.3!important;
+}
+

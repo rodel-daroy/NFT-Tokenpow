@@ -1,0 +1,59 @@
+.grid-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card-height {
+  min-height: 400px!important;
+}
+
+.selltoken-grid-container {
+  margin-top: 15px;
+  margin-left: 0 !important;
+  margin-right: 0!important;
+}
+
+.css-pg23ef {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  grid-gap: 32px;
+}
+
+
+.css-1fjs75c {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: repeat(1,1fr);
+}
+
+
+@media (min-width: 40em)
+{
+  .css-1fjs75c {
+    grid-gap: 24px;
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+
+
+@media (min-width: 52em)
+{
+  .css-1fjs75c {
+    grid-gap: 32px;
+    grid-template-columns: repeat(3,1fr);
+  } 
+}
+
+
+@media (min-width: 72em)
+{
+  .css-1fjs75c {
+    grid-template-columns: repeat(4,1fr);
+  }
+}

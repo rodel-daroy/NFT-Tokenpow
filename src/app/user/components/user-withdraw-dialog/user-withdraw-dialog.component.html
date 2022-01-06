@@ -1,0 +1,55 @@
+
+  <p-tabView>
+    <p-tabPanel header="{{'user.user-withdraw-dialog.withdraw-to-bitcoin-sv-adress' | translate}}">
+      <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+      <h4 class="text-center">{{'user.user-withdraw-dialog.please-type-your-bsv-address' | translate}}</h4>
+      <span class="p-float-label w-100">
+        <input
+          [(ngModel)]="address"
+          pattern="^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$"
+          class="w-100"
+          id="address"
+          type="text"
+          #addressInput="ngModel"
+          pInputText
+        >
+        <label for="address">
+          {{'selltokens.donate-dialog.address' | translate}}
+        </label>
+      </span>
+
+      <p-button
+        [disabled]="!addressInput.valid || address == ''"
+        (onClick)="makeUserWithdraw()"
+        label="{{'selltokens.donate-dialog.withdraw' | translate}}"
+      ></p-button>
+      </div>
+    </p-tabPanel>
+    <!--
+    <p-tabPanel header="{{'user.withdraw-dialog.withdraw-to-iban' | translate}}" *ngIf="this.authService.user$ | async as user">
+      <div *ngIf="priceUserWillReceive >= 100">
+        <div *ngIf="!withdrawIsMade" class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+          <h4 *ngIf="user.iban && user.address && user.postalCode && user.location" class="text-center">{{'user.withdraw-dialog.by-yhis-withdrawal-you-will-receive' | translate}} {{+((amountInSatoshisToWithdraw) - ((amountInSatoshisToWithdraw / 100) * 15)).toFixed(8) | formatCoins}} coins <br> {{'user.withdraw-dialog.to-this-IBAN' | translate}}: {{user.iban}}</h4>
+          <div *ngIf="!user.iban || !user.address || !user.postalCode || !user.location">
+            <h3 class="text-center">{{'user.withdraw-dialog.prompt-user-text' | translate}}</h3>
+          </div>
+
+          <p-button
+            *ngIf="user.iban && user.address && user.postalCode && user.location"
+            [disabled]="user.iban == '' || !user.iban"
+            (onClick)="makeUserIbanWithdraw()"
+            label="{{'selltokens.donate-dialog.withdraw' | translate}}"
+          ></p-button>
+        </div>
+
+        <div *ngIf="withdrawIsMade" class="container" fxLayout="column" fxLayoutAlign="center center">
+          <h3 class="text-center">{{'user.withdraw-dialog.thank-you-message' | translate}}.</h3>
+        </div>
+      </div>
+      <div *ngIf="!(priceUserWillReceive >= 100)" class="container" fxLayout="row" fxLayoutAlign="center center">
+        <h5 class="text-center">{{'user.withdraw-dialog.withdrawals-to-EUR-are-available-for-amount-equal-or-higher-than' | translate}} 100 EUR</h5>
+      </div>
+
+    </p-tabPanel>
+  -->
+  </p-tabView>

@@ -1,0 +1,37 @@
+<div *ngIf = "this.config.data.billinguser" >
+<p> Please send asset to the buyer </p>
+<p>send asset to {{this.config.data.billinguser}} for amount {{ this.config.data.amount}} </p>
+<app-money-button
+              [outputs]="outputs"
+              clientIdentifier="{{clientId}}"
+              (onPayment)="onPaymentSuccess($event)"
+              (onError)="onPaymentError($event)"
+            >
+</app-money-button>
+</div>
+
+<div *ngIf = "!this.config.data.isMB" >
+  <div *ngIf = "this.config.data.isArt" >
+  <p> Please send art to the buyer </p>
+  <app-money-button
+                [outputs]="outputs"
+                clientIdentifier="{{clientId}}"
+                (onPayment)="onPaymentSuccess($event)"
+                (onError)="onPaymentError($event)"
+              >
+  </app-money-button>
+  </div>
+  <div *ngIf = "!this.config.data.isArt" >
+    <p> {{ this.config.data.amountReal }} tokens will be sent to the winner of the auction </p>
+    <app-money-button
+                  [outputs]="outputs"
+                  clientIdentifier="{{clientId}}"
+                  (onPayment)="onPaymentSuccess($event)"
+                  (onError)="onPaymentError($event)"
+                >
+    </app-money-button>
+    </div>
+</div>
+<div *ngIf="paymentSuccessed" class="w-100" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+  <button pButton label="Close" (click)="onSubmit(true)"></button>
+</div>

@@ -1,0 +1,70 @@
+<div style="height: 100%">
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div class="p-shadow-3 p-p-3" style="height: 533px" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+      <h5>
+        {{'selltokens.donate-dialog.donate-with-money-button-info' | translate}}
+      </h5>
+      <h6>
+        {{'selltokens.donate-dialog.comment-for-donation' | translate}}
+      </h6>
+
+      <form class="w-100 h-100" (submit)="handlePaymentForm($event)">
+
+
+        <div #cardElement>
+          <!-- A Stripe Element will be inserted here. -->
+        </div>
+
+
+        <!-- Used to display Element errors. -->
+        <p>{{ cardErrors }}</p>
+
+
+        <button >{{'selltokens.donate-dialog.donate' | translate}}</button>
+      </form>
+      <span class="p-float-label">
+            <textarea
+              [(ngModel)]="comment"
+              class="w-100"
+              id="comment"
+              type="text"
+              maxlength="200"
+              pInputTextarea
+              (ngModelChange)="onCommentChange()"
+            ></textarea>
+            <label for="comment">
+              {{'selltokens.donate-dialog.comment' | translate}}
+            </label>
+          </span>
+
+      <span class="p-float-label">
+        <p-inputNumber
+          [(ngModel)]="totalAmount"
+          mode="currency"
+          inputId="donate"
+          id="donate"
+          currency="USD"
+          (ngModelChange)="onAmountChange($event)"
+        >
+        </p-inputNumber>
+        <label for="Contribute">
+          {{'selltokens.donate-dialog.amount-to-donate' | translate}}
+        </label>
+      </span>
+      <app-money-button
+        #moneyButton
+        [disabled]="!totalAmount"
+        [outputs]="outputs"
+        clientIdentifier="797da85b13e1972ef81871b263233d5c"
+        (onPayment)="onPaymentFromMoneyButton($event)"
+        (onError)="onErrorFromMoneyButton($event)"
+      ></app-money-button>
+
+    </div>
+    <app-selltoken-card
+      [isPreview]="true"
+      [selltoken]="this.selltoken"
+    ></app-selltoken-card>
+  </div>
+
+</div>

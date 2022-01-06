@@ -1,0 +1,28 @@
+{
+  "bsv": {
+    "privatekey": "MIIBOwIBAAJBAJfeArhxWdWkm4XOTsdJkaBdolSoguD/GN8LAYxGO1hv3ismpFSn"
+  },
+  "stripe": {
+    "secret_key": "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"
+  },
+  "auth": {
+    "domain": "gobitfundmedev.firebaseapp.com",
+    "normal-domain": "https://gobitfundmedev.web.app"
+  },
+  "sendgrid": {
+    "key": "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",
+    "selltoken_reached_target_template": "d-07fc02751c634122b8ee2d11b0e83e39",
+    "reject_template": "d-cd23b71f01f14ced996074724416676d",
+    "selltoken-reached-target-template": "d-07fc02751c634122b8ee2d11b0e83e39",
+    "approve_template": "d-1eddec218d22418a898b81a722bfe89c",
+    "verification_email_template": "d-68b3a7de068e45808ed433780f0eea69",
+    "template": "d-cd97df9f8b2d458cb6268191c6d0cec9"
+  },
+  "url": {
+    "shorturl": "https://gobitfundmedev.web.app"
+  },
+  "txt": {
+    "url": "http://35.205.9.167:3013",
+    "token": "eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkdvQml0RnVuZE1lIiwiaWF0IjoxNTE2MjM5MDIyfQ"
+  }
+}

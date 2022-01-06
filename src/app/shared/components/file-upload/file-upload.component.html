@@ -1,0 +1,40 @@
+<div class="dropzone"
+     dropzone
+     (hovered)="toggleHover($event)"
+     (dropped)="onDrop($event)"
+     [class.hovering]="isHovering">
+  <input class="file-input" type="file" (change)="onDrop($event.target.files)">
+  <span>{{'shared.file-upload.drag-and-drop' | translate}}</span>
+  <span>{{'shared.file-upload.photo' | translate}} (960x540px) {{'shared.file-upload.or' | translate}}</span>
+</div>
+
+<div *ngIf="files.length > 0 && thumbnailFile">
+  <upload-task [file]="files[0]" [thumbnailFile]="thumbnailFile"></upload-task>
+</div>
+
+<div *ngIf="imgUrl && files.length == 0">
+  <img style="width: 20%" src="{{imgUrl}}"><br>
+</div>
+
+<p-dialog [modal]="true" header="Upload different type of image" [(visible)]="displayDialog"  [baseZIndex]="10000">
+  <div fxLayout="column" fxLayoutAlign="space-between center" class="dialog" >
+    <p>
+      {{'shared.file-upload.ratio-info' | translate}}
+    </p>
+    <p>
+      {{'shared.file-upload.width-and-height' | translate}}
+    </p>
+    <p><img src="assets/allowed_pic.png" alt="Allowed picture" ></p>
+    <p>
+      {{'shared.file-upload.dont-accept-pictures-info' | translate}}
+    </p>
+    <p><img src="assets/notallowed_pic.png" alt="Not allowed picture" ></p>
+    <p>
+      {{'shared.file-upload.thank-you' | translate}}
+    </p>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayDialog=false" label="{{'shared.file-upload.understand' | translate}}" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

@@ -1,0 +1,131 @@
+<!--<div
+  *ngIf="data.length > 0"
+  infiniteScroll
+  [infiniteScrollThrottle]="500"
+  (scrolled)="onScroll()"
+  class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+
+    <app-selltoken-card
+      class="col-sm col-xl-3"
+      *ngFor="let selltoken of page.$data | async"
+      [selltoken]="selltoken"
+    ></app-selltoken-card>
+</div>
+-->
+
+<p-table #dt2 [value]="data" dataKey="uid" [lazy]="false"  (onLazyLoad)="loadData($event)" (onRowSelect)="onRowSelect($event)" selectionMode="single"   [(selection)]="selectedToken"
+    [rows]="9" [showCurrentPageReport]="true"  [totalRecords]="totalRecords"    [loading]="loading"  styleClass="p-datatable-customers"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['title','categoriesIds','targetInEur','orderAmount','asset.initialSupply','status']">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex">
+            <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="no">No</th>
+            <th >Avatar</th>
+            <th pSortableColumn="title">Name <p-sortIcon field="tile"></p-sortIcon></th>
+            <th> Category </th>
+            <th pSortableColumn="targetInEur">Price <p-sortIcon field="targetInEur"></p-sortIcon></th>
+            <th pSortableColumn="orderAmount">Quantity <p-sortIcon field="orderAmount"></p-sortIcon></th>
+            <th pSortableColumn="initialSupply">Initial supply <p-sortIcon field="initialSupply"></p-sortIcon></th>
+            <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+            <th pSortableColumn="protocol">Protocol Type <p-sortIcon field="protocol"></p-sortIcon></th>
+            <th pSortableColumn="totalBidCount"> Bids <p-sortIcon field="totalBidCount"></p-sortIcon></th>
+        </tr>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+            </th>
+            <th>
+                <p-columnFilter  styleClass="p-datatable-customers" type="text" field="title"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="categoriesIds" [matchMode]="'fliterCategory'" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [ngModel]="value"  [scrollHeight] = "250" [options]="categories" placeholder="Any" (onChange)="onTest($event.value,filter)" optionLabel="id">
+                            <ng-template let-option pTemplate="item">
+                                <div class="p-multiselect-representative-option">
+                                    <span class="p-ml-1">{{option.nameEN}}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="targetInEur"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="orderAmount"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="initialSupply"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="status" [matchMode]="'filterStatus'" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [ngModel]="value" [scrollHeight] = "250"  [options]="statusFilters" placeholder="Any" (onChange)="onTest($event.value,filter)" optionLabel="name">
+                            <ng-template let-option pTemplate="item">
+                                <div class="p-multiselect-representative-option">
+                                    <span class="p-ml-1">{{option.name}}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </ng-template>
+                </p-columnFilter>            
+            </th>
+            <th>
+                <p-columnFilter field="protocol" [matchMode]="'filterStatus'" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [ngModel]="value" [scrollHeight] = "250"  [options]="statusProtocol" placeholder="Any" (onChange)="onTest($event.value,filter)" optionLabel="name">
+                            <ng-template let-option pTemplate="item">
+                                <div class="p-multiselect-representative-option">
+                                    <span class="p-ml-1">{{option.name}}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </ng-template>
+                </p-columnFilter>            
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data  let-i="rowIndex">
+        <tr [pSelectableRow]="data">
+            <td>{{i+1}}</td>
+            <td>
+                <img class="user-image " *ngIf="data.tokenType==1" align="left" [src]="data.photo_url ? data.photo_url : data.asset?.avatar ?  data.asset?.avatar : 'assets/token_land.png'">
+                <img class="user-image " *ngIf="data.tokenType==0" align="left" [src]="data.photo_url ? data.photo_url : data.runart?.image ?   sanitize(data.runart?.image) : 'assets/token_land.png'">
+                <img class="user-image " *ngIf="data.tokenType==2 && !data?.runnft?.image" align="left" [src]="data.photo_url ? data.photo_url : data.runnft?.avatar ?   data.runnft?.avatar : 'assets/token_land.png'">
+                <img class="user-image " *ngIf="data.tokenType==2 && data?.runnft?.image" align="left" [src]="data.photo_url ? data.photo_url : data.runnft?.image ?    sanitize(data.runnft?.image) : 'assets/token_land.png'">
+
+            </td>
+            <td>{{data.title}}</td>
+            <td>{{data.categories | transformCategories }}</td>
+            <td> {{data.currentTokenPrice | currency : 'USD'}}</td>
+            <td> {{data.orderAmount}}</td>
+            <!--<td><p class="word-break">{{asset.description | replace : '/newLineSeparator/' : '\n'}}</p></td>-->
+            <td> {{data.tokenType ===1 ? data.asset.initialSupply : "--"}} </td>
+            <td>{{data.status}} </td>
+            <td> {{data.protocol}} </td>
+            <td>{{data?.totalBidCount?data.totalBidCount:0}} </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<div *ngIf="data.length == 0"
+     class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container"
+>
+  <h3 class="text-center w-100">{{'selltokens.selltoken-grid.sorry-there-are-no-selltokens-with-selected-category' | translate}}</h3>
+
+</div>

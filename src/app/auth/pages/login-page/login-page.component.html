@@ -1,0 +1,8 @@
+<div *ngIf="!(authService.user$ | async)" class="container p-70">
+  <div class="login-container" fxLayout="row" fxLayoutAlign="center center">
+<!--    <div *ngIf="authService.user$ | async as user">-->
+<!--      {{user | json}}-->
+<!--    </div>-->
+    <app-login class="col-12 col-sm-4"></app-login>
+  </div>
+</div>

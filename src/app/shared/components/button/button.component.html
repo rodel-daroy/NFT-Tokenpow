@@ -1,0 +1,23 @@
+<button
+  [type]="type"
+  [disabled]="disabled"
+  class="button"
+  fxFlex
+  [ngClass]="{
+    filled: style == 'filled',
+    'outlined thin': style == 'outlined',
+    medium: size == 'medium',
+    small: size == 'small',
+    large: size == 'large',
+    radius: withRadius == true
+  }"
+  
+  (click)="onButtonClicked($event)" 
+>
+  <span fxLayout="row" fxLayoutAlign="center">
+  <span *ngIf="iconSource">
+  <img class="logo" style = "max-width: {{maxWidth}}px" src="assets/{{iconSource}}" alt="icon">
+  </span>
+    {{ text }}
+</span>
+</button>

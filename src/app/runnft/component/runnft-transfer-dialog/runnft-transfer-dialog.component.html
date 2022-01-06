@@ -1,0 +1,30 @@
+<div fxLayout="column">
+  <label for="address">Owner Address (BSV) or Relayx paymail</label>
+  <input
+    required
+    class="w-200"
+    id="address"
+    type="text"
+    pInputText
+    [(ngModel)]="ownerAddress"
+  />
+
+  <div class="mt-3">
+    <app-money-button
+      [outputs]="outputs"
+      clientIdentifier="{{ clientId }}"
+      (onPayment)="onPaymentSuccess($event)"
+      (onError)="onPaymentError($event)"
+    >
+    </app-money-button>
+  </div>
+</div>
+<div
+  *ngIf="paymentSuccessed"
+  class="w-100"
+  fxLayout="row"
+  fxLayoutAlign="end center"
+  fxLayoutGap="10px"
+>
+  <button pButton label="Close" (click)="onSubmit(true)"></button>
+</div>

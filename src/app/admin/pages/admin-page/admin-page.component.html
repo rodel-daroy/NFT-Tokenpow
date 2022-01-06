@@ -1,0 +1,9 @@
+<div class="container p-70">
+  <app-section-title
+    imgSrc="{{user?.photoUrl ? user?.photoUrl : 'assets/account.png'}}"
+    [mainText]="user?.firstName"
+    [secondaryText]="user?.lastName ? user.lastName : ''"
+  ></app-section-title>
+
+  <router-outlet></router-outlet>
+</div>

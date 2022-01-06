@@ -1,0 +1,27 @@
+
+<div fxLayout="column">
+  <label for="address">Owner Address (BSV) </label>
+  <input required class="w-100" id="address" type="text" pInputText [(ngModel)]="ownerAddress">
+
+  <label for="amount">Amount to Send</label>
+  <input required class="w-100" id="address" type="number" pInputText [(ngModel)]="amount">
+
+  <!--<label for="title">{{'Address' | translate}}</label>
+  <input class="assets-input" id="name" name="name" [(ngModel)]="ownerAddress" maxlength="45">
+  <p style="font-size: 11px">{{'create-assets.assets-name-scope' | translate}}</p>
+
+  <label for="amount">{{'Amount to Send' | translate}}</label>
+  <input id="amount" type="number" class="assets-input" name="target" [(ngModel)]="amount"> -->
+  <div class="mt-5">
+    <app-money-button
+    [outputs]="outputs"
+    clientIdentifier="{{clientId}}"
+    (onPayment)="onPaymentSuccess($event)"
+    (onError)="onPaymentError($event)"
+    >
+    </app-money-button>
+  </div>
+</div>
+<div *ngIf="paymentSuccessed" class="w-100" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+  <button pButton label="Close" (click)="onSubmit(true)"></button>
+</div>

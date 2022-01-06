@@ -1,0 +1,177 @@
+<div fxLayout="column" class="login-card">
+  <div [hidden]="emailSent">
+    <div class="font-weight-light">
+      <h4>{{'auth.register.sign-up' | translate}}</h4>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+      <form [formGroup]="form" fxLayout="column" fxLayoutGap="10px" fxFill class="email">
+        <input
+          fxFill
+          formControlName="firstName"
+          placeholder="{{'auth.register.first-name' | translate}}"
+          type="text"
+          id="firstName"
+          class="form-control form-control-lg email-input"
+        >
+
+        <input
+          fxFill
+          formControlName="lastName"
+          placeholder="{{'auth.register.last-name' | translate}}"
+          type="text"
+          id="lastName"
+          class="form-control form-control-lg email-input"
+        >
+
+        <input
+          fxFill
+          formControlName="email"
+          placeholder="{{'auth.register.email' | translate}}"
+          type="email"
+          id="email"
+          class="form-control form-control-lg email-input"
+        >
+
+        <span class="p-input-icon-right">
+          <i
+            (click)="isPasswordHidden = !isPasswordHidden"
+            [ngClass]="{'pi-eye' : isPasswordHidden, 'pi-eye-slash' : !isPasswordHidden, 'password-invalid-icon': isPasswordInvalid}"
+            class="pi clickable"
+          ></i>
+        <input
+          fxFill
+          formControlName="password"
+          placeholder="{{'auth.register.password' | translate}}"
+          [type]="isPasswordHidden ? 'password' : 'text'"
+          id="password"
+          autocomplete="off"
+          class="form-control form-control-lg email-input"
+        >
+        </span>
+
+        <span class="p-input-icon-right">
+          <i
+            (click)="isConfirmPasswordHidden = !isConfirmPasswordHidden"
+            [ngClass]="isConfirmPasswordHidden ? 'pi-eye' : 'pi-eye-slash'"
+            class="pi clickable"
+          ></i>
+          <input
+            fxFill
+            formControlName="confirmPassword"
+            placeholder="{{'auth.register.confirm-password' | translate}}"
+            [type]="isConfirmPasswordHidden ? 'password' : 'text'"
+            id="confirmPassword"
+            autocomplete="off"
+            class="form-control form-control-lg email-input"
+          >
+        </span>
+
+        <!--      <input-->
+        <!--        fxFill-->
+        <!--        formControlName="phone"-->
+        <!--        placeholder="{{'auth.register.phone-number' | translate}}"-->
+        <!--        type="tel"-->
+        <!--        id="phone"-->
+        <!--        class="form-control form-control-lg email-input"-->
+        <!--      >-->
+
+
+      </form>
+
+      <international-phone-number2
+        [(ngModel)]="phone"
+        #phoneNumber="ngModel"
+        placeholder="{{'auth.register.enter-phone-no' | translate}}"
+        [defaultCountry]="'ch'"
+        class="form-control form-control-lg email-input"
+        [noUSCountryCode]="false"
+        [required]="true"></international-phone-number2>
+      <div *ngIf="!phoneNumber.valid && !phoneNumber.untouched" class="has-error row w-100">
+        <span aria-hidden="true"><i class='fa fa-times-circle color-error'></i></span>
+        <div class="text-right w-100" *ngIf="phoneNumber.errors.required"><span class="text-right" style="color: red">
+          {{'auth.register.phone-is-required' | translate}}
+        </span></div>
+        <div class="text-right w-100" style="color: red" *ngIf="phoneNumber.errors.pattern">
+          {{'auth.register.invalid-phone-number' | translate}}
+        </div>
+      </div>
+
+      <div [hidden]="smsSend" id="recaptcha-container"></div>
+
+      <div *ngIf="windowRef.confirmationResult" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center" class="w-100">
+        <input fxFill
+               placeholder="{{'auth.register.verification-code' | translate}}"
+               type="text"
+               name="code"
+               [(ngModel)]="verificationCode"
+               class="form-control form-control-lg email-input"
+        >
+        <span>{{'auth.register.you-have' | translate}} <countdown [config]="{ leftTime: 300, format: 'm:ss' }"></countdown> {{'auth.register.seconds-to-verify-sms-code' | translate}}</span>
+        <app-button fxFill
+                    text="{{'auth.register.verify' | translate}}"
+                    [type]="'button'"
+                    [style]="'outlined'"
+                    (handleClick)="verifyLoginCode()"
+                    [size]="'large'"></app-button>
+      </div>
+
+      <p-button
+        *ngIf="!windowRef.confirmationResult"
+        fxFill
+        label="{{'auth.register.sign-up' | translate}}"
+        [disabled]="(form.invalid || !phoneNumber.valid) || (this.windowRef.grecaptcha.getResponse().length == 0)"
+        id="signUpButton"
+        (onClick)="sendLoginCode()"
+      ></p-button>
+
+      <!--    <div fxLayout="column" fxFill class="text-center">-->
+      <!--      <hr class="thin-line" />-->
+      <!--      <span>{{'auth.register.or' | translate}}</span>-->
+      <!--      <hr class="thin-line" />-->
+      <!--    </div>-->
+
+      <!--    <app-button-->
+      <!--      fxFill-->
+      <!--      [style]="'outlined'"-->
+      <!--      [iconSource]="'google-logo.png'"-->
+      <!--      (handleClick)="onLogInWithGoogleButtonClicked()"-->
+      <!--      text="{{'auth.register.sign-up-with-google' | translate}}"-->
+      <!--      [size]="'large'"-->
+      <!--    >-->
+      <!--    </app-button>-->
+      <!--    <app-button-->
+      <!--      fxFill-->
+      <!--      [style]="'outlined'"-->
+      <!--      [iconSource]="'facebook-logo.png'"-->
+      <!--      (handleClick)="onLogInWithFacebookButtonClicked()"-->
+      <!--      text="{{'auth.register.sign-up-with-facebook' | translate}}"-->
+      <!--      [size]="'large'"-->
+      <!--    >-->
+      <!--    </app-button>-->
+
+      <div *ngIf="emailSent" class="notification-info">
+        {{'auth.register.check-your-email' | translate}}
+      </div>
+
+      <div *ngIf="errorMessage" class="notification-error">
+        {{ errorMessage }}
+      </div>
+
+      <div fxLayout="column">
+        <hr class="line" />
+        <span>
+        {{'auth.register.already-have-account' | translate}}
+          <a class="sign-up-link" [routerLink]="'/auth/login'">{{'auth.register.log-in' | translate}}</a></span>
+        <hr class="line" />
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="emailSent">
+    <ng-lottie [options]="options"></ng-lottie>
+    <h2 class="text-center">{{'auth.register.please-check-your-email' | translate}}</h2>
+  </div>
+
+
+</div>

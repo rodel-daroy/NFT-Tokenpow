@@ -1,0 +1,4 @@
+<div class="money-button-outer">
+  <app-money-button-loader *ngIf="loading"></app-money-button-loader>
+  <div [hidden]="loading" #button class="money-button-inner"></div>
+</div>

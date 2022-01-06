@@ -1,0 +1,53 @@
+<div class="container">
+  <div
+    class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+
+    <p-tabView (activeIndexChange)="onTabPanelClick($event)" class="w-100">
+      <p-tabPanel header="SELL">
+        <div
+          infiniteScroll
+          [infiniteScrollThrottle]="500"
+          (scrolled)="onScroll()"
+          class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container mt-3">
+          <app-selltoken-card
+            class="col-sm col-xl-3"
+            *ngFor="let selltoken of page.$data | async"
+            [routerLink]="['/auction/', selltoken.uid]"
+            [selltoken]="selltoken"
+          ></app-selltoken-card>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="PENDING ">
+        <div
+          infiniteScroll
+          [infiniteScrollThrottle]="500"
+          (scrolled)="onScroll()"
+          class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container mt-3">
+          <app-selltoken-card
+            class="col-sm col-xl-3"
+            *ngFor="let selltoken of page.$data | async"
+            [routerLink]="['/auction/', selltoken.uid]"
+            [selltoken]="selltoken"
+          ></app-selltoken-card>
+        </div>
+      </p-tabPanel>
+    
+      <p-tabPanel header="SOLD">
+        <div
+          infiniteScroll
+          [infiniteScrollThrottle]="500"
+          (scrolled)="onScroll()"
+          class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container mt-3">
+          <app-selltoken-card
+            class="col-sm col-xl-3"
+            *ngFor="let selltoken of page.$data | async"
+            [routerLink]="['/auction/', selltoken.uid]"
+            [selltoken]="selltoken"
+          ></app-selltoken-card>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+
+  </div>
+</div>
+

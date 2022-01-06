@@ -1,0 +1,155 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+//@import "~ng-pick-datetime/assets/style/picker.min.css";
+$pink-magenta                : #EE2A7B;
+$pink-magenta-dark           : #d00a5c;
+$background-light-brown-color: #f9f5ef;
+$white                       : #fff;
+$text-gray                   : #7e8082;
+
+.hint__moneybutton::ng-deep {
+  z-index: 100000000000 !important;
+}
+
+.ql-image {
+  display: none !important;
+}
+
+body {
+  font-size             : 14px !important;
+  line-height           : 25px !important;
+  font-family           : 'Open Sans', Arial, Helvetica, sans-serif !important;
+  font-weight           : normal !important;
+  color                 : $text-gray !important;
+  background-color      : rgb(255, 255, 255) !important  ;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.p-dynamic-dialog ::ng-deep :host {
+  z-index: 1000 !important;
+}
+
+.magenta-text {
+  color: #2c48fd;
+}
+
+.navbar-language {
+  display        : flex;
+  align-items    : center;
+  justify-content: start;
+
+  img {
+    margin-right: 7px;
+  }
+}
+
+.country-flag {
+  min-width : 20px;
+  max-width : 20px;
+  min-height: 20px;
+  max-height: 20px;
+}
+
+.avatar {
+  min-height   : 36px;
+  max-height   : 36px;
+  max-width    : 36px;
+  min-width    : 36px;
+  border-radius: 50%;
+  margin       : 0 10px 5px;
+}
+
+.moneybutton {
+  height: 1.2rem;
+  width: auto;
+
+}
+
+
+.runlogo {
+  height: 1.2rem;
+  width: auto;
+
+}
+
+.cc-btn.cc-allow {
+  color: white !important;
+}
+
+.desc-icon {
+  width       : 40px;
+  height      : 40px;
+  margin-right: 5px;
+}
+
+.p-70 {
+  padding-top   : 70px;
+  padding-bottom: 70px;
+}
+
+.p-25 {
+  padding-top   : 25px;
+  padding-bottom: 25px;
+}
+
+.p-15 {
+  padding-top   : 15px;
+  padding-bottom: 15px
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+*,
+*:focus {
+  outline: none;
+}
+
+.password-dialog-input {
+  width       : auto;
+  max-width   : 400px;
+  margin-left : 5px;
+  margin-right: 5px;
+}
+
+.selected-list .c-list .c-token {
+  background: $pink-magenta !important;
+}
+
+.pure-checkbox input[type="checkbox"]+label:before {
+  color: $pink-magenta !important;
+  ;
+  border: 1px solid $pink-magenta !important;
+}
+
+.pure-checkbox input[type="checkbox"]:checked+label:before {
+  background: $pink-magenta !important;
+}
+
+international-phone-number2 {
+  .input-group {
+    align-items: center !important;
+  }
+
+  #dial-code {
+    padding-top: 0 !important;
+  }
+
+  #primaryPhoneInput {
+    margin-left: 5px;
+    border     : 0 !important;
+  }
+}
+
+.angular-editor-textarea img,
+.description,
+.description img {
+  max-width: 100% !important;
+}
+
+.additional-info img {
+  max-width: 80% !important;
+}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

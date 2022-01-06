@@ -1,0 +1,30 @@
+<main class="container-fluid w-100" fxLayout="column" fxLayoutAlign="center center">
+
+  <span class="p-float-label mt-2 w-75">
+    <input required class="w-100" id="name" type="text" pInputText [(ngModel)]="request.name">
+    <label for="name">Name</label>
+</span>
+
+  <span class="p-float-label mt-4 w-75">
+    <input required class="w-100" id="email" type="email" pInputText [(ngModel)]="request.email">
+    <label for="email">Email</label>
+</span>
+
+  <span class="p-float-label mt-4 w-75">
+    <input readonly class="w-100" id="perkCode" type="text" pInputText [(ngModel)]="request.perkCode">
+    <label for="perkCode">Perk Code</label>
+</span>
+
+  <span class="p-float-label mt-4 w-75">
+    <input readonly class="w-100" id="selltokenUrl" type="text" pInputText [(ngModel)]="request.selltokenUrl">
+    <label for="selltokenUrl">selltoken URL</label>
+</span>
+
+  <span class="p-float-label mt-4 ">
+    <textarea id="text" rows="5" cols="60" pInputTextarea autoResize="autoResize" [(ngModel)]="request.message"></textarea>
+    <label for="text">Message for selltoken Owner</label>
+</span>
+
+  <p-button  class="p-button-lg mt-4" (onClick)="close()" label="Close"></p-button>
+
+</main>

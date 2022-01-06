@@ -1,0 +1,39 @@
+<main class="container" fxLayout="column" fxLayoutAlign="center center">
+<p-table #dt2 [value]="assets" dataKey="id"
+    [rows]="5" [showCurrentPageReport]="true"  [totalRecords]="totalRecords"  [loading]="loading"  [rowsPerPageOptions]="[5,10,15]"  styleClass="p-datatable-customers"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['name', 'description', 'initialSupply']">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex">
+            <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="no">No</th>
+            <th >Avatar</th>
+            <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+            <th>Description</th>
+            <th pSortableColumn="initialSupply">Initial supply <p-sortIcon field="initialSupply"></p-sortIcon></th>
+            <th colspan="1"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-asset  let-i="rowIndex">
+        <tr>
+            <td>{{i+1}}</td>
+            <td> <img class="user-image " align="left" [src]="asset.avatar ? asset.avatar : 'assets/account.png'">            </td>
+            <td> <a href="https://run.network/explorer/?query={{asset?.location}}&network=main"   style="text-decoration: none" class="gray-text"  target="_blank"> {{asset.name}} </a></td>
+            <!--<td><p class="word-break">{{asset.description | replace : '/newLineSeparator/' : '\n'}}</p></td>-->
+            <td><p class="word-break">{{asset.description}}</p></td>
+            <td>{{asset.initialSupply}} </td>
+            <td>   <p-button  class="p-button-lg mt-4"  (onClick)="mintAsset(i)" [disabled]="!(asset.isMint==false)"   label="{{'Mint' | translate}}"></p-button>
+            </td>
+            <!--<td> <p-button (onClick)="modifyAsset(i)" label="{{'Modify' | translate}}" class="p-button-text"></p-button></td>-->
+        </tr>
+    </ng-template>
+</p-table>
+</main>
+

@@ -1,0 +1,11 @@
+<div *ngIf="paymentSuccessed" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <i class="pi pi-exclamation-triangle" style="font-size: 2rem"></i>
+  <p style="font-size: 16px">
+    We will force to make the status to complete because technical problems.
+    Will you going to do continue?
+  </p>
+</div>
+<div *ngIf="paymentSuccessed"  class="w-100" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+  <button pButton label="{{'selltokens.selltoken-close-dialog.yes' | translate}}" (click)="onSubmit(true)"></button>
+  <button pButton label="{{'selltokens.selltoken-close-dialog.no' | translate}}" (click)="onSubmit(false)"></button>
+</div>

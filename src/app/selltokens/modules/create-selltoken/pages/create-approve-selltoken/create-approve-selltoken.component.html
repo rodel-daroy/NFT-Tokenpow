@@ -1,0 +1,34 @@
+<div class="container p-25">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h4 class="text-center">
+      {{'selltokens.create-selltoken.create-approve-selltoken.how-card-will-look-like' | translate}}
+    </h4>
+    <div style="width:400px">
+      <app-selltoken-card [selltoken]="this.selltoken" isPreview="true">
+      </app-selltoken-card>
+    </div>
+  </div>
+
+  <div class="p-field-checkbox d-flex flex-row justify-content-center mt-5 text-center">
+    <p-checkbox [(ngModel)]="approve" binary="true" inputId="binary"></p-checkbox>
+    <label for="binary">
+      {{'selltokens.create-selltoken.create-approve-selltoken.checkbox' | translate}}
+
+      <a href="/terms" target="_blank" style="text-decoration: none; color: #a2cdff">
+        {{'selltokens.create-selltoken.create-approve-selltoken.terms-and-conditions' | translate}}
+      </a></label>
+  </div>
+  <div class="text-center" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <div>
+      <button
+        pButton
+        class="p-button-outlined"
+        label="{{'selltokens.create-selltoken.create-approve-selltoken.back' | translate}}"
+        (click)="prevStep()"></button>
+    </div>
+  <p-button
+    (onClick)="this.submitButton()"
+    [disabled]="!approve"
+    label="{{'selltokens.create-selltoken.create-approve-selltoken.create-selltoken' | translate}}"></p-button>
+</div>
+</div>

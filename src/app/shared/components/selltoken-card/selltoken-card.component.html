@@ -1,0 +1,80 @@
+<div class="card selltoken-card" [class.selltoken-card-hover]="mouseOvered"
+     (mouseover)="mouseOvered=true"
+     (mouseout)="mouseOvered=false">
+  <div class="css-i9l3dq">
+    <div class="css-tmeqbf">
+    </div>
+    <div *ngIf="selltoken?.tokenType!=0"  class="css-zgakko">
+      <img *ngIf="selltoken?.tokenType==1" class="css-f88728" [src]="selltoken && selltoken.photo_url!? selltoken.photo_url : selltoken?.asset?.avatar ?  selltoken.asset?.avatar : 'assets/token_land.png'" alt="image" (click)="showDetailselltoken()">
+      <img *ngIf="selltoken?.tokenType==2 && !selltoken?.runnft?.image" class="css-f88728" [src]="selltoken && selltoken.photo_url!? selltoken.photo_url : selltoken?.runnft?.avatar ? selltoken.runnft?.avatar  : 'assets/token_land.png'" alt="image" (click)="showDetailselltoken()">
+      <img *ngIf="selltoken?.tokenType==2 && selltoken?.runnft?.image" class="css-f88728" [src]="selltoken && selltoken.photo_url!? selltoken.photo_url : selltoken?.runnft?.image ? sanitize(selltoken.runnft?.image)  : 'assets/token_land.png'" alt="image"  (click)="showDetailselltoken()">
+    </div>
+    <div *ngIf="selltoken?.tokenType==0"  class="css-zgakko">
+      <img *ngIf="selectedType =='image'" class=" card-img-top clickable" [src]="selectedUrl" alt="image"  (error)="fixUrl($event)" (click)="showDetailselltoken()">
+      <video *ngIf="selectedType =='video'" class=" card-img-top clickable" [src]="selectedUrl"  controls="" alt="video" (click)="showDetailselltoken()"></video>
+      <audio style="width: 50%; height: 50%; margin:auto;" *ngIf="selectedType =='sound'"   [src]="selectedUrl" controls="" (click)="showDetailselltoken()"></audio>    
+    </div>
+  </div>
+
+<div class="css-1q26v2q" (click)="showDetailselltoken()">
+  <div class="css-3j2kqe">
+    <div class="css-wh23de"> {{selltoken?.title }}</div>
+  </div>
+  <div class="css-1kj68nb">
+    <div class="css-1f8v3dx">
+      <div class="css-1jm49l2" aria-expanded="false">
+        <div class="css-14yyvao">
+          <div class="css-178i7hf">
+            <div class="css-nw13vo" style="background-image: url('{{selltoken?.userPhotoUrl}}');">
+            </div>
+            <div class="css-4cffwv">
+              <div class="css-e197hz">@{{selltoken?.userName}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column"  fxLayoutAlign="center center">
+      <!-- [style.color]="selltoken.isNotification ? 'red' : ''" -->
+      <span>
+        <ng-container *ngIf="selltoken.notifications">
+          <i *ngIf="selltoken.notifications.includes(user?.uid)" class="pi mr-2 pi-bell" style="color: red"></i>
+          <!-- <i *ngIf="!selltoken.notifications.includes(user?.uid)" class="pi mr-2 pi-bell"></i> -->
+        </ng-container>
+        <!-- <ng-container *ngIf="!selltoken.notifications">
+          <i class="pi mr-2 pi-bell"></i>
+        </ng-container> -->
+        
+        <i class="pi mr-2 pi-heart clickable" (click)="setFavoriteselltoken($event)"
+        pTooltip="{{'shared.selltoken-card.add-to-favorite-selltokens' | translate}}"  tooltipPosition="top"
+        [ngClass]="this.user?.favoritesselltokens?.includes(selltoken?.uid) ? 'pi-heart-check' : 'pi-heart-uncheck'"></i>
+        <span pTooltip="Number of likes" tooltipPosition="top">{{selltoken?.likes ? selltoken?.likes : '0'}}</span>
+  
+      </span>
+    </div>
+    
+  </div>
+</div>
+
+<div class="css-uliqdc" *ngIf="!selltoken?.isReserved" (click)="showDetailselltoken()">
+  <div class="css-tl584j">
+    <div class="css-1ph3isa">
+      <div class="css-12h32g6">Current bid</div>
+      <div class="css-1nivzx7">{{ selltoken.currentTokenPrice.toFixed(2)}} USD</div>
+    </div>
+    <div class="css-vurnku">
+      <div class="css-12h32g6" *ngIf="status=='ACTIVE'">Ending in</div>
+      <div class="css-12h32g6" *ngIf="status!='ACTIVE'">{{status}}</div>
+      <countdown *ngIf="countdownTime>0 && !selltoken?.buyNow" class="count-down css-1nivzx7"  (event)="handleEvent($event)" [config]="{leftTime: countdownTime ,format:'dd HH:mm:ss',formatDate:formatDate }"></countdown>
+    </div>
+  </div>
+</div>
+
+<div class="css-uliqdc" *ngIf="selltoken?.isReserved" (click)="showDetailselltoken()">
+  <div class="css-fd2mzq">
+    <div class="css-938kgt">Reserve price</div>
+    <div class="css-ow7ofa">{{ selltoken.currentTokenPrice.toFixed(2)}} USD </div>
+  </div>
+</div>
+

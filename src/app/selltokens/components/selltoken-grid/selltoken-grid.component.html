@@ -1,0 +1,23 @@
+<div
+  *ngIf="data.length > 0"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="150"
+  (scrolled)="onScroll()"
+  (scrolledUp)="onUp()"
+  class="justify-content-center justify-content-sm-start  selltoken-grid-container">
+    <div class="css-1fjs75c" >
+      <app-selltoken-card
+      *ngFor="let selltoken of page.$data | async"
+      [selltoken]="selltoken"
+    ></app-selltoken-card>
+      
+    </div>
+</div>
+
+<div *ngIf="data.length == 0"
+     class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container"
+>
+  <h3 id="grid-frontpage-message" class="text-center w-100">{{'selltokens.selltoken-grid.sorry-there-are-no-selltokens-with-selected-category' | translate}}</h3>
+
+</div>

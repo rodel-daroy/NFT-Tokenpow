@@ -1,0 +1,142 @@
+<main class="container" fxLayout="column" fxLayoutAlign="center center">
+  <div class="text-center mt-5">
+    <h2 class="dark-text mb-4">
+      <b>Create your NFT</b>
+    </h2>
+    <p style="font-size: 18px">To create your NFT please fill out the information below</p>
+  </div>
+
+  <div class="w-100 mt-5" fxLayout="column" fxLayoutAlign="center start">
+    <div fxLayout="row" fxLayoutGap="30px" fxLayout.lt-md="column">
+      <div fxLayout="column">
+        <label for="title">{{'Name for your NFT'}}</label>
+        <input class="assets-input" id="name" name="name" [(ngModel)]="assets.name" maxlength="55">
+        <p style="font-size: 11px">{{'5-55 characters' | translate}}</p>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="30px" fxLayout.lt-md="column">
+      <div fxLayout="column">
+        <label for="title">{{'Description or purpose of your NFT' | translate}}</label>
+        <input class="assets-input" id="name" name="name" [(ngModel)]="assets.description" maxlength="80">
+        <p style="font-size: 11px">{{'Short sentence, less than 80 characters, that describes the NFT for the users' | translate}}</p>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="30px" fxLayout.lt-md="column">
+      <div fxLayout="column">
+        <label for="title">{{'Emoji (optional)' | translate}}</label>
+        <input class="assets-input" value = '🐉' id="name" name="name" [(ngModel)]="assets.emoji" maxlength="45">
+        <p style="font-size: 11px">{{'Emoji character to represent the NFT, something like this 🐉' | translate}}</p>
+      </div>
+    </div>
+
+
+    <div id="mb"></div><br>
+
+    <div fxLayout="column">
+      <div>
+        <label for="txid">Default NFT image/logo </label>
+        <span class = "ml-2 mt-1" pTooltip="Blockchain Transaction id of the default image or logo - max 95kb" style="font-size: 25px;" > &#9432; </span>
+        <a href = "https://add.bico.media" target="blank"> Upload your default image here</a>
+      </div>
+      <input class="assets-input" id="txid" name="txid" [(ngModel)]="assets.imageTxid" maxlength="500">
+    </div>
+    <p for="txid"> </p>
+
+    <div fxLayout="column">
+
+      <div fxLayout="row">
+        <label class="assets-label"> Asset transaction id </label>
+        <span class = "ml-2 mt-1" pTooltip="Blockchain Transaction id of the asset (any size)" style="font-size: 25px;" > &#9432; </span>
+        <label class = "assets-label ml-5"> Asset description or purpose</label>
+        <span class = "ml-2 mt-1" pTooltip="Enter the blockchain transaction ids of the assets of the NFT, images, videos, registration documents, ownership documents, etc" style="font-size: 25px;" > &#9432; </span>
+        <a class = "mt-1 ml-1" href = "https://add.bico.media" target="blank"> Upload your assets here</a>
+      </div>
+      <div fxLayout="row" fxLayoutAlign = "left bottom" *ngFor="let assetTxid of assets.assestTxid;let i = index;trackBy: customTrackBy">
+        <input class="assets-input mt-2"  id="txid" [name]="'assetTxid-'+i" [(ngModel)]="assetTxid.txtid" maxlength="500">
+        <input class="assets-input mt-2 ml-5"  id="description" [name]="'assetTxid-'+i" [(ngModel)]="assetTxid.description" maxlength="500">
+        <button  *ngIf="i==0" style="height: 40px;"  class="mt-2 landing-button p-button-plain p-button-lg pt-1 pb-1 pr-2 pl-2 ml-1" pButton
+        label="+"
+        (click)="addTxt()"></button>
+        <button *ngIf="i!=0" style="height: 40px;" class="mt-2 landing-button p-button-plain p-button-lg pt-1 pb-2 pr-2 ml-1" pButton
+        label="-"
+        (click)="removeTxt(i)"></button>
+      </div>
+
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-md="column">
+      <div fxLayout="row" class="mr-5" fxLayout.lt-md="column">
+        <div fxLayout="column">
+          <label for="title">{{'Author' | translate}}</label>
+          <input class="assets-input" id="name" name="name" [(ngModel)]="assets.author" maxlength="255">
+          <p style="font-size: 11px">{{'Name of the creator of the NFT art' | translate}}</p>
+        </div>
+      </div>
+      <div fxLayout="row" class="mr-5"  fxLayoutGap="5px" fxLayout.lt-md="column">
+        <div fxLayout="column">
+          <label for="title">{{'Title' | translate}}</label>
+          <input class="assets-input" value = '🐉' id="name" name="name" [(ngModel)]="assets.title" maxlength="255">
+          <p style="font-size: 11px">{{'Title of the art' | translate}}</p>
+        </div>
+      </div>
+
+      <div fxLayout="row" class="mr-5"  fxLayoutGap="5px" fxLayout.lt-md="column">
+        <div fxLayout="column">
+          <label for="title">{{'Reference information' | translate}}</label>
+          <input class="assets-input" id="name" name="name" [(ngModel)]="assets.source" maxlength="255">
+          <p style="font-size: 11px">{{'URL where more information and documents can be found' | translate}}</p>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="5px" fxLayout.lt-md="column">
+        <div fxLayout="column">
+          <label for="title">{{'License' | translate}}</label>
+          <input class="assets-input" value = '🐉' id="name" name="name" [(ngModel)]="assets.license" maxlength="255">
+          <p style="font-size: 11px">{{'License that applies' | translate}}</p>
+       </div>
+      </div>
+
+
+    </div>
+    <div fxLayout="row" fxLayoutGap="5px" fxLayout.lt-md="column">
+      <div fxLayout="column">
+        <label for="title">{{'Number of Editions' | translate}}</label>
+        <input class="assets-input"   type="number" id="numberOfEdition" name="numberOfEdition" [(ngModel)]="assets.numberOfEdition">
+
+        <p style="font-size: 11px">{{'This is the number of editions or copies of the NFT' | translate}}</p>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="5px" fxLayout.lt-md="column">
+      <div fxLayout="column">
+        <label for="title">{{'Royalty fee (optional)' | translate}}</label>
+        <input class="assets-input"   type="number" id="percentage" name="percentage" [(ngModel)]="assets.percentage">
+        <p style="font-size: 11px">{{'This is a royalty fee (for each sale) percentage for the artist, 0~10%' | translate}}</p>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="5px" fxLayout.lt-md="column">
+      <div fxLayout="column">
+        <label for="title">{{'Royalty BSV payment address (optional)' | translate}}</label>
+        <input class="assets-input"   id="address" name="address" [(ngModel)]="assets.feeowneraddress">
+        <p style="font-size: 11px">{{'Address where the royality will be paid for each sale' | translate}}</p>
+      </div>
+    </div>
+
+    <label for="protocol"> <b><p> {{'create-assets.assets-protocol' | translate}} </p></b></label>
+    <div>
+      <input type="radio" id="protocol" name="protocol" value="male" checked>
+      <b><label class="ml-1" for="protocol">Run@0.1</label></b><br>
+    </div>
+
+  </div>
+<div class="mt-5 w-100" fxLayout="row" fxLayoutAlign="center center">
+      <p-button
+        [disabled]="
+          !(this.assets?.name != undefined && this.assets?.name !== '')"
+        label="{{'create-assets.create-assets-page.show-preview' | translate}}"
+        (onClick)="nextStep()"></p-button>
+</div>
+</main>

@@ -1,0 +1,11 @@
+<div class="categories-filter">
+  <a
+    [ngClass]="{
+      'currentFilter': category.marked == true
+    }"
+    class="category-link"
+    (click)="onCategoryClick(category.id, category)"
+    *ngFor="let category of categories">
+    <span >{{category.nameEN}}</span>
+  </a>
+</div>

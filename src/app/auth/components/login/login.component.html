@@ -1,0 +1,115 @@
+<div>
+  <div fxLayout="column" class="login-card">
+    <div class="font-weight-light">
+      <h4>{{'auth.login.log-in' | translate}}</h4>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+      <!--
+      <label class="text-left" for="email"></label>
+      <input
+        fxFill
+        placeholder="{{'auth.login.email' | translate}}"
+        type="email"
+        id="email"
+        [(ngModel)]="email"
+        class="form-control form-control-lg email-input"
+      >
+      <span class="p-input-icon-right w-100">
+        <i
+          (click)="isPasswordHidden = !isPasswordHidden"
+          [ngClass]="isPasswordHidden ? 'pi-eye' : 'pi-eye-slash'"
+          class="pi clickable"
+        ></i>
+        <input
+          fxFill
+          placeholder="{{'auth.login.password' | translate}}"
+          [type]="isPasswordHidden ? 'password' : 'text'"
+          id="password"
+          [(ngModel)]="password"
+          class="form-control form-control-lg email-input"
+        >
+      </span>
+
+      <app-button
+        class="justify-content-center"
+        fxFill
+        text="{{'auth.login.log-in' | translate}}"
+        [type]="'button'"
+        (handleClick)="onLogInButtonClicked()"
+        [size]="'large'"
+      ></app-button>
+
+      <div fxLayout="column" fxFill class="text-center">
+        <hr class="thin-line" />
+        <span>{{'auth.login.or' | translate}}</span>
+        <hr class="thin-line" />
+      </div>
+
+      <app-button
+        class="justify-content-center"
+        fxFill
+        [style]="'outlined'"
+        [iconSource]="'google-logo.png'"
+        (handleClick)="onLogInWithGoogleButtonClicked()"
+        text="{{'auth.login.log-in-with-google' | translate}}"
+        [size]="'large'"
+      >
+      </app-button>
+      <app-button
+        class="justify-content-center"
+        fxFill
+        [style]="'outlined'"
+        [iconSource]="'facebook-logo.png'"
+        (handleClick)="onLogInWithFacebookButtonClicked()"
+        text="{{'auth.login.log-in-with-facebook' | translate}}"
+        [size]="'large'"
+      >
+      </app-button>
+      -->
+      <app-button
+        class="justify-content-center"
+        fxFill
+        [iconSource]="'mb_logo.png'"
+        [maxWidth] = "55"
+        [style]="'outlined'"
+        (handleClick)="onLogInWithMoneyButtonClicked()"
+        text="{{'auth.login.log-in-with-moneybutton' | translate}}"
+        [size]="'large'"
+      >
+      </app-button>
+      <!--
+      <div *ngIf="emailSent" class="notification-info">
+        {{'auth.login.check-your-email' | translate}}
+      </div>
+
+      <div *ngIf="errorMessage" class="notification-error">
+        {{ errorMessage }}
+      </div>
+
+      <div fxLayout="column" class="text-center">
+        <hr class="line" />
+        <span>
+          {{'auth.login.new-to-go-bit-fund-me' | translate}}
+          <a class="sign-up-link" [routerLink]="'/auth/register'">
+            {{'auth.login.sign-up' | translate}}
+          </a></span>
+        <hr class="line" />
+        <span>
+          {{'auth.login.forgot-password' | translate}}
+          <a class="sign-up-link" (click)="onResetPasswordClicked()">
+            {{'auth.login.reset-password' | translate}}
+          </a></span>
+        <hr class="line" />
+        <span>
+          {{'auth.login.verification-email-expired' | translate}}
+          <a class="sign-up-link" (click)="onVerificationEmailExpiredClicked()">
+            {{'auth.login.reset-verification-email' | translate}}
+          </a></span>
+        <hr class="line" />
+      </div>
+      -->
+    </div>
+  </div>
+
+</div>
+<p-confirmDialog></p-confirmDialog>

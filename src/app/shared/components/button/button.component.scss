@@ -1,0 +1,94 @@
+/*$pink-magenta: #EE2A7B;
+$pink-magenta-dark: #d00a5c;
+$white: #fff;@at-root */
+$pink-magenta: rgba(255, 255, 255, 0.35);
+$pink-magenta-dark: #56bdff;
+$white: rgb(0, 0, 0);
+
+
+
+.button {
+  border: none;
+  border-radius: 2px;
+  transition: background-color 0.3s ease 0s;
+  cursor: pointer;
+}
+
+.radius {
+  border-radius: 4px;
+}
+
+.outlined:focus {
+  border: 2px solid $pink-magenta !important;
+  outline: $pink-magenta !important;
+}
+
+.outlined:active {
+  border: 2px solid $pink-magenta !important;
+  outline: $pink-magenta !important;
+}
+
+.filled:active {
+  border: 0!important;
+  outline: $pink-magenta !important;
+}
+
+.filled:focus {
+  border: 0!important;
+  outline: $pink-magenta !important;
+}
+
+.filled {
+  background-color: $pink-magenta;
+  color: $white;
+}
+
+.filled:hover {
+  background-color: $pink-magenta-dark !important;
+}
+
+.medium {
+  padding: 10px 37px 10px 37px;
+  display: inline-block;
+}
+
+.thin {
+  padding: 8px 35px 8px 35px !important;
+}
+
+.outlined {
+  color: $white;
+  border: 2px solid $pink-magenta;
+  background-color:$pink-magenta;
+}
+
+.outlined:hover {
+  background-color: $pink-magenta-dark;
+  color: $white;
+}
+
+.medium {
+  width: 200px;
+  min-height: 45px;
+  max-height: 40px;
+  border: 1px solid #8700ff;
+}
+
+.large {
+  max-width: 100%!important;
+  min-height: 45px;
+  max-height: 70px;
+}
+
+.small {
+  width: 60px;
+  max-width: 80px;
+  min-height: 35px;
+  max-height: 45px;
+}
+
+
+.logo {
+  max-width: 24px;
+  margin-right: 10px;
+}

@@ -1,0 +1,59 @@
+<h1 class="text-center">{{'user.profile-section-header.your-wallet' | translate}}</h1>
+<div class="w-100 polygon-bg">
+
+<div class="container pt-5 pb-5" fxLayout.gt-xs="row" fxLayoutAlign="space-around center" fxLayout.sm="space-between center" fxLayout.xs="column">
+  <div class="clickable"  fxLayout="column" fxLayoutAlign="center center" (click)="onEarnedCoinsClick()" pTooltip="{{'user.profile-section-header.click-to-move-to-cash-out' | translate}}" tooltipPosition="bottom">
+    <div>
+      <ng-lottie width="100px" height="100px" *ngIf="loading" [options]="options"></ng-lottie>
+      <h1 class="coins-text" *ngIf="!loading">{{userCoins | formatCoins}} ({{((userCoins / 100000000) * currentPriceInEur).toFixed(2)}}€)</h1>
+    </div>
+    <h1 >
+      {{'user.profile-section-header.earned-coins' | translate | lowercase}}
+    </h1>
+
+  </div>
+  <div class="vertical-line" fxHide.lt-sm=""></div>
+  <div class="w-100 horizontal-line" fxShow.xs="" fxHide.gt-xs=""></div>
+  <div class="w-auto" style="box-sizing: content-box" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <h1>{{'user.profile-section-header.cash-out' | translate | lowercase}}</h1>
+      <p-inputNumber
+        [(ngModel)]="userWithdraw"
+        min="1000"
+        max="{{userCoins}}"
+        size="small"
+        style="box-sizing: content-box; min-width: 175px; width: auto; color:white !important;"
+        placeholder="{{'user.profile-section-header.value-in-coins' | translate}} *"
+        suffix=" ({{((userWithdraw / 100000000) * currentPriceInEur).toFixed(2)}})€"
+      >
+
+      </p-inputNumber>
+<!--      <input-->
+<!--        [(ngModel)]="userWithdraw"-->
+<!--        type="number"-->
+<!--        min="1000"-->
+<!--        max="{{userCoins}}"-->
+<!--        class="form-control"-->
+<!--        style="box-sizing: content-box; min-width: 175px; width: auto"-->
+<!--        placeholder="{{'user.profile-section-header.value-in-coins' | translate}} *">-->
+
+      <p-button
+        [disabled]="userWithdraw <= 0 || !userWithdraw || userWithdraw > userCoins"
+        (onClick)="onSubmitClick()"
+        label="{{'user.profile-section-header.withdraw' | translate}}"
+      ></p-button>
+
+
+  </div>
+</div>
+
+
+</div>
+
+<div class="text-center pt-5" fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="center center" fxLayoutGap.xs="10px" fxLayoutAlign="space-evenly center">
+  <h4 class="clickable magenta-text" (click)="openActivitySummaryDialog()">
+    {{'user.profile-section-header.activity-summary' | translate}} <sup><fa-icon [icon]="faExternalLinkAlt"></fa-icon> </sup>
+  </h4>
+  <h4 class="clickable magenta-text" (click)="showUserAddress()">{{'user.profile-section-header.audit' | translate}} <sup><fa-icon [icon]="faExternalLinkAlt"></fa-icon></sup></h4>
+</div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

@@ -1,0 +1,79 @@
+<main class="container" fxLayout="column" fxLayoutAlign="center center">
+  <div class="w-100 mt-5" fxLayout="column" fxLayoutAlign="center start">
+    <div fxLayout="row" fxLayoutGap="30px" fxLayout.lt-md="column">
+      <div fxLayout="column">
+        <label for="title">{{'create-assets.assets-name' | translate}}</label>
+        <h6 class="dark-text"> {{assets.name}} </h6>
+      </div>
+    </div>
+
+    <label for="author">{{'Description' | translate}}</label>
+    <h6 class="dark-text"> {{assets.description}} </h6>
+
+    <label for="author">{{'Emoji' | translate}}</label>
+    <h6 class="dark-text"> {{assets.emoji}} </h6>
+
+    <label for="art"> {{'Image' | translate}}</label>
+    <div class="image-hover-zoom clickable">
+      <!--<img class="user-image " [src]="assets.avatar ? assets.avatar : 'assets/account.png'" > -->
+      <img class="user-image " [src]="'https://bico.media/' + assets.imageTxid" >
+
+    </div>
+
+
+    <label for="txid"> Assets </label>
+    <div fxLayout="row" *ngFor="let assetTxid of assets.assestTxid">
+      <a href="https://bico.media/{{assetTxid.txtid}}"   style="text-decoration: none" class="gray-text"  target="_blank"> {{assetTxid.txtid}}  </a>
+    </div>
+
+    <label for="author">{{'Author' | translate}}</label>
+    <h6 class="dark-text"> {{assets.author}} </h6>
+
+
+    <label for="author">{{'Title' | translate}}</label>
+    <h6 class="dark-text"> {{assets.title}} </h6>
+
+
+    <label for="author">{{'Reference info ' | translate}}</label>
+    <h6><a href="{{ assets?.source}}"   style="text-decoration: none" class="gray-text"  target="_blank"> Reference information  </a> </h6>
+
+
+    <label for="author">{{'License' | translate}}</label>
+    <h6 class="dark-text"> {{assets.license}} </h6>
+
+    <label for="author">{{'Number of Edition' | translate}}</label>
+    <h6 class="dark-text"> {{assets.numberOfEdition}} </h6>
+
+    <label for="author">{{'Percentage' | translate}}</label>
+    <h6 class="dark-text"> {{assets.percentage}} </h6>
+    <label for="author">{{'Royalty BSV Address' | translate}}</label>
+    <h6 class="dark-text"> {{assets.feeowneraddress}} </h6>
+    <div>
+      <input type="radio" id="protocol" name="protocol" value="male" checked>
+      <b><label class="ml-1" for="male">Run@0.1</label></b><br>
+    </div>
+
+
+  </div>
+
+  <div class="mt-5  mr-2" fxLayout="row" fxLayoutAlign="center end" fxLayoutGap="10px">
+    <div class="mb-2" >
+      <button
+        pButton
+        class="p-button-outlined"
+        label="{{'selltokens.create-selltoken.create-preview-selltoken.back' | translate}}"
+        (click)="prevStep()"></button>
+    </div>
+
+    <div  class="mb-2">
+      <button
+        pButton
+        class="p-button"
+        label="{{'Create NFT' | translate}}"
+        (click)="nextStep()"></button>
+    </div>
+
+  </div>
+
+
+</main>

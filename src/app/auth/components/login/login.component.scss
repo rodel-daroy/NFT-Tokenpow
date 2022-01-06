@@ -1,0 +1,40 @@
+// TODO REFACTOR CSS TO MAIN LOGIN PAGE, RENAME LOGIN PAGE TO LOGIN-SIGN-UP
+
+$cyan-blue: #0fd4ca;
+
+.login-card {
+  /*min-height: 600px;*/
+  padding: 20px 20px 20px 20px;
+  background-color: transparent;
+}
+
+.line {
+  width: 100%;
+  color: #b7b7b7;
+}
+
+.thin-line {
+  width: 100%;
+  color: #b7b7b7;
+  margin: 0.25rem 0;
+}
+
+.sign-up-link {
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    color: $cyan-blue
+  }
+}
+
+.email-input {
+  border-radius: 0!important;
+  min-height: 4vh!important;
+  font-weight: 200!important;
+  font-size: 14px;
+  border: 0!important;
+}
+

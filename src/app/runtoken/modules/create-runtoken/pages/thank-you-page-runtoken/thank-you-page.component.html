@@ -1,0 +1,19 @@
+<div class="container mt-5" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" *ngIf="authService.user$ | async as user"
+      fxLayout.lt-md="column" >
+  <div class="mt-5" fxLayout="column" fxLayoutAlign="center start">
+
+    <p class="owner-title mt-5">{{'create-selltoken.dear' | translate}}</p>
+    <p class="name-title">{{user.firstName}} {{user.lastName}},</p>
+    <br>
+    <div class="description text-left">
+      <p>{{'create-assets.your-assets' | translate}} <b>"{{assets.name}}"</b> {{'create-selltoken.has-been-successfully-created' | translate}}.</p>
+      <p><b>{{'create-selltoken.thank-you-for-using' | translate}} TokenPow.</b></p>
+    </div>
+    <button pButton label="Check my assets" routerLink="/rtasset/myownedassets" class="mt-4"></button>
+  </div>
+
+  <div class="mt-5" fxHide.lt-md>
+    <ng-lottie class="mt-5"  [options]="teamAnim"></ng-lottie>
+  </div>
+
+</div>

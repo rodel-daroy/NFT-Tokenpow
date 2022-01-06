@@ -1,0 +1,335 @@
+<div appNavbarToggle id="nav" class="w-100" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class = "ml-3" fxLayout="row" fxLayoutAlign="center center">
+    <a href="#">
+      <img id="logo" src="assets/tklogo-onwhite.png" class="p-mr-2">
+    </a>
+    <a   *ngIf="user"  class="menu-button3  menu-button-crate" href="auction/create">Start</a>
+  </div>
+  <div class="mr-3" *ngIf="!user">
+    <button class="wallet-button" (click) = "actionLogin()"> Login </button>
+  </div>
+  <div class="mr-3" *ngIf="user" fxLayout="row">
+    <div class="css-ehmgcn dropdown">
+      <button class="wallet-button dropdown-toggle"  (click) = "actionShowMenu3()">Create NFT</button>
+      <div class="dropdown-box dropdown-menu" [ngClass]="isShowMenu3?'show':''">
+        <div class="">
+          <a class="dropdown-cell" href="runnft/create">
+            <div class="box">
+              <div class="label textbox">
+                <div class="text-box">
+                  <div class="text"><img class="mr-2 runlogo" src="assets/run_logo.png"> NFT </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
+          <a class="dropdown-cell" href="mbasset/create">
+            <div class="box">
+              <div class="label textbox">
+                <div class="text-box">
+                  <div class="text"><img class="mr-2 runlogo" src="assets/mb_logo.png"> NFT </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- <div *ngIf="user?.roles?.admin" class="css-ehmgcn dropdown">
+      <button  class="wallet-button dropdown-toggle "  (click) = "actionShowMenu2()">Admin</button>
+      <div class="dropdown-box dropdown-menu" [ngClass]="isShowMenu2?'show':''">
+        <div class="" style="cursor: pointer;" routerLink="/admin/selltoken-approvals">
+          <a class="dropdown-cell">
+            <div class="box">
+              <div class="label textbox">
+                <div class="text-box">
+                  <div class="text"> Approve Auctions </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+        </div>
+        <div style="cursor: pointer;" routerLink="/admin/refund-coins">
+          <a class="dropdown-cell">
+            <div class="box">
+              <div class="label textbox">
+                <div class="text-box">
+                  <div class="text"> Refunds </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="user?.roles?.partner" class="css-ehmgcn dropdown">
+      <button  class="wallet-button dropdown-toggle "  (click) = "actionShowMenu5()">Partner</button>
+      <div class="dropdown-box dropdown-menu" [ngClass]="isShowMenu5?'show':''">
+        <div class="">
+          <div class="dropdown-cell" (click)="manageCollectionsBtn()" routerLink="/partner/manage-collections">
+            <div class="box">
+              <div class="label textbox">
+                <div class="text-box">
+                  <div class="text"> Manage Collections </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div> -->
+
+    <div class="css-ehmgcn dropdown">
+      <div class="menu-profile" (click) = "actionShowMenu4()">
+        <div class="css-193vh10" style="background-image: url({{user?.photoUrl}});"></div>
+        <div class="css-4cffwv pl-2">
+          <div class="css-5uuy7" style="color:black">{{user?.firstName}}</div>
+        </div>
+      </div>
+      <!--<button class="menu-button4  dropdown-toggle" (click) = "actionShowMenu4()">Profile</button>-->
+      <div class="dropdown-box dropdown-menu" [ngClass]="isShowMenu4?'show':''" style="left: -180px;">
+        <div class="">
+          <a class="dropdown-cell" href="profile">
+            <div class="box">
+              <div class="label textbox">
+                <!--<div class="profile"></div>-->
+                <div class="text-box">
+                  <div class="text">My Profile </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
+          <a class="dropdown-cell" href="user/withdrawals">
+            <div class="box">
+              <div class="label textbox">
+
+                <div class="text-box">
+                  <div class="text">My Rewards </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
+          <span class="header-pane"> Assets</span>
+          <a class="dropdown-cell" href="runnft/myassets">
+            <div class="box">
+              <div class="label textbox">
+                <div class="text-box">
+                  <div class="text"><img class="mr-2 runlogo" src="assets/run_logo.png"> NFT </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
+          <a class="dropdown-cell" href="mbasset/myassets">
+            <div class="box">
+              <div class="label textbox">
+                <div class="text-box">
+                  <div class="text"><img class="mr-2 runlogo" src="assets/mb_logo.png"> NFT </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
+          <span class="header-pane"> Auctions </span>
+
+          <a class="dropdown-cell" href="user/myauctions">
+            <div class="box">
+              <div class="label textbox">
+                <div class="text-box">
+                  <div class="text">Sell Side </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <a class="dropdown-cell" href="user/mybuys">
+            <div class="box">
+              <div class="label textbox">
+                <div class="text-box">
+                  <div class="text">Buy Side </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
+          <ng-container *ngIf="user?.roles?.admin">
+            <span class="header-pane"> Admin</span>
+            <div class="" style="cursor: pointer;" routerLink="/admin/selltoken-approvals">
+              <a class="dropdown-cell">
+                <div class="box">
+                  <div class="label textbox">
+                    <div class="text-box">
+                      <div class="text"> Approve Auctions </div>
+                    </div>
+                  </div>
+                  <div class="caretbox">
+                    <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                      <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+
+            </div>
+            <div style="cursor: pointer;" routerLink="/admin/refund-coins">
+              <a class="dropdown-cell">
+                <div class="box">
+                  <div class="label textbox">
+                    <div class="text-box">
+                      <div class="text"> Refunds </div>
+                    </div>
+                  </div>
+                  <div class="caretbox">
+                    <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                      <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="user?.roles?.partner">
+            <span class="header-pane"> Partner</span>
+            <div class="dropdown-cell" (click)="manageCollectionsBtn()" routerLink="/partner/manage-collections">
+              <div class="box">
+                <div class="label textbox">
+                  <div class="text-box">
+                    <div class="text"> Manage Collections </div>
+                  </div>
+                </div>
+                <div class="caretbox">
+                  <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                    <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                    </path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <span class="header-pane">  </span>
+
+          <button class="dropdown-cell" (click)="signOut()" >
+            <div class="box" >
+              <div class="label textbox">
+                <!--<div class="profile"></div>-->
+                <div class="text-box">
+                  <div class="text">Logout </div>
+                </div>
+              </div>
+              <div class="caretbox">
+                <svg width="8" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-13o7eu2">
+                  <path d="M1.445 0L7.77 7.381a.95.95 0 010 1.238L1.445 16 0 14.761 5.796 8 .001 1.238 1.445 0z" fill="#000">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<p-menubar [model]="items"></p-menubar> -->
+</div>
+
+<ng-content></ng-content>
+<app-footer></app-footer>
+
+
+<div #modalcomp  [ngClass]="isShowModal?'showmodal':''" class="modal" >
+  <!-- Modal content -->
+
+  <div class="modal-content">
+    <button class="btn-close" (click)= "closeBox()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 1L1 15" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round">
+        </path>
+        <path d="M15 15L1 1" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <h2 class="h-wallet">Choose your wallet.</h2>
+    <button class="button-wallet" (click) = "loginWithMoneyButton()"><div class="button-wallet-div">Money Button <svg viewBox="0 0 48 31" width="48px" height="31px" class="jsx-642740185"><path d="M40.6,0h0.3C44.8,0,48,3.1,48,7v16.8c0,4-3.2,7.2-7.3,7.2s-7.3-3.2-7.3-7.2V7 C33.4,3.1,36.6,0,40.6,0z" class="jsx-642740185"></path><path d="M7.3,0c4,0,7.3,3.2,7.3,7.2v16.7c0,4-3.2,7.2-7.3,7.2S0,27.8,0,23.8V7.2C0,3.2,3.2,0,7.3,0z" class="jsx-642740185"></path><path d="M24,0c4,0,7.3,3.2,7.3,7.2v16.7c0,4-3.2,7.2-7.3,7.2s-7.3-3.2-7.3-7.2V7.2C16.7,3.2,20,0,24,0z" class="jsx-642740185"></path><circle cx="40.7" cy="23.8" r="5" class="jsx-642740185 circle"></circle></svg></div></button>
+    <!--app-button
+        class="justify-content-center"
+        fxFill
+        [style]="'outlined'"
+        [iconSource]="'google-logo.png'"
+        (handleClick)="onLogInWithGoogleButtonClicked()"
+        text="{{'auth.login.log-in-with-google' | translate}}"
+        [size]="'medium'"
+    >
+    </app-button-->
+
+  </div>
+
+</div>

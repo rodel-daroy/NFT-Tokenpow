@@ -1,0 +1,18 @@
+<main class="w-30" fxLayout="column" fxLayoutAlign="center center">
+  <b class="mt-2">Let me know the Address to Return Back</b>
+  <div fxLayout="column" fxLayoutAlign="start start">
+    <div class="p-field-radiobutton">
+      <p-radioButton name="city" value="m1" [(ngModel)]="selectedMethod" inputId="city1"></p-radioButton>
+      <label for="city1">User Wallet</label>
+    </div>
+    <div class="p-field-radiobutton">
+        <p-radioButton [disabled] = "withdrawAddress == undefined" name="city" value="m2" [(ngModel)]="selectedMethod" inputId="city2"></p-radioButton>
+        <label for="city2">Preferred Address (Probably Your Money Button Wallet Address)</label>
+    </div>  
+    <input disabled pattern="^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$" id="withdrawalBsvAddress" type="text" pInputText [(ngModel)]="withdrawAddress" class="w-100 ml-3">
+    <p class="ml-3" *ngIf="withdrawAddress == undefined"> You didn't set Preferred Address yet on your Profile page. you can now go to<a href="profile" target="_blank"> here </a></p> 
+  </div>
+
+  <p-button *ngIf="true" [disabled]="false" class="p-button-lg mt-2" (onClick)="withdraw()" label="Withdraw"></p-button>
+</main>
+

@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /categories/{categoryId} {
+    	allow read, write: if true;
+    }
+
+		match /donate_requests/{requestId} {
+    	allow read, write: if true;
+    }
+
+    match /selltokens/{selltokenId} {
+    	allow read, write, update: if true;
+    }
+
+    match /files/{fileId} {
+    	allow read, write: if true;
+    }
+
+    match /metadata/{metadataId} {
+    	allow read, write: if true;
+    }
+
+    match /points/{pointId} {
+    	allow read, write: if true;
+    }
+
+    match /urls/{urlId} {
+    	allow read, write: if true;
+    }
+
+    match /countries/{countryId} {
+    	allow read, write, update: if true;
+    }
+
+
+    match /admin-collection/{document} {
+    	allow read: if getRole('readonly') == true;
+      allow read,update: if getRole('client') == true;
+      allow create,update,delete: if getRole('admin') == true;
+    }
+
+    match /users/{userId} {
+    	allow create: if true;
+    	allow update, read: if isOwner(userId);
+    }
+
+    match /roles/{document} {
+    	allow read,update,delete,create: if false;
+    }
+
+    function isOwner(userId) {
+    	return request.auth.uid == userId;
+    }
+
+    function getRole(role) {
+    	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role] == true;
+    }
+
+    // function isSignedIn() {
+    // 	return request.auth != null;
+    // }
+  }
+}

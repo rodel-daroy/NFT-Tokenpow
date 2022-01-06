@@ -1,0 +1,166 @@
+<section class="landing-content" fxLayout="column" fxLayoutAlign="center center">
+<div  #selltokensDiv
+  class="css-ki8v3k css-wapumg"  fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayoutAlign="center center" class="container-fluid">
+    <div class=" p-25  w-100" fxLayout="column" fxLayoutGap="10px">
+      <!--
+      <div fxLayout.xs="column" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="space-between center">
+        <div fxHide.xs fxLayout="row" fxLayoutGap="10px">
+          <div>
+            <i class="pi pi-heart clickable" (click)="filterFavoriteselltokens()" [ngClass]="this.heart ? 'pi-heart-check' : 'pi-heart-uncheck'"></i>
+          </div>
+
+          <h5 class="mb-0 clickable" data-toggle="collapse" data-target="#collapseOne">
+            <i class="pi pi-sliders-v icon-color"></i>
+          </h5>
+        </div>
+      </div>
+    -->
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <h1 style="color: black">{{selectedCollection?.name}} </h1>
+      <ngx-qrcode
+        [elementType]="elementType"
+        [errorCorrectionLevel]="correctionLevel"
+        [value]="value"
+        cssClass="bshadow"></ngx-qrcode>
+    </div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap.xs="20px">
+        <div fxLayout="column" class="w-100">
+          <!--<div fxHide.sm fxHide.gt-sm fxLayout="row" fxLayoutAlign="space-between center" class="mt-1">
+            <div>
+              <i class="pi pi-heart clickable" (click)="filterFavoriteselltokens()" [ngClass]="this.heart ? 'pi-heart-check' : 'pi-heart-uncheck'"></i>
+            </div>
+            <div>
+              <i class="pi pi-sliders-v icon-color" (click)="toggleSidebar()"></i>
+            </div>
+          </div>
+          <div fxHide.xs>
+            <div id="accordion">
+              <div class="card accordion-background">
+                <div id="collapseOne" class="collapse show"
+                     aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                    <app-filter [favoritesselltokens]="this.user?.favoritesselltokens"></app-filter>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>-->
+          <div class="mt-3 mt-sm-0">
+            <app-selltoken-grid *ngIf="selectedCollection" [collectionId] = selectedCollection.id  [isFavoritesFilterActivated]="heart"></app-selltoken-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+<p-sidebar [baseZIndex]="10000" [(visible)]="display" fullScreen="true" blockScroll="true">
+  <div class="m-2">
+    <h4>
+      {{'selltokens.public-selltokens-page.please-select-categories' | translate}}
+    </h4>
+    <p-scrollPanel [style]="{width: '100%', height: '80vh'}" styleClass="custombar1" >
+      <div *ngFor="let category of categories" class="p-field-checkbox">
+        <p-checkbox name="categories" [value]="category" [(ngModel)]="selectedCategories" [inputId]="category.id"></p-checkbox>
+        <label class="ml-1" [for]="category.id">{{category.nameEN}}</label>
+      </div>
+      <app-button
+        text="{{this.selectedCategories.length > 0 ? ('selltokens.public-selltokens-page.filter' | translate) : ('selltokens.public-selltokens-page.show-all' | translate)}}"
+        class="mt-3"
+        (handleClick)="onFilterCategoriesClick()"></app-button>
+    </p-scrollPanel>
+
+  </div>
+</p-sidebar>
+-->
+</section>
+
+
+<!--
+<section class="trending-selltokens" #selltokensDiv>
+  <div class="w-100 container pb-2">
+    <h1 class="trending-heading text-uppercase">
+      {{'shared.landing-page.trending-selltokens' | translate}}
+    </h1>
+      <div
+        class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+
+        <app-selltoken-card
+          class="col-sm col-xl-3"
+          *ngFor="let selltoken of sortPopularBy('currentDonation') | slice:0:8"
+          [selltoken]="selltoken"
+        ></app-selltoken-card>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end end" class="">
+        <h5 class="clickable text-uppercase" routerLink="/selltokens">{{'shared.landing-page.see-more' | translate}} <i class="pi pi-angle-double-right"></i> </h5>
+      </div>
+  </div>
+</section>
+
+
+<section class="trending-selltokens" *ngIf="nearselltokens.length > 0">
+  <div class="w-100 container pb-2">
+    <h1 class="trending-heading text-uppercase">
+      {{'shared.landing-page.selltokens-near-me' | translate}}
+    </h1>
+    <div
+      class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+      <app-selltoken-card
+        class="col-sm col-xl-3"
+        *ngFor="let selltoken of nearselltokens | slice: 0: 8"
+        [selltoken]="selltoken"
+      ></app-selltoken-card>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end end" class="">
+      <h5 class="clickable text-uppercase" routerLink="/selltokens">{{'shared.landing-page.see-more' | translate}} <i class="pi pi-angle-double-right"></i> </h5>
+    </div>
+  </div>
+</section>
+
+<section class="trending-selltokens" >
+  <div class="w-100 container pb-2">
+    <h1 class="trending-heading text-uppercase">
+      {{'shared.landing-page.latest-selltokens' | translate}}
+    </h1>
+    <div
+      class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+      <app-selltoken-card
+        class="col-sm col-xl-3"
+        *ngFor="let selltoken of sortNewBy('createdAt') | slice:0:8"
+        [selltoken]="selltoken"
+      ></app-selltoken-card>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end end" class="">
+      <h5 class="clickable text-uppercase" routerLink="/selltokens">{{'shared.landing-page.see-more' | translate}} <i class="pi pi-angle-double-right"></i> </h5>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- <section class="feature-content" fxLayout="column" fxLayoutAlign="center center" style="background-color: rgb(242, 242, 242)
+">
+  <div
+  class="css-ki8v3k css-wapumg"  fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center center" class="container-fluid" >
+    <img src="assets/other_collections.png" class="other-collection-image">
+    <div class="css-1fjs75c" >
+      <app-feature-card
+        *ngFor="let collection of featuredSellTokens"
+        [collection]="collection"
+      ></app-feature-card>
+    </div>
+  </div>
+  </div>
+</section> -->
+
+<section class=" text-center container" fxLayout="column" fxLayoutAlign="center center">
+  <h2 class="pt-4 dark-color">
+    <b> {{selectedCollection?.description }} </b>
+  </h2>
+  <!--button class="css-kom36p"> Become a user on TokenPow</button-->
+  <h5 class="pt-5">
+    {{'shared.landing-page.gobitfundme-is-designed-to-help-people-come-together-to-raise-money-using-the-full-power-of-blockchain-technology' | translate}}
+  </h5>
+
+</section>

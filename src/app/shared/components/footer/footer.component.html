@@ -1,0 +1,29 @@
+<footer class="footer-section" fxLayout="row" fxLayoutAlign="space-between" >
+    <!--
+  <div fxLayout="column" fxLayoutAlign="space-evenly center">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="25px">
+      <a href="https://twitter.com/TokenPow1"  target="_blank">
+        <fa-icon class="icon"  [icon]="faTwitter"></fa-icon>
+      </a>
+    </div>
+
+    <div>
+      <p class="copyright">@ TokenPow 2021 | {{'shared.footer.version' | translate}}: {{version.version}} | Commit hash: {{version.hash}}</p>
+    </div>
+
+    <div class="text-center">
+      <a routerLink="/terms/en" class="nav-item nav-link menu-link">{{'shared.footer.terms-and-conditions' | translate}}</a>
+      <a routerLink="/privacy-policy/en" class="nav-item nav-link menu-link">{{'shared.footer.privacy-policy' | translate}}</a>
+    </div>
+  </div>
+  -->
+  <div class="">
+    <a class = "ml-3 footer-link" href="https://twitter.com/TokenPow1"  target="_blank">
+      <fa-icon class="icon"   [icon]="faTwitter"></fa-icon> <span> Twitter</span>
+    </a>
+  </div>
+  <div class="mr-3" fxLayout="row">
+    <a routerLink="/terms/en" class="footer-link">{{'shared.footer.terms-and-conditions' | translate}}</a>
+    <a routerLink="/privacy-policy/en" class="footer-link">{{'shared.footer.privacy-policy' | translate}}</a>
+  </div>
+</footer>

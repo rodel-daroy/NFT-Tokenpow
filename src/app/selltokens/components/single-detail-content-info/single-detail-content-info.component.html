@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutAlign="start start">
+  <div class="icon" fxLayout="column" fxLayoutAlign="start start">
+    <img class="desc-icon" [src]="iconSource" alt="icon">
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="10px">
+    <h3 *ngIf="!isLink" class="head"> {{title}} </h3>
+    <h3 tooltipPosition="top" pTooltip="Show auction wallet" *ngIf="isLink" class="head"><a style="text-decoration: none; color: #EE2A7B" href="{{link}}" target="_blank">{{title}}</a> </h3>
+    <p class="content"> {{description}} </p>
+  </div>
+</div>

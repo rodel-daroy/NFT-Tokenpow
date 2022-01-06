@@ -1,0 +1,50 @@
+<main class="w-30" fxLayout="column" fxLayoutAlign="center center">
+  <b class="mt-2">Current Bid: {{this.currentTopPrice | currency : 'USD'}}</b>
+   <!--<p-button *ngIf="true" [disabled]="!name || !emailValid || !message" class="p-button-lg mt-4" (onClick)="sendInfo()" label="Send"></p-button> -->
+  <!--<p-toggleButton class="mt-2" onLabel="I want to bid more price" offLabel="No I don't want"
+  onIcon="pi pi-check" offIcon="pi pi-times" [(ngModel)]="checked"></p-toggleButton> -->
+  <div class="mt-2"  fxLayout="column" fxLayoutAlign="center center"  >
+    <!--<input class="w-100" id="userName" type="number" pInputText [(ngModel)]="bidValue"> -->
+
+    <p-inputNumber
+    [(ngModel)]="bidValue"
+    (onInput)="onInput($event.value)"
+    mode="currency"
+    inputId="donate"
+    id="donationInput"
+    min="0"
+    currency="USD"
+    autofocus>
+    </p-inputNumber>
+    <!--(ngModelChange)="onInput($event)"-->
+    <p></p>
+    <div *ngIf="this.increment">
+      <p> Your bid price must be higer than previous bid plus the minumum auction bid increment ({{increment}} USD)</p>
+    </div>
+    <div *ngIf="!this.increment">
+      <p> Your bid price must be higer than previous bid.</p>
+    </div>
+
+    <!--<p-button *ngIf="true" [disabled]="disableAll" class="p-button-lg mt-2" (onClick)="confirm()" label="confirm"></p-button> -->
+    <div *ngIf="checked">
+    <app-money-button
+      *ngIf="countdownTime > 0"
+      class="mt-2"
+      [hidden]="!show"
+      #moneyButton
+      [disabled]="false"
+      [outputs]="outputs"
+      clientIdentifier="797da85b13e1972ef81871b263233d5c"
+      (onPayment)="onPaymentFromMoneyButton($event)"
+      (onError)="onErrorFromMoneyButton($event)"
+    ></app-money-button>
+    </div>
+    <!--<span *ngIf="user && paymentFinished" fxLayout="column" fxLayoutAlign="center center" class="p-float-label mt-2 w-100">
+      <input class="w-100" id="userName" type="number" pInputText [(ngModel)]="bidValue">
+      <label for="userName">Bid Price</label>
+      <p-button *ngIf="true" [disabled]="disableAll" class="p-button-lg mt-2" (onClick)="updateBid()" label="Update Bid"></p-button>
+    </span> -->
+
+  </div>
+</main>
+

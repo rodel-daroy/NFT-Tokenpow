@@ -1,0 +1,193 @@
+  <p-tabView>
+    <p-tabPanel header="{{'admin.donate-requests.approved' | translate}}">
+      <p-table [value]="approvedDonations" [paginator]="true" [rows]="10" dataKey="txid" styleClass="p-datatable-responsive-demo">
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex" *ngIf="user?.uid === selltokenOwner || user?.roles.admin">
+            <button type="button" pButton icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success p-mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem"></th>
+            <th pSortableColumn="uid" style="width: 3%">UID <p-sortIcon field="uid"></p-sortIcon> </th>
+            <th pSortableColumn="created_at" style="width: 10%">{{'selltokens.donations-table.date' | translate}} <p-sortIcon field="created_at"></p-sortIcon></th>
+            <!--th pSortableColumn="from" style="width: 15%">{{'selltokens.donations-table.from' | translate}}<p-sortIcon field="from"></p-sortIcon></th-->
+            <th pSortableColumn="payedToselltoken" style="width: 8%">{{'selltokens.donations-table.contribution' | translate}}<p-sortIcon field="payedToselltoken"></p-sortIcon></th>
+            <th pSortableColumn="txid" style="width: 10%">{{'selltokens.donations-table.blockchain-audit' | translate}}<p-sortIcon field="txid"></p-sortIcon></th>
+            <th pSortableColumn="comment" style="width: 15%">{{'selltokens.donations-table.message' | translate}}<p-sortIcon field="comment"></p-sortIcon></th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-donation let-expanded="expanded">
+          <tr>
+            <td>
+              <button
+                type="button"
+                pButton
+                [pRowToggler]="donation"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+              ></button>
+            </td>
+            <td style="overflow: hidden; text-overflow: ellipsis" >{{donation.uid}}</td>
+            <td>{{donation.created_at | dateFormatter: true}}</td>
+            <!--td>{{donation.from}}</td-->
+            <td>{{donation.payedToselltoken | formatCoins}}</td>
+            <td><a href="https://whatsonchain.com/tx/{{donation.txid}}" target="_blank">{{'selltokens.donations-table.show-transaction' | translate}}</a></td>
+            <td>{{donation.comment}}</td>
+          </tr>
+        </ng-template>
+
+        <ng-template class="w-100" pTemplate="rowexpansion" let-donation>
+          <div style="min-width:900px!important; max-width: 1000px!important;">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">{{'selltokens.donations-table.total-contribution' | translate}}</th>
+                <th scope="col">{{'selltokens.donations-table.sharing-reward' | translate}}</th>
+                <th scope="col">{{'selltokens.donations-table.service-fee' | translate}}</th>
+                <th scope="col">{{'selltokens.donations-table.transaction-fee' | translate}}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr>
+                <td>{{donation.amountPayed | formatCoins}}</td>
+                <td>{{donation.payedToUserFromLink | formatCoins}}</td>
+                <td>{{donation.payedToGoBitFundMe | formatCoins}}</td>
+                <td>{{donation.feeAmountSatoshis | formatCoins}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{'admin.donate-requests.pending' | translate}}">
+      <p-table [value]="pendingDonations" [paginator]="true" [rows]="10" dataKey="txid" styleClass="p-datatable-responsive-demo">
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex" *ngIf="user?.uid === selltokenOwner || user?.roles.admin">
+            <button type="button" pButton icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success p-mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem"></th>
+            <th pSortableColumn="uid" style="width: 15%">UID <p-sortIcon field="uid"></p-sortIcon> </th>
+            <th pSortableColumn="createdAt" style="width: 10%">{{'selltokens.donations-table.date' | translate}}<p-sortIcon field="createdAt"></p-sortIcon></th>
+            <!--th pSortableColumn="from" style="width: 15%">{{'selltokens.donations-table.from' | translate}}<p-sortIcon field="from"></p-sortIcon></th-->
+            <th pSortableColumn="payedToselltoken" style="width: 8%">{{'selltokens.donations-table.contribution' | translate}}<p-sortIcon field="payedToselltoken"></p-sortIcon></th>
+<!--            <th style="width: 10%">Blockchain Audit</th>-->
+            <th pSortableColumn="comment" style="width: 15%">{{'selltokens.donations-table.message' | translate}}<p-sortIcon field="comment"></p-sortIcon></th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-donation let-expanded="expanded">
+          <tr>
+            <td>
+              <button
+                type="button"
+                pButton
+                [pRowToggler]="donation"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+              ></button>
+            </td>
+            <td>{{donation.uid}}</td>
+            <td>{{donation.createdAt | dateFormatter: true}}</td>
+            <!--td>{{donation.from}}</td-->
+            <td>{{donation.payedToselltoken}} €</td>
+<!--            <td><a href="https://whatsonchain.com/tx/{{donation.txid}}" target="_blank">Show transaction</a></td>-->
+            <td>{{donation.comment}}</td>
+          </tr>
+        </ng-template>
+
+        <ng-template class="w-100" pTemplate="rowexpansion" let-donation>
+          <div style="min-width:900px!important; max-width: 1000px!important;">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">{{'selltokens.donations-table.total-contribution' | translate}}</th>
+                <th scope="col">{{'selltokens.donations-table.sharing-reward' | translate}}</th>
+                <th scope="col">{{'selltokens.donations-table.service-fee' | translate}}</th>
+                <th scope="col">{{'selltokens.donations-table.stripe-fee' | translate}}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr>
+                <td>{{donation.totalAmount}} €</td>
+                <td>{{donation.payedToUserFromLink}} €</td>
+                <td>{{donation.payedToGoBitFundMe}} €</td>
+                <td>{{donation.stripeFee}} €</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{'admin.donate-requests.rejected' | translate}}">
+      <p-table [value]="rejectedDonations" [paginator]="true" [rows]="10" dataKey="txid" styleClass="p-datatable-responsive-demo">
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex" *ngIf="user?.uid === selltokenOwner || user?.roles.admin">
+            <button type="button" pButton icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success p-mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem"></th>
+            <th pSortableColumn="uid" style="width: 15%">UID <p-sortIcon field="uid"></p-sortIcon> </th>
+            <th pSortableColumn="createdAt" style="width: 10%">{{'selltokens.donations-table.date' | translate}}<p-sortIcon field="createdAt"></p-sortIcon></th>
+            <!--th pSortableColumn="from" style="width: 15%">{{'selltokens.donations-table.from' | translate}}<p-sortIcon field="from"></p-sortIcon></th-->
+            <th pSortableColumn="payedToselltoken" style="width: 8%">{{'selltokens.donations-table.contribution' | translate}}<p-sortIcon field="payedToselltoken"></p-sortIcon></th>
+            <!--            <th style="width: 10%">Blockchain Audit</th>-->
+            <th pSortableColumn="comment" style="width: 15%">{{'selltokens.donations-table.message' | translate}}<p-sortIcon field="comment"></p-sortIcon></th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-donation let-expanded="expanded">
+          <tr>
+            <td>
+              <button
+                type="button"
+                pButton
+                [pRowToggler]="donation"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+              ></button>
+            </td>
+            <td>{{donation.uid}}</td>
+            <td>{{donation.createdAt | dateFormatter: true}}</td>
+            <!--td>{{donation.from}}</td-->
+            <td class="rejected__value">-{{donation.payedToselltoken}} €</td>
+            <!--            <td><a href="https://whatsonchain.com/tx/{{donation.txid}}" target="_blank">Show transaction</a></td>-->
+            <td>{{donation.comment}}</td>
+          </tr>
+        </ng-template>
+
+        <ng-template class="w-100" pTemplate="rowexpansion" let-donation>
+          <div style="min-width:900px!important; max-width: 1000px!important;">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">{{'selltokens.donations-table.total-contribution' | translate}}</th>
+                <th scope="col">{{'selltokens.donations-table.sharing-reward' | translate}}</th>
+                <th scope="col">{{'selltokens.donations-table.service-fee' | translate}}</th>
+                <th scope="col">{{'selltokens.donations-table.stripe-fee' | translate}}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr>
+                <td class="rejected__value">-{{donation.totalAmount}} €</td>
+                <td class="rejected__value">-{{donation.payedToUserFromLink}} €</td>
+                <td class="rejected__value">-{{donation.payedToGoBitFundMe}} €</td>
+                <td class="rejected__value">-{{donation.stripeFee}} €</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+  </p-tabView>

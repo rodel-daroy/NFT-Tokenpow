@@ -1,0 +1,44 @@
+<div class="container ">
+  <div
+    class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+
+    <p-tabView (activeIndexChange)="onTabPanelClick($event)" class="w-100">
+      <p-tabPanel header="SELL">
+        <div
+          class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+          <app-selltoken-card
+            class="col-sm col-xl-3"
+            *ngFor="let selltoken of data"
+            [routerLink]="['/auction/', selltoken.uid]"
+            [selltoken]="selltoken"
+          ></app-selltoken-card>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="PENDING">
+        <div
+          class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+          <app-selltoken-card
+            class="col-sm col-xl-3"
+            *ngFor="let selltoken of data"
+            [routerLink]="['/auction/', selltoken.uid]"
+            [selltoken]="selltoken"
+          ></app-selltoken-card>
+        </div>
+      </p-tabPanel>
+     
+      <p-tabPanel header="SOLD">
+        <div
+          class="p-grid justify-content-center justify-content-sm-start  selltoken-grid-container">
+          <app-selltoken-card
+            class="col-sm col-xl-3"
+            *ngFor="let selltoken of data"
+            [routerLink]="['/tokens/token/', selltoken.uid]"
+            [selltoken]="selltoken"
+          ></app-selltoken-card>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+
+  </div>
+</div>
+

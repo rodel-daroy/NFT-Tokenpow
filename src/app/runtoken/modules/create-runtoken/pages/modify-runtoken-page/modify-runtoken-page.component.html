@@ -1,0 +1,62 @@
+<main class="container" fxLayout="column" fxLayoutAlign="center center">
+  <div fxHide.lt-md>
+    <img class="wizard-image" src="assets/wizard.svg">
+  </div>
+  <div class="text-center mt-5">
+    <h2 class="dark-text mb-4">
+      <b>{{'Modify Token' | translate}}</b>
+    </h2>
+    <p style="font-size: 18px">{{'Change the token values as you need' | translate}}</p>
+  </div>
+  
+  <div class="w-100 mt-5" fxLayout="column" fxLayoutAlign="center start">
+    <div fxLayout="row" fxLayoutGap="30px" fxLayout.lt-md="column">
+      <div fxLayout="column">
+        <label for="title">{{'create-assets.assets-name' | translate}}</label>
+        <input class="assets-input" id="name" name="name" [(ngModel)]="assets.name" maxlength="45">
+        <p style="font-size: 11px">{{'create-assets.assets-name-scope' | translate}}</p>
+      </div>
+    </div>
+
+    <label for="initialSupply">{{'create-assets.assets-initial-supply' | translate}}</label>
+    <input disabled id="initialSupply" type="number" class="assets-input" name="target" [(ngModel)]="assets.initialSupply">
+    <label for="shortDescription">{{'create-assets.assets-description' | translate}}</label>
+    <textarea class="assets-textarea" id="shortDescription" maxlength="145" [(ngModel)]="assets.description"></textarea>
+    <p style="font-size: 10px">{{'create-assets.assets-description-scope' | translate}}</p>
+
+    <label for="avatar"> {{'create-assets.assets-avatar' | translate}}</label>
+    <input class="assets-input" id="avatar" name="name" [(ngModel)]="assets.avatar" maxlength="255">
+    <label for="protocol"> <b><p> {{'create-assets.assets-protocol' | translate}} </p></b></label>
+    <div>
+      <input type="radio" id="protocol" name="protocol" value="male" checked>
+      <b><label class="ml-1" for="male">SFP@0.1</label></b><br>
+    </div>
+    <!--<div class="image-hover-zoom clickable">
+      <img class="user-image " [src]="assets.avatar ? assets.avatar : 'assets/account.png'" (click)="fileInput.click()">
+      <input style="display:none" type="file" (change)="onFileChanged($event)" accept="image/*" #fileInput>
+      <div class="overlay" (click)="fileInput.click()">
+        <div class="overlay-text">
+          {{'user.user-profile.upload-image' | translate}}
+        </div>
+      </div>
+    </div>
+    -->
+  </div>
+  <div class="mt-5" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <div>
+    <button
+      pButton
+      class="p-button-outlined"
+      label="{{'selltokens.create-selltoken.create-preview-selltoken.back' | translate}}"
+      (click)="backStep()"></button>
+  </div>
+
+      <p-button
+        [disabled]="
+          !(this.assets?.name !== '' && (this.assets?.initialSupply != undefined))
+          
+          "
+        label="{{'Modify' | translate}}"
+        (onClick)="nextStep()"></p-button>
+</div>
+</main>

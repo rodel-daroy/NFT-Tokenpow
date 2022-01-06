@@ -1,0 +1,143 @@
+@import "src/styles";
+
+.locations {
+  background-color: #F9F9F9;
+}
+
+.multiselect {
+  padding-top: 1.2em;
+}
+
+.selected-list.c-list.c-token {
+  background: $pink-magenta !important;
+}
+
+p-calendar ::ng-deep {
+  width: 100%!important;
+}
+
+.text-area ::ng-deep {
+  margin-top: 20px!important;
+}
+
+.bitcoinlink {
+  color: rgb(126, 128, 130);
+  text-decoration: none;
+}
+
+.wizard-image {
+  max-width: 400px;
+  width: auto;
+}
+.dark-text {
+  color: #050505;
+}
+
+.assets-input {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.87);
+  background: #d3d3d3;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #c9c9c9;
+  transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+  border-radius: 4px;
+  width: 260px;
+  height: 40px;
+}
+.assets-textarea {
+  background: #ffffff;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  border: 1px solid #c7c7c7;
+  height: 170px;
+  max-width: 400px;
+  color: rgba(0, 0, 0, 0.87);
+  width: 100%;
+  padding: 5px;
+}
+
+.ng-select.assets-select ::ng-deep .ng-select-container {
+  background: #F4F4F4 !important;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  border: 1px solid #F4F4F4;
+  height: 40px;
+  width: 260px;
+  padding: 5px;
+}
+
+:host ::ng-deep .p-calendar {
+  background: #F4F4F4 !important;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  border: 1px solid #F4F4F4;
+  height: 40px;
+  padding: 5px;
+}
+
+:host ::ng-deep .dropzone {
+  margin-top: 0!important;
+  background-color: #F4F4F4!important;
+}
+.user-image {
+  max-height: 100px;
+  min-height: 100px;
+  min-width: 100px;
+  max-width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50% !important;
+  display: block;
+}
+
+.image-hover-zoom  {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  max-width: 100px;
+  height: 100px;
+}
+
+.image-hover-zoom img {
+  max-width: 100%;
+}
+
+.image-hover-zoom .overlay {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 15px;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -ms-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+
+}
+
+.image-hover-zoom :hover {
+  opacity: 1;
+}
+
+.image-hover-zoom .overlay-text {
+  text-align: center;
+  font-size: 18px;
+  display: inline-block;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}

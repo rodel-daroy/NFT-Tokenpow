@@ -1,0 +1,299 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.arts_and_photography",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.beauty_and_makeup",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.fashion_and_style",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.food_and_drink",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.health_and_fitness",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.home_and_garden",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.just_launched",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.mind_and_body",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.movies_tv_books",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.music",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.near_you",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.outdoor_and_nature",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.parenting_and_family",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.pets",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.sports",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.technology",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.test",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.travel",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.upcoming",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "selltokens",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categories.vehicles",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

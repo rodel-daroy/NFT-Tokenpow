@@ -1,0 +1,26 @@
+<p-table [value]="users" [paginator]="true" [rows]="10" sortField="createdAt" sortOrder="-1" styleClass="p-datatable-responsive-demo">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 19%" pSortableColumn="uid">UID<p-sortIcon field="uid"></p-sortIcon></th>
+      <th style="width: 14%" pSortableColumn="createdAt">{{'admin.user-list.created-at' | translate}}<p-sortIcon  field="createdAt"></p-sortIcon></th>
+      <th style="width: 13%" pSortableColumn="lastLoggedIn">{{'admin.user-list.last-logged-in' | translate}}<p-sortIcon field="lastLoggedIn"></p-sortIcon></th>
+      <th style="width: 10%" pSortableColumn="firstName">{{'admin.user-list.first-name' | translate}}<p-sortIcon field="firstName"></p-sortIcon></th>
+      <th style="width: 10%" pSortableColumn="lastName">{{'admin.user-list.last-name' | translate}}<p-sortIcon field="lastName"></p-sortIcon></th>
+      <th style="width: 17%" pSortableColumn="email">{{'admin.user-list.email' | translate}}<p-sortIcon field="email"></p-sortIcon></th>
+      <th style="width: 17%" pSortableColumn="location.name">{{'admin.user-list.country' | translate}}<p-sortIcon field="location.name"></p-sortIcon></th>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td style="overflow: hidden; text-overflow: ellipsis"><span class="p-column-title">UID</span>{{user.uid}} </td>
+      <td><span class="p-column-title">{{'admin.user-list.created-at' | translate}}</span>{{user.createdAt}} </td>
+      <td><span class="p-column-title">{{'admin.user-list.last-logged-in' | translate}}</span>{{user.lastLoggedIn }}</td>
+      <td><span class="p-column-title">{{'admin.user-list.first-name' | translate}}</span>{{user.firstName}}</td>
+      <td><span class="p-column-title">{{'admin.user-list.last-name' | translate}}</span>{{user.lastName}}</td>
+      <td><span class="p-column-title">{{'admin.user-list.email' | translate}}</span>{{user.email}}</td>
+      <td><span class="p-column-title">{{'admin.user-list.location' | translate}}</span>{{user.location?.name}}</td>
+
+    </tr>
+  </ng-template>
+</p-table>

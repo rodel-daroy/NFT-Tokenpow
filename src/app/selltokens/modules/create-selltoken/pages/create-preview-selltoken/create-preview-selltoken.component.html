@@ -1,0 +1,227 @@
+  <div fxLayout="column" fxLayoutAlign="center center" style="background-color: rgb(242, 242, 242);">
+    <div #fullscreen style="height: 500px; width: 100%; background-color: rgb(242, 242, 242);" fxLayout="column" fxLayoutAlign="center center">
+      <div class="image-container" style="height: 100%; width: 100%; overflow: hidden;   object-fit: cover;"  fxLayout="row"  fxLayoutAlign="">
+        <img *ngIf="selltoken?.tokenType==1" class="card-img-top selltoken-card-image clickable" [src]="selltoken && selltoken.photo_url!? selltoken.photo_url : selltoken?.asset?.avatar ?  selltoken.asset?.avatar : 'assets/token_land.png'" alt="image" (click)="showDetailselltoken()">
+        <img *ngIf="selltoken?.tokenType==0" class="card-img-top selltoken-card-image clickable" [src]="selltoken && selltoken.photo_url!? selltoken.photo_url : selltoken?.runart?.image ?  sanitize(selltoken.runart?.image) : 'assets/token_land.png'" alt="image" (click)="showDetailselltoken()">
+        <img *ngIf="selltoken?.tokenType==2 && !selltoken?.runnft?.image" class="card-img-top selltoken-card-image clickable" [src]="selltoken && selltoken.photo_url!? selltoken.photo_url : selltoken?.runnft?.avatar ? selltoken.runnft?.avatar  : 'assets/token_land.png'" alt="image" (click)="showDetailselltoken()">
+        <img *ngIf="selltoken?.tokenType==2 && selltoken?.runnft?.image" class="card-img-top selltoken-card-image clickable" [src]="selltoken && selltoken.photo_url!? selltoken.photo_url : selltoken?.runnft?.image ? sanitize(selltoken.runnft?.image)  : 'assets/token_land.png'" alt="image" (click)="showDetailselltoken()">
+      </div>
+      <div fxLayout="row" style="width:100%" fxLayoutAlign="end center">
+        <button class="btn-enlarge" (click)="selltokenNotCreated()" >
+
+
+
+          <div class="container" >
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"><path d="M9 2h3.6l-4 4L10 7.4l4-4V7h2V0H9v2zM6 8.6l-4 4V9H0v7h7v-2H3.4l4-4L6 8.6z" fill="#fff"></path>
+          </svg></div>
+        </button>
+      </div>
+    </div>
+    <div style=" margin-bottom: -24px; width:100%; z-index: 4" fxLayout="row"  fxLayoutAlign.gt-xs="space-between center">
+      <div class="css-1fp3cxy">
+        <div class="css-193vh10" style="background-image: url({{selltoken?.userPhotoUrl}});"></div>
+        <div class="css-4cffwv">
+          <div class="css-5uuy7" style="color:black">{{selltoken?.userName}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="leader-board">
+    <div class="container">
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <div class="title-pane">
+          <div class="css-pk1a08">
+            <div class="css-f19vuz">
+              <h2 class="header-text">{{selltoken?.title}}</h2>
+            </div>
+          </div>
+          <div class="css-16n8vql">
+            <div class="css-1mj918r" fxLayout="row"  fxLayoutAlign="start center">
+              <svg width="18" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 0v17.67M16 11.486L9 17.67l-7-6.185" stroke="currentColor" stroke-width="2">
+                </path>
+              </svg>
+              <div class="information-text">Artwork information</div>
+            </div>
+          </div>
+        </div>
+        <div class="detailed-pane w-100">
+            <div class="css-1g4f2k1 w-100">
+              <div class="css-vurnku w-100">
+                 <p> Price per NFT:   {{selltoken?.targetInEur | currency : 'USD'}} </p>
+                 <p> Quantity:  {{selltoken?.orderAmount}} </p>
+                 <!--<p> BuyNow price:   {{selltoken?.buyNowPrice | currency : 'USD'}} </p> -->
+                 <p> BuyNow price:   {{selltoken?.buyNowPrice | currency : 'USD'}} </p>
+                 <p> Minimum bid: {{selltoken?.orderAmount * selltoken?.targetInEur | currency : 'USD'}} </p>
+                <div class="description-title">Description</div>
+                <div class="description">        <p [innerHTML]="selltoken?.description" class="description"></p>
+                </div>
+              </div>
+              <div class="assetinfo-card"  style="" [class.p-shadow-10]="mouseOvered"
+              (mouseover)="mouseOvered=true"
+              (mouseout)="mouseOvered=false" fxlayoutalign="center center">
+                <div  *ngIf="selltoken?.tokenType == 1"  class="container " fxLayout="column" fxLayoutAlign="center center">
+                  <div class="col-12  bottom-border-line" fxLayoutAlign="center center">
+                  <p> <img class="user-image " align="left" [src]="selltoken?.asset?.avatar ? selltoken?.asset?.avatar : 'assets/account.png'">            </p>
+                  </div>
+
+                  <div class="col-12  bottom-border-line">
+                    <h3> Asset Info </h3>
+                    <p> Name:  {{ selltoken?.asset?.name }}</p>
+                    <p> Initial Supply:  {{ selltoken?.asset?.initialSupply }}</p>
+                    <p> User's supply:{{ selltoken?.amount }} </p>
+                    <p> Paymail:{{ selltoken?.asset?.alias }} </p>
+                  </div>
+                  <div class="col-12  bottom-border-line">
+                    <p> Asset emited: moneybutton.com </p>
+                  </div>
+                  <div class="col-12  bottom-border-line">
+                    <p> Asset sent from: https://www.moneybutton.com </p>
+                  </div>
+                  <div class="col-12  bottom-border-line">
+                    <p> Protocol: SFP@0.1</p>
+                  </div>
+                </div>
+
+
+                <div *ngIf="selltoken?.tokenType == 0" class="container " fxLayout="column" fxLayoutAlign="center center">
+                  <div class="col-12 " fxLayout="column" fxLayoutAlign="center center">
+                  <p> <img class="user-image " align="left" [src]="selltoken?.runart?.image ? sanitize(selltoken?.runart?.image) : 'assets/account.png'">            </p>
+                  <p> Author:  {{ selltoken?.runart?.author }}</p>
+                  <p> Title:  {{ selltoken?.runart?.title }}</p>
+                  <p><a href="{{ selltoken?.runArt?.source}}"   style="text-decoration: none" class="gray-text"  target="_blank"> Reference information  </a></p>
+                  <p> License:  {{ selltoken?.runart?.license }}</p>
+                  </div>
+
+                  <div class="col-12  ">
+                    <p> Asset Overview </p>
+                    <p> Name:   <a href="https://run.network/explorer/?query={{selltoken?.runart?.location}}&network=main"   style="text-decoration: none" class="gray-text"  target="_blank"> {{ selltoken?.runart?.name }} </a>  </p>
+                    <p> Emoji:  {{ selltoken?.runart?.emoji }}</p>
+                    <p> Description:</p>
+                    <p > {{ selltoken?.runart?.description }}</p>
+                    <p class="mb-1"> Assets:</p>
+                    <div fxLayout="row" *ngFor="let assetTxid of selltoken?.runart?.assetIds;let i = index; ">
+                      <a href="https://bico.media/{{assetTxid.txtid}}"   style="text-decoration: none" class="gray-text"  target="_blank">  NFT asset-{{i}}  </a>
+                      <span class="ml-3"> {{assetTxid?.description}} </span>
+                    </div>
+                    <p> Edition No:  {{ selltoken?.runart?.editionNo }}</p>
+                    <p> Percentage:  {{ selltoken?.runart?.percentage }}</p>
+                    <p> OwnerAddrress:  {{ selltoken?.runart?.feeowneraddress }}</p>
+                  </div>
+                  <div class="col-12 ">
+                    <p> Asset emited: {{selltoken?.assetEmited}} </p>
+                  </div>
+                  <div class="col-12 ">
+                    <p> Protocol: {{selltoken?.assetProtocol}}</p>
+                  </div>
+                </div>
+
+                <div *ngIf="selltoken?.tokenType == 2" class="container " fxLayout="column" fxLayoutAlign="center center">
+                  <div class="col-12  " fxLayoutAlign="center center">
+                  <p>
+                    <img *ngIf="!selltoken?.runnft?.image"  class="user-image " align="left" [src]="selltoken?.runnft?.avatar ? selltoken?.runnft?.avatar : 'assets/account.png'">
+                    <img *ngIf="selltoken?.runnft?.image"  class="user-image " align="left" [src]="selltoken?.runnft?.image ? sanitize(selltoken?.runnft?.image) : 'assets/account.png'">
+                  </p>
+                  </div>
+
+                  <div class="col-12  ">
+                    <p> Asset Overview </p>
+                    <p> Name:   <a href="https://run.network/explorer/?query={{selltoken?.runnft?.location}}&network=main"   style="text-decoration: none" class="gray-text"  target="_blank"> {{ selltoken?.runnft?.name }} </a>  </p>
+                    <p> Description:</p>
+                    <p> {{ selltoken?.runnft?.description }}</p>
+                    <p> Emoji:  {{ selltoken?.runnft?.emoji }}</p>
+                    <p> Symbol:  {{ selltoken?.runnft?.symbol }}</p>
+                    <p> Decimal:  {{ selltoken?.runnft?.decimals }}</p>
+                    <p> InitialSupply: {{ selltoken?.runnft?.initialSupply!=0?getRealSupply(selltoken?.runnft?.initialSupply,selltoken?.runnft?.decimals):'Unknown'}}  </p>
+                    <p> Owned:  {{getRealSupply(selltoken?.runnft?.supply,selltoken?.runnft?.decimals)}}</p>
+                  </div>
+                  <div class="col-12 ">
+                    <p> Asset emited: {{selltoken?.assetEmited}} </p>
+                  </div>
+                  <div class="col-12 ">
+                    <p> Protocol: {{selltoken?.assetProtocol}}</p>
+                  </div>
+                </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="auction-listing-pane" fxLayout="column" fxLayoutAlign="start start">
+        <div class="css-6vfr7z">
+
+            <div class="css-oiuqw7">
+              <div class="css-1sqg0uu">
+                <div *ngIf="!selltoken?.auctionPaymail " class="css-wbxa2r">No Bid</div>
+              </div>
+              <div class="css-vurnku">
+
+                <div class="css-wbxa2r">Auction duration</div>
+                <countdown *ngIf="countdownTime>0" class="count-down"  (event)="handleEvent($event)" [config]="{leftTime: countdownTime ,format:'dd HH:mm:ss',formatDate:formatDate, demand: true }"></countdown>
+              </div>
+            </div>
+            <div class="css-3rf65c" >
+                <button (click)="selltokenNotCreated()"    class="css-6iow5d">Place a bid</button>
+            </div>
+
+          </div>
+        <app-auction-table
+        style="width:100%"
+        *ngIf="selltoken"
+        [status] = "status"
+        [selltoken]="selltoken"
+        ></app-auction-table>
+      </div>
+
+    </div>
+
+    <div class="css-1k8g9yd">
+      <h2 class="css-16r8npt">Creator</h2>
+      <div class="css-1pkhopn">
+        <div class="css-7bdn4n">
+          <a href=""><div class="css-mcc8vk">
+            <div class="css-1dvvz0s" style="background-image: url({{selltoken?.userPhotoUrl}});"></div>
+             </div>
+          </a>
+          <div class="css-vurnku">
+            <a href="" class="css-1ozgi4c">{{selltoken?.userName}}</a>
+            <div class="css-1bhrwxo">
+              <a href="" class="css-15ooa9">
+                <div class="css-36tuqx">@{{selltoken?.userName}}</div>
+              </a>
+            </div>
+            <div fxLayout="row" >
+              <a *ngIf="selltoken?.userFacebook" class="mr-2" [href]="selltoken?.userFacebook" target="_blank">
+              <fa-icon [icon]="faFacebook" class="icon"></fa-icon>
+              </a>
+              <a *ngIf="selltoken?.userTwitter" [href]="selltoken?.userTwitter" target="_blank">
+                <fa-icon [icon]="faTwitter" class="icon"></fa-icon>
+              </a>
+            </div>
+          </div>
+
+        </div>
+        <div class="css-wjurn4">
+          <p [innerHTML]="selltoken?.userDescription?selltoken?.userDescription:''"  style="color: black;"></p>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <div>
+      <button
+        pButton
+        class="p-button-outlined"
+        label="{{'selltokens.create-selltoken.create-preview-selltoken.back' | translate}}"
+        (click)="prevStep()"></button>
+    </div>
+
+    <div>
+      <button
+        pButton
+        class="p-button-outlined"
+        label="Next"
+        (click)="nextStep()"></button>
+    </div>
+  </div>

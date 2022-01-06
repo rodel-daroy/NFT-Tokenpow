@@ -1,0 +1,105 @@
+<p-tabView>
+  <p-tabPanel header="{{'admin.donate-requests.pending' | translate}}">
+    <p-table [value]="donations" [paginator]="true" [rows]="10" sortField="createdAt" sortOrder="-1" styleClass="p-datatable-responsive-demo">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 19%" pSortableColumn="uid">UID<p-sortIcon field="uid"></p-sortIcon></th>
+          <th style="width: 14%" pSortableColumn="createdAt">{{'admin.selltoken-approvals.created-at' | translate}}<p-sortIcon  field="createdAt"></p-sortIcon></th>
+          <th style="width: 13%" pSortableColumn="totalAmount">{{'admin.donate-requests.total-pay' | translate}}<p-sortIcon field="totalAmount"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="payedToselltoken">{{'admin.donate-requests.pay-to-selltoken' | translate}}<p-sortIcon field="payedToselltoken"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="payedToGoBitFundMe">{{'admin.donate-requests.pay-to-gobitfundme' | translate}}<p-sortIcon field="payedToGoBitFundMe"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="payedToUserFromLink">{{'admin.donate-requests.pay-to-user-from-link' | translate}}<p-sortIcon field="payedToUserFromLink"></p-sortIcon></th>
+          <th style="width: 17%" pSortableColumn="from">{{'admin.donate-requests.from' | translate}}<p-sortIcon field="from"></p-sortIcon></th>
+          <th style="width: 13%" pSortableColumn="link">{{'admin.donate-requests.link-to-selltoken' | translate}}<p-sortIcon field="link"></p-sortIcon></th>
+          <th style="width: 13%">{{'admin.donate-requests.moneybutton' | translate}}</th>
+          <th style="width: 10%">{{'admin.donate-requests.decline' | translate}}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-donation>
+        <tr>
+          <td><span class="p-column-title">UID</span>{{donation.uid}} </td>
+          <td><span class="p-column-title">{{'admin.selltoken-approvals.created-at' | translate}}</span>{{donation.createdAt | dateFormatter}} </td>
+          <td><span class="p-column-title">{{'admin.donate-requests.total-pay' | translate}}</span>{{donation.totalAmount | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.pay-to-selltoken' | translate}}</span>{{donation.payedToselltoken | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.service-fee' | translate}}</span>{{donation.payedToGoBitFundMe | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.sharing-reward' | translate}}</span>{{donation.payedToUserFromLink | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.from' | translate}}</span>{{donation.from}}</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.link-to-selltoken' | translate}}</span><a [href]="donation.link" target="_blank">{{'admin.donate-requests.view-selltoken' | translate}}</a></td>
+          <!--      <td><button (click)="getSingleselltoken(donation)">test</button></td>-->
+          <td>
+            <span class="p-column-title">{{'admin.donate-requests.moneybutton' | translate}}</span>
+            <app-money-button
+              [outputs]="donation.outputs"
+              clientIdentifier="{{clientId}}"
+              (onPayment)="onPaymentSuccess($event, donation)"
+              (onError)="onPaymentError($event)"
+            >
+            </app-money-button>
+          </td>
+          <td>
+            <span class="p-column-title">{{'admin.donate-requests.decline-request' | translate}}</span>
+            <button style="z-index: 100" (click)="declineRequest(donation)" pButton label="{{'admin.donate-requests.decline' | translate}}"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+  <p-tabPanel header="{{'admin.donate-requests.approved' | translate}}">
+    <p-table [value]="approvedDonations" [paginator]="true" [rows]="10" styleClass="p-datatable-responsive-demo">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 17%" pSortableColumn="uid">UID<p-sortIcon field="uid"></p-sortIcon></th>
+          <th style="width: 12%" pSortableColumn="createdAt">{{'admin.selltoken-approvals.created-at' | translate}}<p-sortIcon field="createdAt"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="totalAmount">{{'admin.donate-requests.total-pay' | translate}}<p-sortIcon field="totalAmount"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="payedToselltoken">{{'admin.donate-requests.pay-to-selltoken' | translate}}<p-sortIcon field="payedToselltoken"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="payedToGoBitFundMe">{{'admin.donate-requests.pay-to-gobitfundme' | translate}}<p-sortIcon field="payedToGoBitFundMe"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="payedToUserFromLink">{{'admin.donate-requests.pay-to-user-from-link' | translate}}<p-sortIcon field="payedToUserFromLink"></p-sortIcon></th>
+          <th style="width: 18%" pSortableColumn="from">{{'admin.donate-requests.from' | translate}}<p-sortIcon field="from"></p-sortIcon></th>
+          <th style="width: 12%" pSortableColumn="link">{{'admin.donate-requests.link-to-selltoken' | translate}}<p-sortIcon field="link"></p-sortIcon></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-approvedDonation>
+        <tr>
+          <td><span class="p-column-title">UID</span>{{approvedDonation.uid}} </td>
+          <td><span class="p-column-title">{{'admin.selltoken-approvals.created-at' | translate}}</span>{{approvedDonation.createdAt | dateFormatter}} </td>
+          <td><span class="p-column-title">{{'admin.donate-requests.total-pay' | translate}}</span>{{approvedDonation.totalAmount | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.pay-to-selltoken' | translate}}</span>{{approvedDonation.payedToselltoken | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.service-fee' | translate}}</span>{{approvedDonation.payedToGoBitFundMe | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.sharing-reward' | translate}}</span>{{approvedDonation.payedToUserFromLink | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.from' | translate}}</span>{{approvedDonation.from}}</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.link-to-selltoken' | translate}}</span><a [href]="approvedDonation.link" target="_blank">{{'admin.donate-requests.view-selltoken' | translate}}</a></td>
+
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+  <p-tabPanel header="{{'admin.donate-requests.declined' | translate}}">
+    <p-table [value]="declinedDonations" [paginator]="true" [rows]="10" styleClass="p-datatable-responsive-demo">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 17%" pSortableColumn="uid">UID<p-sortIcon field="uid"></p-sortIcon></th>
+          <th style="width: 12%" pSortableColumn="createdAt">{{'admin.selltoken-approvals.created-at' | translate}}<p-sortIcon field="createdAt"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="totalAmount">{{'admin.donate-requests.total-pay' | translate}}<p-sortIcon field="totalAmount"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="payedToselltoken">{{'admin.donate-requests.pay-to-selltoken' | translate}}<p-sortIcon field="payedToselltoken"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="payedToGoBitFundMe">{{'admin.donate-requests.pay-to-gobitfundme' | translate}}<p-sortIcon field="payedToGoBitFundMe"></p-sortIcon></th>
+          <th style="width: 10%" pSortableColumn="payedToUserFromLink">{{'admin.donate-requests.pay-to-user-from-link' | translate}}<p-sortIcon field="payedToUserFromLink"></p-sortIcon></th>
+          <th style="width: 18%" pSortableColumn="from">{{'admin.donate-requests.from' | translate}}<p-sortIcon field="from"></p-sortIcon></th>
+          <th style="width: 12%" pSortableColumn="link">{{'admin.donate-requests.link-to-selltoken' | translate}}<p-sortIcon field="link"></p-sortIcon></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-declinedDonation>
+        <tr>
+          <td><span class="p-column-title">UID</span>{{declinedDonation.uid}} </td>
+          <td><span class="p-column-title">{{'admin.selltoken-approvals.created-at' | translate}}</span>{{declinedDonation.createdAt | dateFormatter}} </td>
+          <td><span class="p-column-title">{{'admin.donate-requests.total-pay' | translate}}</span>{{declinedDonation.totalAmount | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.pay-to-selltoken' | translate}}</span>{{declinedDonation.payedToselltoken | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.service-fee' | translate}}</span>{{declinedDonation.payedToGoBitFundMe | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.sharing-reward' | translate}}</span>{{declinedDonation.payedToUserFromLink | number}} €</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.from' | translate}}</span>{{declinedDonation.from}}</td>
+          <td><span class="p-column-title">{{'admin.donate-requests.link-to-selltoken' | translate}}</span><a [href]="declinedDonation.link" target="_blank">{{'admin.donate-requests.view-selltoken' | translate}}</a></td>
+
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+</p-tabView>

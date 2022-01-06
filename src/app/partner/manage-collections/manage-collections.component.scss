@@ -1,0 +1,121 @@
+:host ::ng-deep {
+  .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
+    display: none;
+  }
+}
+
+.image {
+  img {
+    width: 50%;
+    height: 50%;
+    max-width: 640px;
+    max-height: 360px;
+
+    object-fit: cover;
+    border-radius: 5px;
+  }
+}
+
+.p-column-responsive-hide {
+  display: block;
+}
+
+.p-column-responsive-show {
+  display: none;
+}
+
+::ng-deep .p-dropdown {
+  width: 100%;
+}
+
+.item {
+  margin-top: 20px;
+}
+
+td {
+  word-break: break-all;
+}
+
+@media screen and (max-width: 40rem) {
+  .p-column-responsive-hide {
+    display: none !important;
+  }
+
+  .p-column-responsive-show {
+    display: block !important;
+  }
+
+  :host ::ng-deep {
+    .p-datatable {
+      &.p-datatable-responsive-demo {
+        .p-datatable-thead > tr > th,
+        .p-datatable-tfoot > tr > td {
+          display: none !important;
+        }
+
+        .p-datatable-tbody > tr > td {
+          text-align: left;
+          display: block;
+          width: 100%;
+          float: left;
+          clear: left;
+          border: 0 none;
+
+          .p-column-title {
+            padding: 0.4rem;
+            min-width: 30%;
+            display: inline-block;
+            margin: -0.4em 1em -0.4em -0.4rem;
+            font-weight: bold;
+          }
+
+          &:last-child {
+            border-bottom: 1px solid var(--surface-d);
+          }
+        }
+      }
+    }
+  }
+}
+
+.uploadfilecontainer {
+  background-image: url("../../../assets/cloud-2044823_960_720.png");
+  background-repeat: no-repeat;
+  background-size: 50px;
+  background-position: center;
+  height: 100px;
+//   max-width: 400px;
+  width: 100%;
+  // margin: 20px auto;
+  border: 2px dashed #1c8adb;
+  border-radius: 10px;
+}
+
+.uploadfilecontainer:hover {
+  cursor: pointer;
+  background-color: #9ecbec !important;
+  opacity: 0.8;
+}
+
+.files-list {
+  display: flex;
+  justify-content: space-between;
+//   max-width: 400px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #ffffff;
+  border: 1px dashed;
+  border-radius: 12px;
+  padding: 5px;
+  color: #1c8adb;
+}
+
+.files-list .delete-file {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.files-list .delete-file img {
+  width: 30px;
+}

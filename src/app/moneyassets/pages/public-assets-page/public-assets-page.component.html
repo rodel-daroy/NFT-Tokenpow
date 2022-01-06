@@ -1,0 +1,89 @@
+<main class="container" fxLayout="column"  fxLayoutGap="10px"  fxLayoutAlign="center center">
+    <div class="w-100 mb-3" fxLayout.xs="column" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.gt-xs="space-between center">
+    </div>
+    <p-tabView  class="w-100">
+        <p-tabPanel >
+            <ng-template pTemplate = "header">
+              <span class="d-flex align-items-center">My Assets</span>
+            </ng-template>
+            <p-table #dt2 [value]="assets" dataKey="id"
+                [rows]="5" [showCurrentPageReport]="true"  [totalRecords]="totalRecords"  [loading]="loading"  [rowsPerPageOptions]="[5,10,15]"  styleClass="p-datatable-customers"
+                [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [globalFilterFields]="['name', 'description', 'initialSupply']">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex">
+                        <span class="p-input-icon-left p-ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="no">No</th>
+                        <th >Avatar</th>
+                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                        <th>Description</th>
+                        <th pSortableColumn="initialSupply">Initial supply <p-sortIcon field="initialSupply"></p-sortIcon></th>
+                        <th colspan="2"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-asset  let-i="rowIndex">
+                    <tr>
+                        <td>{{i+1}}</td>
+                        <td> <img class="user-image " align="left" [src]="asset.avatar ? asset.avatar : 'assets/account.png'">            </td>
+                        <td>{{asset.name}}</td>
+                        <!--<td><p class="word-break">{{asset.description | replace : '/newLineSeparator/' : '\n'}}</p></td>-->
+                        <td><p class="word-break">{{asset.description}}</p></td>
+                        <td>{{asset.initialSupply}} </td>
+                        <td>   <p-button  class="p-button-lg mt-4"  (onClick)="mintAsset(i)" [disabled]="!(asset.mintingScript==null)"   label="{{'Mint' | translate}}"></p-button>
+                        </td>
+                        <td> <p-button (onClick)="modifyAsset(i)" label="{{'Modify' | translate}}" class="p-button-text"></p-button></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-tabPanel>
+        <p-tabPanel >
+            <ng-template pTemplate = "header">
+              <span class="d-flex align-items-center">Owned Assets</span>
+            </ng-template>
+            <p-table #dt2 [value]="ownedassets" dataKey="id"
+            [rows]="5" [showCurrentPageReport]="true"  [totalRecords]="ownedtotalRecords"  [loading]="loading"  [rowsPerPageOptions]="[5,10,15]"  styleClass="p-datatable-customers"
+            [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [globalFilterFields]="['asset.name','asset.description']">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex">
+                    <span class="p-input-icon-left p-ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="no">No</th>
+                    <th >Avatar</th>
+                    <th pSortableColumn="asset.name">Name <p-sortIcon field="asset.name"></p-sortIcon></th>
+                    <th>Description</th>
+                    <th pSortableColumn="asset.initialSupply">Initial supply <p-sortIcon field="asset.initialSupply"></p-sortIcon></th>
+                    <th pSortableColumn="amount">Quantity <p-sortIcon field="amount"></p-sortIcon></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-asset  let-i="rowIndex">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td> <img class="user-image " align="left" [src]="asset.asset.avatar ? asset.asset.avatar : 'assets/account.png'">            </td>
+                    <td>{{asset.asset.name}}</td>
+                    <!--<td><p class="word-break">{{asset.description | replace : '/newLineSeparator/' : '\n'}}</p></td>-->
+                    <td><p class="word-break">{{asset.asset.description}}</p></td>
+                    <td>{{asset.asset.initialSupply}} </td>
+                    <td>{{asset.amount}} </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        </p-tabPanel>
+
+    </p-tabView>
+
+</main>
+

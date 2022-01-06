@@ -1,0 +1,35 @@
+# This is a basic workflow to help you get started with Actions
+
+name: PULL_REQUEST
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  test-and-build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: actions/setup-node@master
+        with:
+          node-version: '10.x'
+          
+
+      - name: Test front-end
+        working-directory: ./
+        run: npm install && npm run test-headless
+      - name: Test functions
+        working-directory: ./functions
+        run: npm install && npm run test
+      - name: Build
+        working-directory: ./
+        run: npm run build:dev

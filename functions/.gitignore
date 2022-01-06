@@ -1,0 +1,7 @@
+lib
+
+# Typescript v1 declaration files
+typings/
+package-lock.json
+node_modules/
+dist

@@ -1,0 +1,43 @@
+$cyan-blue: #0fd4ca;
+
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  //min-width: 80%;
+  font-weight: 200;
+  height: 200px;
+  border: 2px dashed gray;
+  border-radius: 5px;
+  background-color: #eaeaea;
+  margin: 10px 0;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    border: 2px dashed $cyan-blue;
+    background-color: white;
+  }
+
+  &.hovering {
+    border: 2px solid $cyan-blue;
+    color: #dadada !important;
+  }
+
+  .file-label {
+    font-size: 1.2em;
+  }
+}
+
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}
+
+@media(max-width: 600px) {
+  .dialog {
+    width: 100vw;
+  }
+}
+:host ::ng-deep .p-scrollpanel-bar {
+  opacity: 1;
+}
